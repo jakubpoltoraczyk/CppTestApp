@@ -7,10 +7,10 @@ set(CMAKE_CXX_STANDARD 20)
 add_executable(${PROJECT_NAME}
     main.cpp
     src/basiccontroller.cpp
-    src/mainpage/mainpagecontroller.cpp
+    src/entryview/entryviewcontroller.cpp
 
     src/basiccontroller.h
-    src/mainpage/mainpagecontroller.h
+    src/entryview/entryviewcontroller.h
 
     qml.qrc
 )

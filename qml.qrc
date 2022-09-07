@@ -3,6 +3,8 @@
         <file>src/external/GUIConfig.qml</file>
         <file>src/main.qml</file>
         <file>src/external/qmldir</file>
-        <file>src/mainpage/MainPage.qml</file>
+        <file>src/entryview/EntryView.qml</file>
+        <file>src/entryview/EntryViewPage.qml</file>
+        <file>src/entryview/EntryViewIndicator.qml</file>
     </qresource>
 </RCC>
