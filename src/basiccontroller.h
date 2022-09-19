@@ -1,5 +1,7 @@
 #pragma once
 
+#include "entryview/entryviewcontroller.h"
+
 #include <QObject>
 
 #include <vector>
@@ -13,5 +15,8 @@ public:
    * @brief Provide objects to register in QML part of application
    * @return Container of pairs (object's name and pointer to its instance) to register
    */
-  std::vector<std::pair<QString, QObject *>> getObjectsToRegister();
+  std::vector<std::pair<QString, QObject*>> getObjectsToRegister();
+
+private:
+  EntryViewController entryViewController;
 };

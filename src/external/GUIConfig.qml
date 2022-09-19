@@ -2,6 +2,8 @@ pragma Singleton
 
 import QtQuick 2.15
 
+import EntryViewController 1.0
+
 Item {
     id: guiConfig
 
@@ -67,14 +69,21 @@ Item {
         /** Bottom margin of page indicator object */
         readonly property int pageIndicatorBottomMargin: 50
 
-        /** Icon sources used in entry view component */
-        readonly property var iconSources: [
-            "qrc:/resources/studyicon.png",
-            "qrc:/resources/quizicon.png"
-        ]
-
         /** Text placed on the start button object */
         readonly property string startButtonText: "Start"
+
+        /** List of available pages in entry view */
+        readonly property var pages: [
+            EntryViewController.PageType.STUDY,
+            EntryViewController.PageType.QUIZ
+        ]
+
+        /** Icon sources used in entry view component */
+        readonly property var iconSources: (new Map([
+            [EntryViewController.PageType.UNDEFINED, ""],
+            [EntryViewController.PageType.STUDY, "qrc:/resources/studyicon.png"],
+            [EntryViewController.PageType.QUIZ, "qrc:/resources/quizicon.png"]
+        ]))
     }
 
     QtObject {

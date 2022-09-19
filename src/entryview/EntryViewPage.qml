@@ -3,14 +3,20 @@ import QtQuick.Controls 2.15
 
 import "../external"
 
+import EntryViewController 1.0
+
 Item {
     id: entryViewPage
 
-    /** Source of icon to display */
-    property url iconSource: ""
+    /** Type of entry view page */
+    property int pageType: EntryViewController.PageType.UNDEFINED
 
     /** Emitted when start button has been released */
-    signal startButtonReleased()
+    signal startButtonReleased(int pageType)
+
+    Component.onCompleted: {
+        startButtonReleased.connect(entryViewController.onStartButtonReleased)
+    }
 
     Rectangle {
         id: pageBackground
@@ -24,7 +30,7 @@ Item {
 
     Image {
         id: image
-        source: iconSource
+        source: GUIConfig.entryView.iconSources.get(pageType)
         anchors {
             centerIn: pageBackground
         }
@@ -59,7 +65,7 @@ Item {
             }
 
             onReleased: {
-                startButtonReleased()
+                startButtonReleased(pageType)
             }
         }
     }

@@ -1,5 +1,5 @@
 #include "basiccontroller.h"
 
-std::vector<std::pair<QString, QObject *>> BasicController::getObjectsToRegister() {
-  return {{QStringLiteral("basicController"), this}};
+std::vector<std::pair<QString, QObject*>> BasicController::getObjectsToRegister() {
+  return {{QStringLiteral("basicController"), this}, {QStringLiteral("entryViewController"), this}};
 }
