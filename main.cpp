@@ -29,7 +29,7 @@ int main(int argc, char* argv[]) {
     qDebug() << REGISTER_OBJECT.arg(name);
   }
 
-  engine.load(QUrl("qrc:/src/main.qml"));
+  engine.load(QUrl("qrc:/main.qml"));
 
   return app.exec();
 }

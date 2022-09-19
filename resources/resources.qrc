@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/resources">
+        <file>studyicon.png</file>
+        <file>quizicon.png</file>
+    </qresource>
+</RCC>

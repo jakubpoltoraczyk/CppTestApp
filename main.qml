@@ -3,8 +3,8 @@ import QtQuick.Window 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
 
-import "external"
-import "entryview"
+import "src/external"
+import "src/entryview"
 
 ApplicationWindow {
     id: applicationWindow

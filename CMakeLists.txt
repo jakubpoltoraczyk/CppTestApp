@@ -13,6 +13,7 @@ add_executable(${PROJECT_NAME}
     src/entryview/entryviewcontroller.h
 
     qml.qrc
+    resources/resources.qrc
 )
 
 target_include_directories(${PROJECT_NAME} PRIVATE

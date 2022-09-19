@@ -15,9 +15,14 @@ Rectangle {
 
         Repeater {
             id: entryViewPages
-            model: 3
+            model: GUIConfig.entryView.iconSources.length
 
             EntryViewPage {
+                iconSource: GUIConfig.entryView.iconSources[index]
+
+                onStartButtonReleased: {
+                    console.log("Hello world from button:", index)
+                }
             }
         }
     }

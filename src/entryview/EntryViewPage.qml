@@ -6,6 +6,12 @@ import "../external"
 Item {
     id: entryViewPage
 
+    /** Source of icon to display */
+    property url iconSource: ""
+
+    /** Emitted when start button has been released */
+    signal startButtonReleased()
+
     Rectangle {
         id: pageBackground
         anchors.fill: parent
@@ -16,11 +22,21 @@ Item {
         }
     }
 
+    Image {
+        id: image
+        source: iconSource
+        anchors {
+            centerIn: pageBackground
+        }
+    }
+
     RoundButton {
         id: startButton
         width: GUIConfig.entryView.startButtonWidth
         height: GUIConfig.entryView.startButtonHeight
         palette.button: GUIConfig.colors.grey
+        font: GUIConfig.fonts.mediumFont
+        text: GUIConfig.entryView.startButtonText
         anchors {
             horizontalCenter: pageBackground.horizontalCenter
             bottom: pageBackground.bottom
@@ -32,12 +48,18 @@ Item {
             hoverEnabled: true
             anchors.fill: parent
 
+            /** Called when mouse has been entered mouse area */
             onEntered: {
                 startButton.palette.button = GUIConfig.colors.green
             }
 
+            /** Called when mouse has been exited mouse area */
             onExited: {
                 startButton.palette.button = GUIConfig.colors.grey
+            }
+
+            onReleased: {
+                startButtonReleased()
             }
         }
     }
