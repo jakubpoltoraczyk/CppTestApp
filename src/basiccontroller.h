@@ -6,10 +6,16 @@
 
 #include <vector>
 
+/** Class which represents application basic controller */
 class BasicController : public QObject {
   Q_OBJECT
+  Q_PROPERTY(bool entryViewVisibility MEMBER entryViewVisibility CONSTANT NOTIFY entryViewVisibilityChanged)
 public:
-  using QObject::QObject;
+  /**
+   * @brief Create an instance of BasicController class
+   * @param parent Pointer to parent widget
+   */
+  BasicController(QObject* parent = nullptr);
 
   /**
    * @brief Provide objects to register in QML part of application
@@ -17,6 +23,19 @@ public:
    */
   std::vector<std::pair<QString, QObject*>> getObjectsToRegister();
 
+signals:
+  /** Emitted when entry view visibility has been changed */
+  void entryViewVisibilityChanged();
+
+public slots:
+  /**
+   * @brief Called when entry view page has been selected
+   * @param pageType Type of page which has been selected
+   */
+  void onEntryViewPageSelected(EntryViewController::PageType pageType);
+
 private:
+  bool entryViewVisibility;
+
   EntryViewController entryViewController;
 };

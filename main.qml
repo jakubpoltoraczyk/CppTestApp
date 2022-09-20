@@ -15,5 +15,6 @@ ApplicationWindow {
     EntryView {
         id: mainPage
         anchors.fill: parent
+        visible: basicController.entryViewVisibility
     }
 }

@@ -23,7 +23,8 @@ Rectangle {
         }
     }
 
-    EntryViewIndicator {
+    PageIndicator {
+        id: pageIndicator
         count: entrySwipeView.count
         currentIndex: entrySwipeView.currentIndex
         anchors {

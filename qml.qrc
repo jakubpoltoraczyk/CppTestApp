@@ -4,7 +4,6 @@
         <file>src/external/qmldir</file>
         <file>src/entryview/EntryView.qml</file>
         <file>src/entryview/EntryViewPage.qml</file>
-        <file>src/entryview/EntryViewIndicator.qml</file>
         <file>main.qml</file>
         <file>resources/resources.qrc</file>
     </qresource>

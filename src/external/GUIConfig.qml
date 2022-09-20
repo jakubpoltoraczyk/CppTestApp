@@ -89,6 +89,13 @@ Item {
     QtObject {
         id: fonts
 
+        /** Small-size font used in application */
+        readonly property font smallFont: Qt.font({
+            family: "Courier",
+            pointSize: 12,
+            bold: true
+        })
+
         /** Medium-size font used in application */
         readonly property font mediumFont: Qt.font({
             family: "Courier",

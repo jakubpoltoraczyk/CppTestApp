@@ -14,6 +14,7 @@ Item {
     /** Emitted when start button has been released */
     signal startButtonReleased(int pageType)
 
+    /** Called when creation of component has been completed */
     Component.onCompleted: {
         startButtonReleased.connect(entryViewController.onStartButtonReleased)
     }
@@ -54,18 +55,33 @@ Item {
             hoverEnabled: true
             anchors.fill: parent
 
-            /** Called when mouse has been entered mouse area */
+            /** Called when mouse pointer entered mouse area */
             onEntered: {
                 startButton.palette.button = GUIConfig.colors.green
             }
 
-            /** Called when mouse has been exited mouse area */
+            /** Called when mouse pointer exited mouse area */
             onExited: {
                 startButton.palette.button = GUIConfig.colors.grey
             }
 
+            /** Called when mouse area reported user press action */
+            onPressed: {
+                startButton.font = GUIConfig.fonts.smallFont
+            }
+
+            /** Called when mouse area reported user release action */
             onReleased: {
-                startButtonReleased(pageType)
+                startButton.font = GUIConfig.fonts.mediumFont
+                if (containsMouse) {
+                    startButtonReleased(pageType)
+                }
+            }
+
+            /** Called when mouse area reported user cancel action */
+            onCanceled: {
+                startButton.palette.button = GUIConfig.colors.grey
+                startButton.font = GUIConfig.fonts.mediumFont
             }
         }
     }
