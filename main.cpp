@@ -1,7 +1,6 @@
 #include "src/basiccontroller.h"
 
 #include <QApplication>
-#include <QDebug>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 

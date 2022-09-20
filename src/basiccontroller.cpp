@@ -1,7 +1,5 @@
 #include "basiccontroller.h"
 
-#include <QDebug>
-
 BasicController::BasicController(QObject* parent) : QObject(parent) {
   connect(&entryViewController, &EntryViewController::pageSelected, this,
           &BasicController::onEntryViewPageSelected);

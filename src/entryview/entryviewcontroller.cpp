@@ -8,7 +8,7 @@ namespace {
 
 const QString PAGE_SELECTED = QStringLiteral("%1 page has been selected");
 
-}
+} // namespace
 
 void EntryViewController::onStartButtonReleased(EntryViewController::PageType pageType) {
   auto enumValue = Utils::convertEnumToString<EntryViewController::PageType>(pageType);
