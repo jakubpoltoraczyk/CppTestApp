@@ -8,9 +8,11 @@ add_executable(${PROJECT_NAME}
     main.cpp
     src/basiccontroller.cpp
     src/entryview/entryviewcontroller.cpp
+    src/external/utils/utils.cpp
 
     src/basiccontroller.h
     src/entryview/entryviewcontroller.h
+    src/external/utils/utils.h
 
     qml.qrc
     resources/resources.qrc
