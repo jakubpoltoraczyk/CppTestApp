@@ -6,5 +6,8 @@
         <file>src/entryview/EntryViewPage.qml</file>
         <file>main.qml</file>
         <file>resources/resources.qrc</file>
+        <file>src/quizmenu/QuizMenu.qml</file>
+        <file>src/quizmenu/QuizMenuPage.qml</file>
+        <file>src/external/CustomPageIndicator.qml</file>
     </qresource>
 </RCC>

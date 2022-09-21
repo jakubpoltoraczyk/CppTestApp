@@ -1,6 +1,7 @@
 #pragma once
 
 #include "entryview/entryviewcontroller.h"
+#include "quizmenu/quizmenucontroller.h"
 
 #include <QObject>
 
@@ -9,7 +10,8 @@
 /** Class which represents application basic controller */
 class BasicController : public QObject {
   Q_OBJECT
-  Q_PROPERTY(bool entryViewVisibility MEMBER entryViewVisibility CONSTANT NOTIFY entryViewVisibilityChanged)
+  Q_PROPERTY(bool entryViewVisibility MEMBER entryViewVisibility NOTIFY entryViewVisibilityChanged)
+  Q_PROPERTY(bool quizMenuVisibility MEMBER quizMenuVisibility NOTIFY quizMenuVisibilityChanged)
 public:
   /**
    * @brief Create an instance of BasicController class
@@ -27,6 +29,9 @@ signals:
   /** Emitted when entry view visibility has been changed */
   void entryViewVisibilityChanged();
 
+  /** Emitted when quiz menu visibility has been changed */
+  void quizMenuVisibilityChanged();
+
 public slots:
   /**
    * @brief Called when entry view page has been selected
@@ -35,7 +40,9 @@ public slots:
   void onEntryViewPageSelected(EntryViewController::PageType pageType);
 
 private:
-  bool entryViewVisibility;
+  bool entryViewVisibility = true;
+  bool quizMenuVisibility = false;
 
   EntryViewController entryViewController;
+  QuizMenuController quizMenuController;
 };

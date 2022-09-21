@@ -3,6 +3,7 @@ pragma Singleton
 import QtQuick 2.15
 
 import EntryViewController 1.0
+import QuizMenuPageModel 1.0
 
 Item {
     id: guiConfig
@@ -10,80 +11,75 @@ Item {
     /** Contains available component colors */
     readonly property alias colors: colors
 
-    /** Contains configuration related to application window component */
-    readonly property alias applicationWindow: applicationWindow
+    /** Contains available component gradients */
+    readonly property alias gradients: gradients
 
-    /** Contains configuration related to entry view component */
-    readonly property alias entryView: entryView
+    /** Contains configuration shared between different components */
+    readonly property alias shared: shared
 
     /** Contains available fonts used in application */
     readonly property alias fonts: fonts
 
+    /** Contains configuration related to entry view component */
+    readonly property alias entryView: entryView
+
+    /** Contains configuration related to quiz menu component */
+    readonly property alias quizMenu: quizMenu
+
     QtObject {
         id: colors
 
-        /** Grey color used in application */
-        readonly property color grey: "#c3c1c7"
-
         /** Light blue color used in application */
-        readonly property color lightBlue: "#243561"
+        readonly property color lightBlue: "#7f9be3"
 
         /** Blue color used in application */
         readonly property color blue: "#5068a6"
 
         /** Dark blue color used in application */
-        readonly property color darkBlue: "#7f9be3"
+        readonly property color darkBlue: "#243561"
+
+        /** Light cyan color used in application */
+        readonly property color lightCyan: "#88fcfa"
+
+        /** Cyan color used in application */
+        readonly property color cyan: "#53dbd9"
+
+        /** Dark cyan color used in application */
+        readonly property color darkCyan: "#1c8a88"
 
         /** Green color used in application */
         readonly property color green: "#3bbf74"
-
-        /** Dark green color used in application */
-        readonly property color darkGreen: "#198041"
-
-        /** Red color used in application */
-        readonly property color red: "#bd5048"
     }
 
     QtObject {
-        id: applicationWindow
+        id: gradients
 
-        /** Height of application window */
-        readonly property int height: 600
+        /** Contains blue gradient component */
+        readonly property var blueGradient: Gradient {
+            GradientStop { position: 0.0; color: colors.darkBlue }
+            GradientStop { position: 0.33; color: colors.blue }
+            GradientStop { position: 1.0; color: colors.lightBlue }
+        }
+
+        /** Contains cyan gradient component */
+        readonly property var cyanGradient: Gradient {
+            GradientStop { position: 0.0; color: colors.darkCyan }
+            GradientStop { position: 0.33; color: colors.cyan }
+            GradientStop { position: 1.0; color: colors.lightCyan }
+        }
+    }
+
+    QtObject {
+        id: shared
 
         /** Width of application window */
-        readonly property int width: 800
-    }
+        readonly property int applicationWidth: 800
 
-    QtObject {
-        id: entryView
+        /** Height of application window */
+        readonly property int applicationHeight: 600
 
-        /** Width of start button object */
-        readonly property int startButtonWidth: 200
-
-        /** Height of start button object */
-        readonly property int startButtonHeight: 60
-
-        /** Bottom margin of start button object */
-        readonly property int startButtonBottomMargin: 100
-
-        /** Bottom margin of page indicator object */
+        /** Bottom margin of any page indicator component used in application */
         readonly property int pageIndicatorBottomMargin: 50
-
-        /** Text placed on the start button object */
-        readonly property string startButtonText: "Start"
-
-        /** List of available pages in entry view */
-        readonly property var pages: [
-            EntryViewController.PageType.STUDY,
-            EntryViewController.PageType.QUIZ
-        ]
-
-        /** Icon sources used in entry view component */
-        readonly property var iconSources: (new Map([
-            [EntryViewController.PageType.UNDEFINED, ""],
-            [EntryViewController.PageType.STUDY, "qrc:/resources/studyicon.png"],
-            [EntryViewController.PageType.QUIZ, "qrc:/resources/quizicon.png"]
-        ]))
     }
 
     QtObject {
@@ -102,5 +98,45 @@ Item {
             pointSize: 14,
             bold: true
         })
+    }
+
+    QtObject {
+        id: entryView
+
+        /** Width of start button object */
+        readonly property int startButtonWidth: 200
+
+        /** Height of start button object */
+        readonly property int startButtonHeight: 60
+
+        /** Bottom margin of start button object */
+        readonly property int startButtonBottomMargin: 100
+
+        /** Text placed on the start button object */
+        readonly property string startButtonText: "Start"
+
+        /** List of available pages in entry view */
+        readonly property var pages: [
+            EntryViewController.PageType.STUDY,
+            EntryViewController.PageType.QUIZ
+        ]
+
+        /** Map consists of page type and related icon source */
+        readonly property var iconSources: (new Map([
+            [EntryViewController.PageType.UNDEFINED, ""],
+            [EntryViewController.PageType.STUDY, "qrc:/resources/entryviewicon/studyicon.png"],
+            [EntryViewController.PageType.QUIZ, "qrc:/resources/entryviewicon/quizicon.png"]
+        ]))
+    }
+
+    QtObject {
+        id: quizMenu
+
+        /** Map consists of quiz difficulty level and related gradient */
+        readonly property var gradients: (new Map([
+            [QuizMenuPageModel.DifficultyLevel.EASY, gradients.cyanGradient],
+            [QuizMenuPageModel.DifficultyLevel.MEDIUM, gradients.cyanGradient],
+            [QuizMenuPageModel.DifficultyLevel.HARD, gradients.cyanGradient]
+        ]))
     }
 }

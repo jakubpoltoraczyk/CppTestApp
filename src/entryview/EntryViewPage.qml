@@ -22,11 +22,7 @@ Item {
     Rectangle {
         id: pageBackground
         anchors.fill: parent
-        gradient: Gradient {
-            GradientStop { position: 0.0; color: GUIConfig.colors.lightBlue }
-            GradientStop { position: 0.33; color: GUIConfig.colors.blue }
-            GradientStop { position: 1.0; color: GUIConfig.colors.darkBlue }
-        }
+        gradient: GUIConfig.gradients.blueGradient
     }
 
     Image {

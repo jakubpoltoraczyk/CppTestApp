@@ -5,26 +5,25 @@ import QtQuick.Layouts 1.15
 import "../external"
 
 Rectangle {
-    id: entryView
+    id: quizMenu
     anchors.fill: parent
 
     SwipeView {
-        id: entrySwipeView
+        id: quizMenuSwipeView
         anchors.fill: parent
         currentIndex: 0
 
         Repeater {
-            id: entryViewPages
-            model: GUIConfig.entryView.pages.length
+            id: quizMenuPages
+            model: quizMenuController.pageModels.length
 
-            EntryViewPage {
-                pageType: GUIConfig.entryView.pages[index]
+            QuizMenuPage {
             }
         }
     }
 
     CustomPageIndicator {
         id: pageIndicator
-        swipeView: entrySwipeView
+        swipeView: quizMenuSwipeView
     }
 }
