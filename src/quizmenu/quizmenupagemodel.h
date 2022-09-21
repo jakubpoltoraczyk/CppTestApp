@@ -1,6 +1,7 @@
 #pragma once
 
 #include <QObject>
+#include <QVector>
 
 /** Contains dataset of quiz menu page */
 class QuizMenuPageModel {
