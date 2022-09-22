@@ -6,6 +6,7 @@
 /** Contains dataset of quiz menu page */
 class QuizMenuPageModel {
   Q_GADGET
+  Q_PROPERTY(DifficultyLevel difficultyLevel MEMBER difficultyLevel CONSTANT)
 public:
   /** Contains available difficulty levels */
   enum class DifficultyLevel { UNDEFINED, EASY, MEDIUM, HARD };

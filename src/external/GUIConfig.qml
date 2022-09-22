@@ -49,6 +49,24 @@ Item {
 
         /** Green color used in application */
         readonly property color green: "#3bbf74"
+
+        /** Light red color used in application */
+        readonly property color lightRed: "#ff6666"
+
+        /** Red color used in application */
+        readonly property color red: "#ff0000"
+
+        /** Dark red color used in application */
+        readonly property color darkRed: "#990000"
+
+        /** Light yellow color used in application */
+        readonly property color lightYellow: "#ffff99"
+
+        /** Yellow color used in application */
+        readonly property color yellow: "#ffff00"
+
+        /** Dark yellow color used in application */
+        readonly property color darkYellow: "#999900"
     }
 
     QtObject {
@@ -66,6 +84,20 @@ Item {
             GradientStop { position: 0.0; color: colors.darkCyan }
             GradientStop { position: 0.33; color: colors.cyan }
             GradientStop { position: 1.0; color: colors.lightCyan }
+        }
+
+        /** Contains red gradient component */
+        readonly property var redGradient: Gradient {
+            GradientStop { position: 0.0; color: colors.darkRed }
+            GradientStop { position: 0.33; color: colors.red }
+            GradientStop { position: 1.0; color: colors.lightRed }
+        }
+
+        /** Contains yellow gradient component */
+        readonly property var yellowGradient: Gradient {
+            GradientStop { position: 0.0; color: colors.darkYellow }
+            GradientStop { position: 0.33; color: colors.yellow }
+            GradientStop { position: 1.0; color: colors.lightYellow }
         }
     }
 
@@ -135,8 +167,8 @@ Item {
         /** Map consists of quiz difficulty level and related gradient */
         readonly property var gradients: (new Map([
             [QuizMenuPageModel.DifficultyLevel.EASY, gradients.cyanGradient],
-            [QuizMenuPageModel.DifficultyLevel.MEDIUM, gradients.cyanGradient],
-            [QuizMenuPageModel.DifficultyLevel.HARD, gradients.cyanGradient]
+            [QuizMenuPageModel.DifficultyLevel.MEDIUM, gradients.yellowGradient],
+            [QuizMenuPageModel.DifficultyLevel.HARD, gradients.redGradient]
         ]))
     }
 }

@@ -18,6 +18,7 @@ Rectangle {
             model: quizMenuController.pageModels.length
 
             QuizMenuPage {
+                difficultyLevel: quizMenuController.pageModels[index].difficultyLevel
             }
         }
     }
