@@ -7,6 +7,8 @@
 class QuizMenuPageModel {
   Q_GADGET
   Q_PROPERTY(DifficultyLevel difficultyLevel MEMBER difficultyLevel CONSTANT)
+  Q_PROPERTY(bool areOpenQuestions MEMBER areOpenQuestions CONSTANT)
+  Q_PROPERTY(bool areClosedQuestions MEMBER areClosedQuestions CONSTANT)
 public:
   /** Contains available difficulty levels */
   enum class DifficultyLevel { UNDEFINED, EASY, MEDIUM, HARD };

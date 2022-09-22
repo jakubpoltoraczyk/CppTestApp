@@ -1,7 +1,21 @@
 #include "quizmenucontroller.h"
 
-QuizMenuController::QuizMenuController(QObject* parent) : QObject(parent) {
-  pageModels.push_back(QuizMenuPageModel{QuizMenuPageModel::DifficultyLevel::EASY, true, false});
-  pageModels.push_back(QuizMenuPageModel{QuizMenuPageModel::DifficultyLevel::MEDIUM, true, false});
-  pageModels.push_back(QuizMenuPageModel{QuizMenuPageModel::DifficultyLevel::HARD, true, false});
+#include "../external/datamanager/datamanager.h"
+
+#include <QDebug>
+#include <QDir>
+
+namespace {
+
+namespace DeserializationUtils {
+QuizMenuPageModels deserializePageModels() {
+  DataManager dataManager;
+
+  return {};
 }
+} // namespace DeserializationUtils
+
+} // namespace
+
+QuizMenuController::QuizMenuController(QObject* parent)
+    : QObject(parent), pageModels(DeserializationUtils::deserializePageModels()) {}

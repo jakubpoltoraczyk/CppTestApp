@@ -3,6 +3,7 @@
 #include <QApplication>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
+#include <QDir>
 
 namespace {
 
