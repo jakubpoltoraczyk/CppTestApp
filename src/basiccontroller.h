@@ -1,10 +1,12 @@
 #pragma once
 
 #include "entryview/entryviewcontroller.h"
+#include "external/datadirectorymanager/datadirectorymanager.h"
 #include "quizmenu/quizmenucontroller.h"
 
 #include <QObject>
 
+#include <memory>
 #include <vector>
 
 /** Class which represents application basic controller */
@@ -42,6 +44,8 @@ public slots:
 private:
   bool entryViewVisibility = true;
   bool quizMenuVisibility = false;
+
+  std::shared_ptr<DataDirectoryManager> dataDirectoryManager;
 
   EntryViewController entryViewController;
   QuizMenuController quizMenuController;

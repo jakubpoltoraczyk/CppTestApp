@@ -8,12 +8,14 @@ add_executable(${PROJECT_NAME}
     main.cpp
     src/basiccontroller.cpp
     src/entryview/entryviewcontroller.cpp
-    src/external/datamanager/datamanager.cpp
+    src/external/datadirectorymanager/datadirectorymanager.cpp
+    src/external/utils/utils.cpp
     src/quizmenu/quizmenucontroller.cpp
 
     src/basiccontroller.h
     src/entryview/entryviewcontroller.h
-    src/external/datamanager/datamanager.h
+    src/external/datadirectorymanager/datadirectorymanager.h
+    src/external/utils/utils.h
     src/quizmenu/quizmenucontroller.h
     src/quizmenu/quizmenupagemodel.h
 

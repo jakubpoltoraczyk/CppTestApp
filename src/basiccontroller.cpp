@@ -2,7 +2,9 @@
 
 #include <QDebug>
 
-BasicController::BasicController(QObject* parent) : QObject(parent) {
+BasicController::BasicController(QObject* parent)
+    : QObject(parent), dataDirectoryManager(std::make_shared<DataDirectoryManager>()),
+      quizMenuController(dataDirectoryManager) {
   connect(&entryViewController, &EntryViewController::pageSelected, this,
           &BasicController::onEntryViewPageSelected);
 }
@@ -21,6 +23,7 @@ void BasicController::onEntryViewPageSelected(EntryViewController::PageType page
   case EntryViewController::PageType::QUIZ:
     quizMenuVisibility = true;
     emit quizMenuVisibilityChanged();
+    dataDirectoryManager->getQuizConfigurationFilePaths();
     break;
 
   case EntryViewController::PageType::STUDY:
