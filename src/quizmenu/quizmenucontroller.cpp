@@ -2,7 +2,6 @@
 
 #include "../external/utils/utils.h"
 
-#include <QDebug>
 #include <QJsonDocument>
 #include <QJsonObject>
 
@@ -16,12 +15,13 @@ constexpr char CLOSED_QUESTIONS[] = "closedQuestions";
 
 QuizMenuPageModels deserializePageModels(const QStringList& quizConfigurationFilePaths) {
   QuizMenuPageModels pageModels;
+  pageModels.reserve(quizConfigurationFilePaths.size());
 
   for (const auto& filePath : quizConfigurationFilePaths) {
     try {
       auto fileContent = Utils::readFileContent(filePath);
-      auto jsonDocument(QJsonDocument::fromJson(fileContent));
-      auto jsonObject(jsonDocument.object());
+      auto jsonDocument = QJsonDocument::fromJson(fileContent);
+      auto jsonObject = jsonDocument.object();
 
       auto difficultyLevel =
           static_cast<QuizMenuPageModel::DifficultyLevel>(jsonObject[Json::DIFFICULTY_LEVEL].toInt());
