@@ -14,8 +14,8 @@ Item {
     /** Contains available component gradients */
     readonly property alias gradients: gradients
 
-    /** Contains configuration shared between different components */
-    readonly property alias shared: shared
+    /** Contains configuration related to main application window component */
+    readonly property alias applicationWindow: applicationWindow
 
     /** Contains available fonts used in application */
     readonly property alias fonts: fonts
@@ -25,6 +25,9 @@ Item {
 
     /** Contains configuration related to quiz menu component */
     readonly property alias quizMenu: quizMenu
+
+    /** Contains configuration related to custom page indicator component */
+    readonly property alias customPageIndicator: customPageIndicator
 
     QtObject {
         id: colors
@@ -102,16 +105,13 @@ Item {
     }
 
     QtObject {
-        id: shared
+        id: applicationWindow
 
         /** Width of application window */
-        readonly property int applicationWidth: 800
+        readonly property int width: 800
 
         /** Height of application window */
-        readonly property int applicationHeight: 600
-
-        /** Bottom margin of any page indicator component used in application */
-        readonly property int pageIndicatorBottomMargin: 50
+        readonly property int height: 600
     }
 
     QtObject {
@@ -170,5 +170,12 @@ Item {
             [QuizMenuPageModel.DifficultyLevel.MEDIUM, gradients.yellowGradient],
             [QuizMenuPageModel.DifficultyLevel.HARD, gradients.redGradient]
         ]))
+    }
+
+    QtObject {
+        id: customPageIndicator
+
+        /** Bottom margin of custom page indicator component */
+        readonly property int bottomMargin: 50
     }
 }

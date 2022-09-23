@@ -8,7 +8,7 @@ PageIndicator {
     anchors {
         horizontalCenter: swipeView.horizontalCenter
         bottom: swipeView.bottom
-        bottomMargin: GUIConfig.shared.pageIndicatorBottomMargin
+        bottomMargin: GUIConfig.customPageIndicator.bottomMargin
     }
 
     /** Swipe view component used to determine proper placement of page indicator */

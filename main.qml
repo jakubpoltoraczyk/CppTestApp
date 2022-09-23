@@ -9,8 +9,8 @@ import "src/quizmenu"
 
 ApplicationWindow {
     id: applicationWindow
-    width: GUIConfig.shared.applicationWidth
-    height: GUIConfig.shared.applicationHeight
+    width: GUIConfig.applicationWindow.width
+    height: GUIConfig.applicationWindow.height
     visible: true
 
     EntryView {
