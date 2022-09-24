@@ -8,6 +8,14 @@ Rectangle {
     id: quizMenu
     anchors.fill: parent
 
+    /** Emitted when user decided to exit quiz menu */
+    signal quizMenuExited()
+
+    /** Called when component creation has been finished */
+    Component.onCompleted: {
+        quizMenuExited.connect(basicController.onQuizMenuExited)
+    }
+
     SwipeView {
         id: quizMenuSwipeView
         anchors.fill: parent
@@ -29,5 +37,14 @@ Rectangle {
     CustomPageIndicator {
         id: pageIndicator
         swipeView: quizMenuSwipeView
+    }
+
+    ExitButton {
+        id: exitButton
+
+        /** Called when exit button has been released */
+        onReleased: {
+            quizMenuExited()
+        }
     }
 }

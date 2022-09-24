@@ -48,8 +48,21 @@ public slots:
    */
   void onEntryPageSelected(EntryPage entryPage);
 
+  /** Called when user decided to exit entry view */
+  void onEntryViewExited();
+
+  /** Called when user decided to exit quiz menu */
+  void onQuizMenuExited();
+
 private:
+  /**
+   * @brief Change current view using new selected view type
+   * @param newView Type of the new view
+   */
   void changeView(View newView);
+
+  /** Close each view expect main entry view */
+  void closeEachView();
 
   bool entryViewVisibility = true;
   bool quizMenuVisibility = false;

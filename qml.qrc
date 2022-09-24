@@ -13,5 +13,6 @@
         <file>src/external/ImageLabel.qml</file>
         <file>resources/quizmenuicon/openquestions.png</file>
         <file>resources/quizmenuicon/closedquestions.png</file>
+        <file>src/external/ExitButton.qml</file>
     </qresource>
 </RCC>

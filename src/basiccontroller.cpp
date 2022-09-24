@@ -2,10 +2,12 @@
 
 #include "external/utils/utils.h"
 
+#include <QCoreApplication>
 #include <QDebug>
 
 namespace {
 
+constexpr char APPLICATION_CLOSED[] = "Application has been successfully closed";
 const QString ENTRY_PAGE_SELECTED = QStringLiteral("%1 entry view page has been selected");
 const QString VIEW_CHANGED = QStringLiteral("View has been changed from %1 to %2");
 
@@ -30,10 +32,21 @@ void BasicController::onEntryPageSelected(EntryPage entryPage) {
   changeView(newView);
 }
 
+void BasicController::onEntryViewExited() {
+  qDebug() << APPLICATION_CLOSED;
+  QCoreApplication::quit();
+}
+
+void BasicController::onQuizMenuExited() { changeView(View::ENTRY_VIEW); }
+
 void BasicController::changeView(View newView) {
   switch (newView) {
   case View::ENTRY_VIEW:
+    closeEachView();
+    break;
+
   case View::STUDY_VIEW:
+    ///< @todo Implement logic here
     return;
 
   case View::QUIZ_MENU:
@@ -44,4 +57,9 @@ void BasicController::changeView(View newView) {
 
   qDebug() << VIEW_CHANGED.arg(Utils::qenumToString(currentView), Utils::qenumToString(newView));
   currentView = newView;
+}
+
+void BasicController::closeEachView() {
+  quizMenuVisibility = false;
+  emit quizMenuVisibilityChanged();
 }

@@ -35,8 +35,14 @@ Item {
     /** Contains configuration related to image label component */
     readonly property alias imageLabel: imageLabel
 
+    /** Contains configuration related to exit button component */
+    readonly property alias exitButton: exitButton
+
     QtObject {
         id: colors
+
+        /** Transparent color used in application */
+        readonly property color transparent: "transparent"
 
         /** Light blue color used in application */
         readonly property color lightBlue: "#7f9be3"
@@ -248,5 +254,18 @@ Item {
 
         /** Spacing between image icon and label text */
         readonly property int spacing: 12
+    }
+
+    QtObject {
+        id: exitButton
+
+        /** Icon source of exit button */
+        readonly property string iconSource: "qrc:/resources/exitbutton.png"
+
+        /** Top margin value between exit button and parent component */
+        readonly property int topMargin: 20
+
+        /** Right margin value between exit button and parent component */
+        readonly property int rightMargin: 20
     }
 }

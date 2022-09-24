@@ -8,6 +8,14 @@ Rectangle {
     id: entryView
     anchors.fill: parent
 
+    /** Emitted when user decided to exit entry view */
+    signal entryViewExited()
+
+    /** Called when component creation has been finished */
+    Component.onCompleted: {
+        entryViewExited.connect(basicController.onEntryViewExited)
+    }
+
     SwipeView {
         id: entrySwipeView
         anchors.fill: parent
@@ -26,5 +34,14 @@ Rectangle {
     CustomPageIndicator {
         id: pageIndicator
         swipeView: entrySwipeView
+    }
+
+    ExitButton {
+        id: exitButton
+
+        /** Called when exit button has been just released */
+        onReleased: {
+            entryViewExited()
+        }
     }
 }
