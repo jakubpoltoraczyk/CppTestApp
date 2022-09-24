@@ -1,5 +1,6 @@
 {
     "difficultyLevel": 1,
     "closedQuestions": true,
-    "openQuestions": false
+    "openQuestions": false,
+    "quizDuration": 300
 }

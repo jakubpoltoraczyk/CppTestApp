@@ -18,6 +18,9 @@ Item {
     /** Contains information if open questions are available */
     property bool areOpenQuestions: true
 
+    /** Contains information about quiz duration */
+    property int quizDuration: 0
+
     Rectangle {
         id: pageBackground
         anchors.fill: parent
@@ -44,6 +47,13 @@ Item {
         }
 
         ImageLabel {
+            id: difficultyImageLabel
+            labelText: GUIConfig.quizMenu.difficultyInfoText.arg(
+                           GUIConfig.quizMenu.difficultyNames.get(difficultyLevel))
+            imageSource: GUIConfig.quizMenu.difficultyIconSource
+        }
+
+        ImageLabel {
             id: closedQuestionsImageLabel
             labelText: GUIConfig.quizMenu.closedQuestionsInfoText
             imageSource: GUIConfig.quizMenu.closedQuestionsIconSource
@@ -55,6 +65,12 @@ Item {
             labelText: GUIConfig.quizMenu.openQuestionsInfoText
             imageSource: GUIConfig.quizMenu.openQuestionsIconSource
             visible: areOpenQuestions
+        }
+
+        ImageLabel {
+            id: quizDurationImageLabel
+            labelText: GUIConfig.quizMenu.quizDurationText.arg(quizDuration / 60)
+            imageSource: GUIConfig.quizMenu.quizDurationIconSource
         }
     }
 

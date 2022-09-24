@@ -5,5 +5,7 @@
         <file>quizmenuicon/mediumowl.png</file>
         <file>quizmenuicon/hardowl.png</file>
         <file>quizmenuicon/easyowl.png</file>
+        <file>quizmenuicon/clock.png</file>
+        <file>quizmenuicon/difficulty.png</file>
     </qresource>
 </RCC>

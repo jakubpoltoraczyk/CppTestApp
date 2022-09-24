@@ -11,6 +11,7 @@ namespace Json {
 constexpr char DIFFICULTY_LEVEL[] = "difficultyLevel";
 constexpr char OPEN_QUESTIONS[] = "openQuestions";
 constexpr char CLOSED_QUESTIONS[] = "closedQuestions";
+constexpr char QUIZ_DURATION[] = "quizDuration";
 } // namespace Json
 
 QuizMenuPageModels deserializePageModels(const QStringList& quizConfigurationFilePaths) {
@@ -27,10 +28,12 @@ QuizMenuPageModels deserializePageModels(const QStringList& quizConfigurationFil
           static_cast<QuizMenuPageModel::DifficultyLevel>(jsonObject[Json::DIFFICULTY_LEVEL].toInt());
       auto areOpenQuestions = jsonObject[Json::OPEN_QUESTIONS].toBool();
       auto areClosedQuestions = jsonObject[Json::CLOSED_QUESTIONS].toBool();
+      auto quizDuration = jsonObject[Json::QUIZ_DURATION].toInt();
 
       QuizMenuPageModel pageModel{.difficultyLevel = difficultyLevel,
                                   .areOpenQuestions = areOpenQuestions,
-                                  .areClosedQuestions = areClosedQuestions};
+                                  .areClosedQuestions = areClosedQuestions,
+                                  .quizDuration = quizDuration};
       pageModels.push_back(std::move(pageModel));
     } catch (const std::logic_error& error) {
       qDebug() << error.what();

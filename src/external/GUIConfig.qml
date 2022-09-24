@@ -168,10 +168,13 @@ Item {
         readonly property int levelImageTopMargin: 60
 
         /** Value of information layout top margin */
-        readonly property int informationLayoutTopMargin: 20
+        readonly property int informationLayoutTopMargin: 30
 
         /** Spacing between components in the quiz information layout */
-        readonly property int informationLayoutSpacing: 10
+        readonly property int informationLayoutSpacing: 12
+
+        /** Information text about difficulty */
+        readonly property string difficultyInfoText: "Difficulty level: %1"
 
         /** Information text about open questions */
         readonly property string openQuestionsInfoText: "Open questions available"
@@ -179,11 +182,20 @@ Item {
         /** Information text about closed questions */
         readonly property string closedQuestionsInfoText: "Closed questions available"
 
+        /** Information text about quiz duration */
+        readonly property string quizDurationText: "Duration of quiz: %1 minutes"
+
+        /** Icon source related to difficulty */
+        readonly property string difficultyIconSource: "qrc:/resources/quizmenuicon/difficulty.png"
+
         /** Icon source related to open questions */
         readonly property string openQuestionsIconSource: "qrc:/resources/quizmenuicon/openquestions.png"
 
         /** Icon source related to closed questions */
         readonly property string closedQuestionsIconSource: "qrc:/resources/quizmenuicon/closedquestions.png"
+
+        /** Icon source related to quiz duration */
+        readonly property string quizDurationIconSource: "qrc:/resources/quizmenuicon/clock.png"
 
         /** Map consists of quiz difficulty level and related gradient */
         readonly property var gradients: (new Map([
@@ -198,6 +210,13 @@ Item {
             [QuizMenuPageModel.DifficultyLevel.EASY, "qrc:/resources/quizmenuicon/easyowl.png"],
             [QuizMenuPageModel.DifficultyLevel.MEDIUM, "qrc:/resources/quizmenuicon/mediumowl.png"],
             [QuizMenuPageModel.DifficultyLevel.HARD, "qrc:/resources/quizmenuicon/hardowl.png"]
+        ]))
+
+        /** Map consists of quiz difficulty level and related difficulty name */
+        readonly property var difficultyNames: (new Map([
+            [QuizMenuPageModel.DifficultyLevel.EASY, "Easy"],
+            [QuizMenuPageModel.DifficultyLevel.MEDIUM, "Medium"],
+            [QuizMenuPageModel.DifficultyLevel.HARD, "Hard"]
         ]))
     }
 
