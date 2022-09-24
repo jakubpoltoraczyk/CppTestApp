@@ -2,5 +2,8 @@
     <qresource prefix="/resources">
         <file>entryviewicon/studyicon.png</file>
         <file>entryviewicon/quizicon.png</file>
+        <file>quizlevelicon/mediumowl.png</file>
+        <file>quizlevelicon/hardowl.png</file>
+        <file>quizlevelicon/easyowl.png</file>
     </qresource>
 </RCC>

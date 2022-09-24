@@ -9,12 +9,22 @@ Item {
     id: quizMenuPage
 
     /** Contains quiz difficulty level */
-    property int difficultyLevel: QuizMenuPageModel.DifficultyLevel.EASY
+    property int difficultyLevel: QuizMenuPageModel.DifficultyLevel.UNDEFINED
 
     Rectangle {
         id: pageBackground
         anchors.fill: parent
         gradient: GUIConfig.quizMenu.gradients.get(difficultyLevel)
+    }
+
+    Image {
+        id: image
+        source: GUIConfig.quizMenu.iconLevelSources.get(difficultyLevel)
+        anchors {
+            horizontalCenter: pageBackground.horizontalCenter
+            top: pageBackground.top
+            topMargin: GUIConfig.quizMenu.levelIconTopMargin
+        }
     }
 
     ConfirmButton {

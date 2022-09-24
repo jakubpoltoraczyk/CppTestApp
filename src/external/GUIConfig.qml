@@ -158,6 +158,9 @@ Item {
     QtObject {
         id: quizMenu
 
+        /** Value of level icon top margin */
+        readonly property int levelIconTopMargin: 50
+
         /** Text of start button component */
         readonly property string startButtonText: "Start test"
 
@@ -166,6 +169,14 @@ Item {
             [QuizMenuPageModel.DifficultyLevel.EASY, gradients.cyanGradient],
             [QuizMenuPageModel.DifficultyLevel.MEDIUM, gradients.yellowGradient],
             [QuizMenuPageModel.DifficultyLevel.HARD, gradients.redGradient]
+        ]))
+
+        /** Map consists of page type and related icon source */
+        readonly property var iconLevelSources: (new Map([
+            [QuizMenuPageModel.DifficultyLevel.UNDEFINED, ""],
+            [QuizMenuPageModel.DifficultyLevel.EASY, "qrc:/resources/quizlevelicon/easyowl.png"],
+            [QuizMenuPageModel.DifficultyLevel.MEDIUM, "qrc:/resources/quizlevelicon/mediumowl.png"],
+            [QuizMenuPageModel.DifficultyLevel.HARD, "qrc:/resources/quizlevelicon/hardowl.png"]
         ]))
     }
 
