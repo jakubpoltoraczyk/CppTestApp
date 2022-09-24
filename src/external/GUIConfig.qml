@@ -29,6 +29,9 @@ Item {
     /** Contains configuration related to custom page indicator component */
     readonly property alias customPageIndicator: customPageIndicator
 
+    /** Contains configuration related to confirm button component */
+    readonly property alias confirmButton: confirmButton
+
     QtObject {
         id: colors
 
@@ -135,16 +138,7 @@ Item {
     QtObject {
         id: entryView
 
-        /** Width of start button object */
-        readonly property int startButtonWidth: 200
-
-        /** Height of start button object */
-        readonly property int startButtonHeight: 60
-
-        /** Bottom margin of start button object */
-        readonly property int startButtonBottomMargin: 100
-
-        /** Text placed on the start button object */
+        /** Text of start button component */
         readonly property string startButtonText: "Start"
 
         /** List of available pages in entry view */
@@ -164,6 +158,9 @@ Item {
     QtObject {
         id: quizMenu
 
+        /** Text of start button component */
+        readonly property string startButtonText: "Start test"
+
         /** Map consists of quiz difficulty level and related gradient */
         readonly property var gradients: (new Map([
             [QuizMenuPageModel.DifficultyLevel.EASY, gradients.cyanGradient],
@@ -177,5 +174,21 @@ Item {
 
         /** Bottom margin of custom page indicator component */
         readonly property int bottomMargin: 50
+    }
+
+    QtObject {
+        id: confirmButton
+
+        /** Width of confirm button object */
+        readonly property int width: 200
+
+        /** Height of confirm button object */
+        readonly property int height: 60
+
+        /** Bottom margin of confirm button object */
+        readonly property int bottomMargin: 100
+
+        /** Default text placed on the confirm button object */
+        readonly property string defaultText: "Confirm"
     }
 }

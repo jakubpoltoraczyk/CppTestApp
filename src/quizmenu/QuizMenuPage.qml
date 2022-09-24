@@ -16,4 +16,9 @@ Item {
         anchors.fill: parent
         gradient: GUIConfig.quizMenu.gradients.get(difficultyLevel)
     }
+
+    ConfirmButton {
+        id: confirmButton
+        text: GUIConfig.quizMenu.startButtonText
+    }
 }

@@ -9,5 +9,6 @@
         <file>src/quizmenu/QuizMenu.qml</file>
         <file>src/quizmenu/QuizMenuPage.qml</file>
         <file>src/external/CustomPageIndicator.qml</file>
+        <file>src/external/ConfirmButton.qml</file>
     </qresource>
 </RCC>
