@@ -11,15 +11,15 @@ const QString REGISTER_OBJECT =
     QStringLiteral("Object called '%1' has been registered in QML part of application");
 
 namespace MetaObjectUtils {
-constexpr char ENTRY_VIEW_CONTROLLER[] = "EntryViewController";
+constexpr char BASIC_CONTROLLER[] = "BasicController";
 constexpr char QUIZ_MENU_PAGE_MODEL[] = "QuizMenuPageModel";
 const QString UNCREATABLE_OBJECT =
     QStringLiteral("Couldn't create object %1, because it can be used only for accessing C++ enums");
 
 void registerMetaObjects() {
   // Necessary to use C++ enums in QML part of application
-  qmlRegisterUncreatableMetaObject(EntryViewController::staticMetaObject, ENTRY_VIEW_CONTROLLER, 1, 0,
-                                   ENTRY_VIEW_CONTROLLER, UNCREATABLE_OBJECT.arg(ENTRY_VIEW_CONTROLLER));
+  qmlRegisterUncreatableMetaObject(BasicController::staticMetaObject, BASIC_CONTROLLER, 1, 0,
+                                   BASIC_CONTROLLER, UNCREATABLE_OBJECT.arg(BASIC_CONTROLLER));
   qmlRegisterUncreatableMetaObject(QuizMenuPageModel::staticMetaObject, QUIZ_MENU_PAGE_MODEL, 1, 0,
                                    QUIZ_MENU_PAGE_MODEL, UNCREATABLE_OBJECT.arg(QUIZ_MENU_PAGE_MODEL));
 }

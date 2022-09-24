@@ -2,7 +2,7 @@ pragma Singleton
 
 import QtQuick 2.15
 
-import EntryViewController 1.0
+import BasicController 1.0
 import QuizMenuPageModel 1.0
 
 Item {
@@ -146,15 +146,15 @@ Item {
 
         /** List of available pages in entry view */
         readonly property var pages: [
-            EntryViewController.PageType.STUDY,
-            EntryViewController.PageType.QUIZ
+            BasicController.EntryPage.STUDY,
+            BasicController.EntryPage.QUIZ
         ]
 
         /** Map consists of page type and related icon source */
         readonly property var iconSources: (new Map([
-            [EntryViewController.PageType.UNDEFINED, ""],
-            [EntryViewController.PageType.STUDY, "qrc:/resources/entryviewicon/studyicon.png"],
-            [EntryViewController.PageType.QUIZ, "qrc:/resources/entryviewicon/quizicon.png"]
+            [BasicController.EntryPage.UNDEFINED, ""],
+            [BasicController.EntryPage.STUDY, "qrc:/resources/entryviewicon/studyicon.png"],
+            [BasicController.EntryPage.QUIZ, "qrc:/resources/entryviewicon/quizicon.png"]
         ]))
     }
 

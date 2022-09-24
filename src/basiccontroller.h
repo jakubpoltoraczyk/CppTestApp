@@ -1,6 +1,5 @@
 #pragma once
 
-#include "entryview/entryviewcontroller.h"
 #include "external/datadirectorymanager/datadirectorymanager.h"
 #include "quizmenu/quizmenucontroller.h"
 
@@ -15,6 +14,14 @@ class BasicController : public QObject {
   Q_PROPERTY(bool entryViewVisibility MEMBER entryViewVisibility NOTIFY entryViewVisibilityChanged)
   Q_PROPERTY(bool quizMenuVisibility MEMBER quizMenuVisibility NOTIFY quizMenuVisibilityChanged)
 public:
+  /** Contains available entry page types */
+  enum class EntryPage { UNDEFINED = -1, STUDY, QUIZ };
+  Q_ENUM(EntryPage)
+
+  /** Contains available view types used in the application */
+  enum class View { ENTRY_VIEW, STUDY_VIEW, QUIZ_MENU };
+  Q_ENUM(View)
+
   /**
    * @brief Create an instance of BasicController class
    * @param parent Pointer to parent widget
@@ -36,17 +43,19 @@ signals:
 
 public slots:
   /**
-   * @brief Called when entry view page has been selected
-   * @param pageType Type of page which has been selected
+   * @brief Called when entry page has been selected
+   * @param entryPage Type of page which has been selected
    */
-  void onEntryViewPageSelected(EntryViewController::PageType pageType);
+  void onEntryPageSelected(EntryPage entryPage);
 
 private:
+  void changeView(View newView);
+
   bool entryViewVisibility = true;
   bool quizMenuVisibility = false;
 
   std::shared_ptr<DataDirectoryManager> dataDirectoryManager;
+  View currentView;
 
-  EntryViewController entryViewController;
   QuizMenuController quizMenuController;
 };

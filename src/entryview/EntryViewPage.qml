@@ -3,20 +3,18 @@ import QtQuick.Controls 2.15
 
 import "../external"
 
-import EntryViewController 1.0
-
 Item {
     id: entryViewPage
 
     /** Type of entry view page */
-    property int pageType: EntryViewController.PageType.UNDEFINED
+    property int pageType: BasicController.EntryPage.UNDEFINED
 
-    /** Emitted when start button has been released */
-    signal startButtonReleased(int pageType)
+    /** Emitted when entry page has been selected */
+    signal entryPageSelected(int pageType)
 
     /** Called when creation of component has been completed */
     Component.onCompleted: {
-        startButtonReleased.connect(entryViewController.onStartButtonReleased)
+        entryPageSelected.connect(basicController.onEntryPageSelected)
     }
 
     Rectangle {
@@ -40,7 +38,7 @@ Item {
         /** Called when confirm button has been released */
         buttonArea.onReleased: {
             if (buttonArea.containsMouse) {
-                startButtonReleased(pageType)
+                entryPageSelected(pageType)
             }
         }
     }
