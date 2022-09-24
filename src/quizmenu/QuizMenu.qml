@@ -19,6 +19,8 @@ Rectangle {
 
             QuizMenuPage {
                 difficultyLevel: quizMenuController.pageModels[index].difficultyLevel
+                areClosedQuestions: quizMenuController.pageModels[index].areClosedQuestions
+                areOpenQuestions: quizMenuController.pageModels[index].areOpenQuestions
             }
         }
     }

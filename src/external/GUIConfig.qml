@@ -32,6 +32,9 @@ Item {
     /** Contains configuration related to confirm button component */
     readonly property alias confirmButton: confirmButton
 
+    /** Contains configuration related to image label component */
+    readonly property alias imageLabel: imageLabel
+
     QtObject {
         id: colors
 
@@ -158,11 +161,29 @@ Item {
     QtObject {
         id: quizMenu
 
-        /** Value of level icon top margin */
-        readonly property int levelIconTopMargin: 50
-
         /** Text of start button component */
         readonly property string startButtonText: "Start test"
+
+        /** Value of level image top margin */
+        readonly property int levelImageTopMargin: 60
+
+        /** Value of information layout top margin */
+        readonly property int informationLayoutTopMargin: 20
+
+        /** Spacing between components in the quiz information layout */
+        readonly property int informationLayoutSpacing: 10
+
+        /** Information text about open questions */
+        readonly property string openQuestionsInfoText: "Open questions available"
+
+        /** Information text about closed questions */
+        readonly property string closedQuestionsInfoText: "Closed questions available"
+
+        /** Icon source related to open questions */
+        readonly property string openQuestionsIconSource: "qrc:/resources/quizmenuicon/openquestions.png"
+
+        /** Icon source related to closed questions */
+        readonly property string closedQuestionsIconSource: "qrc:/resources/quizmenuicon/closedquestions.png"
 
         /** Map consists of quiz difficulty level and related gradient */
         readonly property var gradients: (new Map([
@@ -174,9 +195,9 @@ Item {
         /** Map consists of page type and related icon source */
         readonly property var iconLevelSources: (new Map([
             [QuizMenuPageModel.DifficultyLevel.UNDEFINED, ""],
-            [QuizMenuPageModel.DifficultyLevel.EASY, "qrc:/resources/quizlevelicon/easyowl.png"],
-            [QuizMenuPageModel.DifficultyLevel.MEDIUM, "qrc:/resources/quizlevelicon/mediumowl.png"],
-            [QuizMenuPageModel.DifficultyLevel.HARD, "qrc:/resources/quizlevelicon/hardowl.png"]
+            [QuizMenuPageModel.DifficultyLevel.EASY, "qrc:/resources/quizmenuicon/easyowl.png"],
+            [QuizMenuPageModel.DifficultyLevel.MEDIUM, "qrc:/resources/quizmenuicon/mediumowl.png"],
+            [QuizMenuPageModel.DifficultyLevel.HARD, "qrc:/resources/quizmenuicon/hardowl.png"]
         ]))
     }
 
@@ -201,5 +222,12 @@ Item {
 
         /** Default text placed on the confirm button object */
         readonly property string defaultText: "Confirm"
+    }
+
+    QtObject {
+        id: imageLabel
+
+        /** Spacing between image icon and label text */
+        readonly property int spacing: 12
     }
 }

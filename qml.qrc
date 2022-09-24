@@ -10,5 +10,8 @@
         <file>src/quizmenu/QuizMenuPage.qml</file>
         <file>src/external/CustomPageIndicator.qml</file>
         <file>src/external/ConfirmButton.qml</file>
+        <file>src/external/ImageLabel.qml</file>
+        <file>resources/quizmenuicon/openquestions.png</file>
+        <file>resources/quizmenuicon/closedquestions.png</file>
     </qresource>
 </RCC>
