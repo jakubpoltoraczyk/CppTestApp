@@ -1,9 +1,9 @@
 #include "src/basiccontroller.h"
 
 #include <QApplication>
+#include <QDir>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
-#include <QDir>
 
 namespace {
 

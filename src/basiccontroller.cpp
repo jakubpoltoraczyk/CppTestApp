@@ -23,7 +23,6 @@ void BasicController::onEntryViewPageSelected(EntryViewController::PageType page
   case EntryViewController::PageType::QUIZ:
     quizMenuVisibility = true;
     emit quizMenuVisibilityChanged();
-    dataDirectoryManager->getQuizConfigurationFilePaths();
     break;
 
   case EntryViewController::PageType::STUDY:
