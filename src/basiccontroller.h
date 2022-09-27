@@ -2,6 +2,7 @@
 
 #include "external/datadirectorymanager/datadirectorymanager.h"
 #include "quizmenu/quizmenucontroller.h"
+#include "studymenu/studymenucontroller.h"
 
 #include <QObject>
 
@@ -72,4 +73,5 @@ private:
   View currentView;
 
   QuizMenuController quizMenuController;
+  StudyMenuController studyMenuController;
 };

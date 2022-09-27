@@ -21,13 +21,15 @@ const std::unordered_map<BasicController::EntryPage, BasicController::View> ENTR
 
 BasicController::BasicController(QObject* parent)
     : QObject(parent), dataDirectoryManager(std::make_shared<DataDirectoryManager>()),
-      currentView(View::ENTRY_VIEW), quizMenuController(dataDirectoryManager) {
+      currentView(View::ENTRY_VIEW), quizMenuController(dataDirectoryManager),
+      studyMenuController(dataDirectoryManager) {
   connect(&quizMenuController, &QuizMenuController::quizMenuClosed, this, &BasicController::onQuizMenuClosed);
 }
 
 std::vector<std::pair<QString, QObject*>> BasicController::getObjectsToRegister() {
   return {{QStringLiteral("basicController"), this},
-          {QStringLiteral("quizMenuController"), &quizMenuController}};
+          {QStringLiteral("quizMenuController"), &quizMenuController},
+          {QStringLiteral("studyMenuController"), &studyMenuController}};
 }
 
 void BasicController::onEntryPageSelected(EntryPage entryPage) {

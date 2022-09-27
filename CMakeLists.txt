@@ -10,12 +10,15 @@ add_executable(${PROJECT_NAME}
     src/external/datadirectorymanager/datadirectorymanager.cpp
     src/external/utils/utils.cpp
     src/quizmenu/quizmenucontroller.cpp
+    src/studymenu/studymenucontroller.cpp
 
     src/basiccontroller.h
     src/external/datadirectorymanager/datadirectorymanager.h
     src/external/utils/utils.h
     src/quizmenu/quizmenucontroller.h
     src/quizmenu/quizmenupagemodel.h
+    src/studymenu/studymenucontroller.h
+    src/studymenu/studymenupagemodel.h
 
     qml.qrc
     resources/resources.qrc
