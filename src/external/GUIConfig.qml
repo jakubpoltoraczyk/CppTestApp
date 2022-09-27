@@ -153,14 +153,18 @@ Item {
         /** List of available pages in entry view */
         readonly property var pages: [
             BasicController.EntryPage.STUDY,
-            BasicController.EntryPage.QUIZ
+            BasicController.EntryPage.TESTING,
+            BasicController.EntryPage.QUIZ,
+            BasicController.EntryPage.COMPILER
         ]
 
         /** Map consists of page type and related icon source */
         readonly property var iconSources: (new Map([
             [BasicController.EntryPage.UNDEFINED, ""],
             [BasicController.EntryPage.STUDY, "qrc:/resources/entryviewicon/studyicon.png"],
-            [BasicController.EntryPage.QUIZ, "qrc:/resources/entryviewicon/quizicon.png"]
+            [BasicController.EntryPage.TESTING, "qrc:/resources/entryviewicon/testingicon.png"],
+            [BasicController.EntryPage.QUIZ, "qrc:/resources/entryviewicon/quizicon.png"],
+            [BasicController.EntryPage.COMPILER, "qrc:/resources/entryviewicon/compilericon.png"]
         ]))
     }
 

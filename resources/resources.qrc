@@ -1,12 +1,14 @@
 <RCC>
     <qresource prefix="/resources">
         <file>entryviewicon/studyicon.png</file>
-        <file>entryviewicon/quizicon.png</file>
         <file>quizmenuicon/mediumowl.png</file>
         <file>quizmenuicon/hardowl.png</file>
         <file>quizmenuicon/easyowl.png</file>
         <file>quizmenuicon/clock.png</file>
         <file>quizmenuicon/difficulty.png</file>
         <file>closebutton.png</file>
+        <file>entryviewicon/compilericon.png</file>
+        <file>entryviewicon/testingicon.png</file>
+        <file>entryviewicon/quizicon.png</file>
     </qresource>
 </RCC>

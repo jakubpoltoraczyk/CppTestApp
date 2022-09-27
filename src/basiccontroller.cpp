@@ -13,7 +13,9 @@ const QString VIEW_CHANGED = QStringLiteral("View has been changed from %1 to %2
 
 const std::unordered_map<BasicController::EntryPage, BasicController::View> ENTRY_PAGE_TO_VIEW{
     {BasicController::EntryPage::STUDY, BasicController::View::STUDY_VIEW},
-    {BasicController::EntryPage::QUIZ, BasicController::View::QUIZ_MENU}};
+    {BasicController::EntryPage::TESTING, BasicController::View::TESTING_VIEW},
+    {BasicController::EntryPage::QUIZ, BasicController::View::QUIZ_MENU},
+    {BasicController::EntryPage::COMPILER, BasicController::View::COMPILER}};
 
 } // namespace
 
@@ -47,14 +49,16 @@ void BasicController::changeView(View newView) {
     closeEachView();
     break;
 
-  case View::STUDY_VIEW:
-    ///< @todo Implement logic here
-    return;
-
   case View::QUIZ_MENU:
     quizMenuVisibility = true;
     emit quizMenuVisibilityChanged();
     break;
+
+  case View::STUDY_VIEW:
+  case View::TESTING_VIEW:
+  case View::COMPILER:
+    ///< @todo Implement logic here
+    return;
   }
 
   qDebug() << VIEW_CHANGED.arg(Utils::qenumToString(currentView), Utils::qenumToString(newView));

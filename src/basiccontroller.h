@@ -11,15 +11,16 @@
 /** Class which represents application basic controller */
 class BasicController : public QObject {
   Q_OBJECT
+  Q_CLASSINFO("RegisterEnumClassesUnscoped", "false")
   Q_PROPERTY(bool entryViewVisibility MEMBER entryViewVisibility NOTIFY entryViewVisibilityChanged)
   Q_PROPERTY(bool quizMenuVisibility MEMBER quizMenuVisibility NOTIFY quizMenuVisibilityChanged)
 public:
   /** Contains available entry page types */
-  enum class EntryPage { UNDEFINED = -1, STUDY, QUIZ };
+  enum class EntryPage { UNDEFINED = -1, STUDY, TESTING, QUIZ, COMPILER };
   Q_ENUM(EntryPage)
 
   /** Contains available view types used in the application */
-  enum class View { ENTRY_VIEW, STUDY_VIEW, QUIZ_MENU };
+  enum class View { ENTRY_VIEW, STUDY_VIEW, TESTING_VIEW, QUIZ_MENU, COMPILER };
   Q_ENUM(View)
 
   /**
