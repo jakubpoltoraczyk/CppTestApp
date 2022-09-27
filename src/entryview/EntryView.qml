@@ -8,12 +8,9 @@ Rectangle {
     id: entryView
     anchors.fill: parent
 
-    /** Emitted when user decided to exit entry view */
-    signal entryViewExited()
-
     /** Called when component creation has been finished */
     Component.onCompleted: {
-        entryViewExited.connect(basicController.onEntryViewExited)
+        closeButton.released.connect(basicController.onEntryViewClosed)
     }
 
     SwipeView {
@@ -36,12 +33,7 @@ Rectangle {
         swipeView: entrySwipeView
     }
 
-    ExitButton {
-        id: exitButton
-
-        /** Called when exit button has been just released */
-        onReleased: {
-            entryViewExited()
-        }
+    CloseButton {
+        id: closeButton
     }
 }

@@ -35,8 +35,8 @@ Item {
     /** Contains configuration related to image label component */
     readonly property alias imageLabel: imageLabel
 
-    /** Contains configuration related to exit button component */
-    readonly property alias exitButton: exitButton
+    /** Contains configuration related to close button component */
+    readonly property alias closeButton: closeButton
 
     QtObject {
         id: colors
@@ -257,15 +257,15 @@ Item {
     }
 
     QtObject {
-        id: exitButton
+        id: closeButton
 
-        /** Icon source of exit button */
-        readonly property string iconSource: "qrc:/resources/exitbutton.png"
+        /** Icon source of close button */
+        readonly property string iconSource: "qrc:/resources/closebutton.png"
 
-        /** Top margin value between exit button and parent component */
+        /** Top margin value between close button and parent component */
         readonly property int topMargin: 20
 
-        /** Right margin value between exit button and parent component */
+        /** Right margin value between close button and parent component */
         readonly property int rightMargin: 20
     }
 }

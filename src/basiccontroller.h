@@ -46,13 +46,13 @@ public slots:
    * @brief Called when entry page has been selected
    * @param entryPage Type of page which has been selected
    */
-  void onEntryPageSelected(EntryPage entryPage);
+  void onEntryPageSelected(BasicController::EntryPage entryPage);
 
-  /** Called when user decided to exit entry view */
-  void onEntryViewExited();
+  /** Called when user decided to close entry view */
+  void onEntryViewClosed();
 
-  /** Called when user decided to exit quiz menu */
-  void onQuizMenuExited();
+  /** Called when user decided to close quiz menu */
+  void onQuizMenuClosed();
 
 private:
   /**

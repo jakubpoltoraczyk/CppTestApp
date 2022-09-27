@@ -7,6 +7,6 @@
         <file>quizmenuicon/easyowl.png</file>
         <file>quizmenuicon/clock.png</file>
         <file>quizmenuicon/difficulty.png</file>
-        <file>exitbutton.png</file>
+        <file>closebutton.png</file>
     </qresource>
 </RCC>

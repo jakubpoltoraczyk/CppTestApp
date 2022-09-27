@@ -2,6 +2,7 @@
 
 #include "../external/utils/utils.h"
 
+#include <QDebug>
 #include <QJsonDocument>
 #include <QJsonObject>
 
@@ -49,3 +50,8 @@ QuizMenuController::QuizMenuController(std::shared_ptr<DataDirectoryManager> new
                                        QObject* parent)
     : QObject(parent), dataDirectoryManager(newDataDirectoryManager),
       pageModels(deserializePageModels(dataDirectoryManager->getQuizConfigurationFilePaths())) {}
+
+void QuizMenuController::onCloseButtonReleased() {
+  qDebug() << __PRETTY_FUNCTION__;
+  emit quizMenuClosed();
+}

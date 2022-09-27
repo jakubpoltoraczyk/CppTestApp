@@ -18,6 +18,14 @@ public:
   QuizMenuController(std::shared_ptr<DataDirectoryManager> newDataDirectoryManager,
                      QObject* parent = nullptr);
 
+signals:
+  /** Emitted when user decided to close quiz menu */
+  void quizMenuClosed();
+
+public slots:
+  /** Called when close button has been released */
+  void onCloseButtonReleased();
+
 private:
   std::shared_ptr<DataDirectoryManager> dataDirectoryManager;
   QuizMenuPageModels pageModels;

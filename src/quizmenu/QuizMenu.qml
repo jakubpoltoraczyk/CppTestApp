@@ -8,12 +8,9 @@ Rectangle {
     id: quizMenu
     anchors.fill: parent
 
-    /** Emitted when user decided to exit quiz menu */
-    signal quizMenuExited()
-
     /** Called when component creation has been finished */
     Component.onCompleted: {
-        quizMenuExited.connect(basicController.onQuizMenuExited)
+        closeButton.released.connect(quizMenuController.onCloseButtonReleased)
     }
 
     SwipeView {
@@ -39,12 +36,7 @@ Rectangle {
         swipeView: quizMenuSwipeView
     }
 
-    ExitButton {
-        id: exitButton
-
-        /** Called when exit button has been released */
-        onReleased: {
-            quizMenuExited()
-        }
+    CloseButton {
+        id: closeButton
     }
 }
