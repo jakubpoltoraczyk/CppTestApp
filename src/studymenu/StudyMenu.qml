@@ -11,7 +11,6 @@ Rectangle {
     /** Called when component creation has been finished */
     Component.onCompleted: {
         closeButton.released.connect(studyMenuController.onCloseButtonReleased)
-        console.log(Qt.fontFamilies())
     }
 
     SwipeView {
