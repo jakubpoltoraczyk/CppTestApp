@@ -14,6 +14,12 @@ public:
    */
   QStringList getQuizConfigurationFilePaths() const;
 
+  /**
+   * @brief Provide a list of study topic configuration file paths
+   * @return List of study topic configuration file paths
+   */
+  QStringList getStudyTopicConfigurationFilePaths() const;
+
 private:
   QString dataDirectoryPath;
 };

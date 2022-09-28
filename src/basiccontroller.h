@@ -15,13 +15,14 @@ class BasicController : public QObject {
   Q_CLASSINFO("RegisterEnumClassesUnscoped", "false")
   Q_PROPERTY(bool entryViewVisibility MEMBER entryViewVisibility NOTIFY entryViewVisibilityChanged)
   Q_PROPERTY(bool quizMenuVisibility MEMBER quizMenuVisibility NOTIFY quizMenuVisibilityChanged)
+  Q_PROPERTY(bool studyMenuVisibility MEMBER studyMenuVisibility NOTIFY studyMenuVisibilityChanged)
 public:
   /** Contains available entry page types */
   enum class EntryPage { UNDEFINED = -1, STUDY, TESTING, QUIZ, COMPILER };
   Q_ENUM(EntryPage)
 
   /** Contains available view types used in the application */
-  enum class View { ENTRY_VIEW, STUDY_VIEW, TESTING_VIEW, QUIZ_MENU, COMPILER };
+  enum class View { ENTRY_VIEW, STUDY_MENU, TESTING_VIEW, QUIZ_MENU, COMPILER };
   Q_ENUM(View)
 
   /**
@@ -43,6 +44,9 @@ signals:
   /** Emitted when quiz menu visibility has been changed */
   void quizMenuVisibilityChanged();
 
+  /** Emitted when study menu visibility has been changed */
+  void studyMenuVisibilityChanged();
+
 public slots:
   /**
    * @brief Called when entry page has been selected
@@ -56,6 +60,9 @@ public slots:
   /** Called when user decided to close quiz menu */
   void onQuizMenuClosed();
 
+  /** Called when user decided to close study menu */
+  void onStudyMenuClosed();
+
 private:
   /**
    * @brief Change current view using new selected view type
@@ -68,6 +75,7 @@ private:
 
   bool entryViewVisibility = true;
   bool quizMenuVisibility = false;
+  bool studyMenuVisibility = false;
 
   std::shared_ptr<DataDirectoryManager> dataDirectoryManager;
   View currentView;

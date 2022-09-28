@@ -12,7 +12,7 @@ const QString ENTRY_PAGE_SELECTED = QStringLiteral("%1 entry view page has been 
 const QString VIEW_CHANGED = QStringLiteral("View has been changed from %1 to %2");
 
 const std::unordered_map<BasicController::EntryPage, BasicController::View> ENTRY_PAGE_TO_VIEW{
-    {BasicController::EntryPage::STUDY, BasicController::View::STUDY_VIEW},
+    {BasicController::EntryPage::STUDY, BasicController::View::STUDY_MENU},
     {BasicController::EntryPage::TESTING, BasicController::View::TESTING_VIEW},
     {BasicController::EntryPage::QUIZ, BasicController::View::QUIZ_MENU},
     {BasicController::EntryPage::COMPILER, BasicController::View::COMPILER}};
@@ -24,6 +24,8 @@ BasicController::BasicController(QObject* parent)
       currentView(View::ENTRY_VIEW), quizMenuController(dataDirectoryManager),
       studyMenuController(dataDirectoryManager) {
   connect(&quizMenuController, &QuizMenuController::quizMenuClosed, this, &BasicController::onQuizMenuClosed);
+  connect(&studyMenuController, &StudyMenuController::studyMenuClosed, this,
+          &BasicController::onStudyMenuClosed);
 }
 
 std::vector<std::pair<QString, QObject*>> BasicController::getObjectsToRegister() {
@@ -45,10 +47,17 @@ void BasicController::onEntryViewClosed() {
 
 void BasicController::onQuizMenuClosed() { changeView(View::ENTRY_VIEW); }
 
+void BasicController::onStudyMenuClosed() { changeView(View::ENTRY_VIEW); }
+
 void BasicController::changeView(View newView) {
   switch (newView) {
   case View::ENTRY_VIEW:
     closeEachView();
+    break;
+
+  case View::STUDY_MENU:
+    studyMenuVisibility = true;
+    emit studyMenuVisibilityChanged();
     break;
 
   case View::QUIZ_MENU:
@@ -56,10 +65,8 @@ void BasicController::changeView(View newView) {
     emit quizMenuVisibilityChanged();
     break;
 
-  case View::STUDY_VIEW:
   case View::TESTING_VIEW:
   case View::COMPILER:
-    ///< @todo Implement logic here
     return;
   }
 
@@ -70,4 +77,7 @@ void BasicController::changeView(View newView) {
 void BasicController::closeEachView() {
   quizMenuVisibility = false;
   emit quizMenuVisibilityChanged();
+
+  studyMenuVisibility = false;
+  emit studyMenuVisibilityChanged();
 }

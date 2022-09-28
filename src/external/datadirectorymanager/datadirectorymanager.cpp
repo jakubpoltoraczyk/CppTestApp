@@ -7,7 +7,9 @@ namespace {
 
 namespace Paths {
 const QString QUIZ_DIRECTORY = QStringLiteral("%1/quiz");
+const QString STUDY_DIRECTORY = QStringLiteral("%1/study");
 const QString QUIZ_CONFIGURATION_FILE = QStringLiteral("%1/quiz/%2/config.json");
+const QString STUDY_TOPIC_CONFIGURATION_FILE = QStringLiteral("%1/study/%2/config.json");
 } // namespace Paths
 
 QString determineDataDirectoryPath() {
@@ -30,4 +32,16 @@ QStringList DataDirectoryManager::getQuizConfigurationFilePaths() const {
   }
 
   return quizConfigurationFilePaths;
+}
+
+QStringList DataDirectoryManager::getStudyTopicConfigurationFilePaths() const {
+  QStringList studyTopicConfigurationFilePaths;
+  QDir studyDirectory(Paths::STUDY_DIRECTORY.arg(dataDirectoryPath));
+
+  for (const auto& studyTopic : studyDirectory.entryList(QDir::Dirs | QDir::NoDotAndDotDot)) {
+    studyTopicConfigurationFilePaths.push_back(
+        Paths::STUDY_TOPIC_CONFIGURATION_FILE.arg(dataDirectoryPath, studyTopic));
+  }
+
+  return studyTopicConfigurationFilePaths;
 }

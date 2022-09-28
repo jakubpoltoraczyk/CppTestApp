@@ -14,5 +14,7 @@
         <file>resources/quizmenuicon/openquestions.png</file>
         <file>resources/quizmenuicon/closedquestions.png</file>
         <file>src/external/CloseButton.qml</file>
+        <file>src/studymenu/StudyMenu.qml</file>
+        <file>src/studymenu/StudyMenuPage.qml</file>
     </qresource>
 </RCC>
