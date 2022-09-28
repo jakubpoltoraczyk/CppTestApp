@@ -11,6 +11,7 @@ Rectangle {
     /** Called when component creation has been finished */
     Component.onCompleted: {
         closeButton.released.connect(studyMenuController.onCloseButtonReleased)
+        console.log(Qt.fontFamilies())
     }
 
     SwipeView {
@@ -22,8 +23,8 @@ Rectangle {
             id: studyMenuPages
             model: studyMenuController.pageModels.length
 
-            Rectangle {
-                color: GUIConfig.colors.darkRed;
+            StudyMenuPage {
+                title: studyMenuController.pageModels[index].title
             }
         }
     }

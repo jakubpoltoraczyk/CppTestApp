@@ -26,6 +26,9 @@ Item {
     /** Contains configuration related to quiz menu component */
     readonly property alias quizMenu: quizMenu
 
+    /** Contains configuration related to study menu component */
+    readonly property alias studyMenu: studyMenu
+
     /** Contains configuration related to custom page indicator component */
     readonly property alias customPageIndicator: customPageIndicator
 
@@ -82,6 +85,15 @@ Item {
 
         /** Dark yellow color used in application */
         readonly property color darkYellow: "#999900"
+
+        /** Light purpler color used in application */
+        readonly property color lightPurple: "#e08df0"
+
+        /** Purple color used in application */
+        readonly property color purple: "#9739a8"
+
+        /** Dark purple color used in application */
+        readonly property color darkPurple: "#6d187d"
     }
 
     QtObject {
@@ -114,6 +126,12 @@ Item {
             GradientStop { position: 0.33; color: colors.yellow }
             GradientStop { position: 1.0; color: colors.lightYellow }
         }
+
+        readonly property var purpleGradient: Gradient {
+            GradientStop { position: 0.0; color: colors.darkPurple }
+            GradientStop { position: 0.33; color: colors.purple }
+            GradientStop { position: 1.0; color: colors.lightPurple }
+        }
     }
 
     QtObject {
@@ -140,6 +158,13 @@ Item {
         readonly property font mediumFont: Qt.font({
             family: "Courier",
             pointSize: 14,
+            bold: true
+        })
+
+        /** Decorated font used in application */
+        readonly property font decoratedFont: Qt.font({
+            family: "TeX Gyre Cursor",
+            pointSize: 24,
             bold: true
         })
     }
@@ -214,7 +239,7 @@ Item {
             [QuizMenuPageModel.DifficultyLevel.HARD, gradients.redGradient]
         ]))
 
-        /** Map consists of page type and related icon source */
+        /** Map consists of page type and stylerelated icon source */
         readonly property var iconLevelSources: (new Map([
             [QuizMenuPageModel.DifficultyLevel.UNDEFINED, ""],
             [QuizMenuPageModel.DifficultyLevel.EASY, "qrc:/resources/quizmenuicon/easyowl.png"],
@@ -228,6 +253,16 @@ Item {
             [QuizMenuPageModel.DifficultyLevel.MEDIUM, "Medium"],
             [QuizMenuPageModel.DifficultyLevel.HARD, "Hard"]
         ]))
+    }
+
+    QtObject {
+        id: studyMenu
+
+        /** Text of start button component */
+        readonly property string startButtonText: "Start topic"
+
+        /** Value of title label top margin */
+        readonly property int titleLabelTopMargin: 150
     }
 
     QtObject {
