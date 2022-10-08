@@ -9,6 +9,7 @@
 namespace {
 
 namespace Json {
+constexpr char QUIZ_NAME[] = "quizName";
 constexpr char DIFFICULTY_LEVEL[] = "difficultyLevel";
 constexpr char OPEN_QUESTIONS[] = "openQuestions";
 constexpr char CLOSED_QUESTIONS[] = "closedQuestions";
@@ -25,13 +26,15 @@ QuizMenuPageModels deserializePageModels(const QStringList& quizConfigurationFil
       auto jsonDocument = QJsonDocument::fromJson(fileContent);
       auto jsonObject = jsonDocument.object();
 
+      auto quizName = jsonObject[Json::QUIZ_NAME].toString();
       auto difficultyLevel =
           static_cast<QuizMenuPageModel::DifficultyLevel>(jsonObject[Json::DIFFICULTY_LEVEL].toInt());
       auto areOpenQuestions = jsonObject[Json::OPEN_QUESTIONS].toBool();
       auto areClosedQuestions = jsonObject[Json::CLOSED_QUESTIONS].toBool();
       auto quizDuration = jsonObject[Json::QUIZ_DURATION].toInt();
 
-      QuizMenuPageModel pageModel{.difficultyLevel = difficultyLevel,
+      QuizMenuPageModel pageModel{.quizName = quizName,
+                                  .difficultyLevel = difficultyLevel,
                                   .areOpenQuestions = areOpenQuestions,
                                   .areClosedQuestions = areClosedQuestions,
                                   .quizDuration = quizDuration};
@@ -54,4 +57,9 @@ QuizMenuController::QuizMenuController(std::shared_ptr<DataDirectoryManager> new
 void QuizMenuController::onCloseButtonReleased() {
   qDebug() << __PRETTY_FUNCTION__;
   emit quizMenuClosed();
+}
+
+void QuizMenuController::onStartTestButtonReleased(const QString& quizName) {
+  qDebug() << __PRETTY_FUNCTION__;
+  emit quizSelected(quizName);
 }

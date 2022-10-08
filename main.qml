@@ -26,6 +26,12 @@ ApplicationWindow {
     }
 
     Loader {
+        id: quizView
+        anchors.fill: parent
+        source: basicController.quizViewVisibility ? "src/quizview/QuizView.qml" : ""
+    }
+
+    Loader {
         id: studyMenu
         anchors.fill: parent
         source: basicController.studyMenuVisibility ? "src/studymenu/StudyMenu.qml" : ""

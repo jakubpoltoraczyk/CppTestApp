@@ -16,5 +16,6 @@
         <file>src/external/CloseButton.qml</file>
         <file>src/studymenu/StudyMenu.qml</file>
         <file>src/studymenu/StudyMenuPage.qml</file>
+        <file>src/quizview/QuizView.qml</file>
     </qresource>
 </RCC>

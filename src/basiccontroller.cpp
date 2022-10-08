@@ -22,8 +22,9 @@ const std::unordered_map<BasicController::EntryPage, BasicController::View> ENTR
 BasicController::BasicController(QObject* parent)
     : QObject(parent), dataDirectoryManager(std::make_shared<DataDirectoryManager>()),
       currentView(View::ENTRY_VIEW), quizMenuController(dataDirectoryManager),
-      studyMenuController(dataDirectoryManager) {
+      quizViewController(dataDirectoryManager), studyMenuController(dataDirectoryManager) {
   connect(&quizMenuController, &QuizMenuController::quizMenuClosed, this, &BasicController::onQuizMenuClosed);
+  connect(&quizMenuController, &QuizMenuController::quizSelected, this, &BasicController::onQuizSelected);
   connect(&studyMenuController, &StudyMenuController::studyMenuClosed, this,
           &BasicController::onStudyMenuClosed);
 }
@@ -47,12 +48,19 @@ void BasicController::onEntryViewClosed() {
 
 void BasicController::onQuizMenuClosed() { changeView(View::ENTRY_VIEW); }
 
+void BasicController::onQuizSelected(const QString& quizName) {
+  quizViewController.updateQuestions(quizName);
+  changeView(View::QUIZ_VIEW);
+}
+
 void BasicController::onStudyMenuClosed() { changeView(View::ENTRY_VIEW); }
 
 void BasicController::changeView(View newView) {
+  closeEachView();
+
   switch (newView) {
   case View::ENTRY_VIEW:
-    closeEachView();
+    // nothing to do, that's okay
     break;
 
   case View::STUDY_MENU:
@@ -63,6 +71,11 @@ void BasicController::changeView(View newView) {
   case View::QUIZ_MENU:
     quizMenuVisibility = true;
     emit quizMenuVisibilityChanged();
+    break;
+
+  case View::QUIZ_VIEW:
+    quizViewVisibility = true;
+    emit quizViewVisibilityChanged();
     break;
 
   case View::TESTING_VIEW:

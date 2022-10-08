@@ -15,6 +15,13 @@ public:
   QStringList getQuizConfigurationFilePaths() const;
 
   /**
+   * @brief Provide a list of specified quiz question file paths
+   * @param quiz Name of quiz which questions are wanted
+   * @return List of quiz question file paths
+   */
+  QStringList getQuizQuestionFilePaths(const QString& quiz) const;
+
+  /**
    * @brief Provide a list of study topic configuration file paths
    * @return List of study topic configuration file paths
    */

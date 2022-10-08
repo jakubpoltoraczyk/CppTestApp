@@ -9,6 +9,9 @@ import "../external"
 Item {
     id: quizMenuPage
 
+    /** Contains quiz name */
+    property string quizName: ""
+
     /** Contains quiz difficulty level */
     property int difficultyLevel: QuizMenuPageModel.DifficultyLevel.UNDEFINED
 
@@ -20,6 +23,9 @@ Item {
 
     /** Contains information about quiz duration */
     property int quizDuration: 0
+
+    /** Emitted when start test button has been released */
+    signal startTestButtonReleased(string quizName)
 
     Rectangle {
         id: pageBackground
@@ -77,5 +83,10 @@ Item {
     ConfirmButton {
         id: confirmButton
         text: GUIConfig.quizMenu.startButtonText
+
+        /** Called when button has been released */
+        buttonArea.onReleased: {
+            startTestButtonReleased(quizName)
+        }
     }
 }

@@ -2,6 +2,7 @@
 
 #include "external/datadirectorymanager/datadirectorymanager.h"
 #include "quizmenu/quizmenucontroller.h"
+#include "quizview/quizviewcontroller.h"
 #include "studymenu/studymenucontroller.h"
 
 #include <QObject>
@@ -15,6 +16,7 @@ class BasicController : public QObject {
   Q_CLASSINFO("RegisterEnumClassesUnscoped", "false")
   Q_PROPERTY(bool entryViewVisibility MEMBER entryViewVisibility NOTIFY entryViewVisibilityChanged)
   Q_PROPERTY(bool quizMenuVisibility MEMBER quizMenuVisibility NOTIFY quizMenuVisibilityChanged)
+  Q_PROPERTY(bool quizViewVisibility MEMBER quizViewVisibility NOTIFY quizViewVisibilityChanged)
   Q_PROPERTY(bool studyMenuVisibility MEMBER studyMenuVisibility NOTIFY studyMenuVisibilityChanged)
 public:
   /** Contains available entry page types */
@@ -22,7 +24,7 @@ public:
   Q_ENUM(EntryPage)
 
   /** Contains available view types used in the application */
-  enum class View { ENTRY_VIEW, STUDY_MENU, TESTING_VIEW, QUIZ_MENU, COMPILER };
+  enum class View { ENTRY_VIEW, STUDY_MENU, TESTING_VIEW, QUIZ_MENU, COMPILER, QUIZ_VIEW };
   Q_ENUM(View)
 
   /**
@@ -44,6 +46,9 @@ signals:
   /** Emitted when quiz menu visibility has been changed */
   void quizMenuVisibilityChanged();
 
+  /** Emitted when quiz view visibility has been changed */
+  void quizViewVisibilityChanged();
+
   /** Emitted when study menu visibility has been changed */
   void studyMenuVisibilityChanged();
 
@@ -60,6 +65,12 @@ public slots:
   /** Called when user decided to close quiz menu */
   void onQuizMenuClosed();
 
+  /**
+   * @brief Called when the new quiz has been just selected
+   * @param quizName Name of the new selected quiz
+   */
+  void onQuizSelected(const QString& quizName);
+
   /** Called when user decided to close study menu */
   void onStudyMenuClosed();
 
@@ -75,11 +86,13 @@ private:
 
   bool entryViewVisibility = true;
   bool quizMenuVisibility = false;
+  bool quizViewVisibility = false;
   bool studyMenuVisibility = false;
 
   std::shared_ptr<DataDirectoryManager> dataDirectoryManager;
   View currentView;
 
   QuizMenuController quizMenuController;
+  QuizViewController quizViewController;
   StudyMenuController studyMenuController;
 };

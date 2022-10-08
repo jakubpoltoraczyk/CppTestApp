@@ -10,6 +10,7 @@ add_executable(${PROJECT_NAME}
     src/external/datadirectorymanager/datadirectorymanager.cpp
     src/external/utils/utils.cpp
     src/quizmenu/quizmenucontroller.cpp
+    src/quizview/quizviewcontroller.cpp
     src/studymenu/studymenucontroller.cpp
 
     src/basiccontroller.h
@@ -17,6 +18,8 @@ add_executable(${PROJECT_NAME}
     src/external/utils/utils.h
     src/quizmenu/quizmenucontroller.h
     src/quizmenu/quizmenupagemodel.h
+    src/quizview/quizviewcontroller.h
+    src/quizview/quizviewmodel.h
     src/studymenu/studymenucontroller.h
     src/studymenu/studymenupagemodel.h
 

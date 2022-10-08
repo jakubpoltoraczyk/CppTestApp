@@ -23,10 +23,16 @@ Rectangle {
             model: quizMenuController.pageModels.length
 
             QuizMenuPage {
+                quizName: quizMenuController.pageModels[index].quizName
                 difficultyLevel: quizMenuController.pageModels[index].difficultyLevel
                 areClosedQuestions: quizMenuController.pageModels[index].areClosedQuestions
                 areOpenQuestions: quizMenuController.pageModels[index].areOpenQuestions
                 quizDuration: quizMenuController.pageModels[index].quizDuration
+
+                /** Called when component has been just created */
+                Component.onCompleted: {
+                    startTestButtonReleased.connect(quizMenuController.onStartTestButtonReleased)
+                }
             }
         }
     }

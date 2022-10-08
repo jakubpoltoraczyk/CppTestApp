@@ -22,9 +22,21 @@ signals:
   /** Emitted when user decided to close quiz menu */
   void quizMenuClosed();
 
+  /**
+   * @brief Emitted when user selected the new quiz
+   * @param quizName Name of the selected quiz
+   */
+  void quizSelected(const QString& quizName);
+
 public slots:
   /** Called when close button has been released */
   void onCloseButtonReleased();
+
+  /**
+   * @brief Called when start test button has been released
+   * @param quizName Name of the selected quiz
+   */
+  void onStartTestButtonReleased(const QString& quizName);
 
 private:
   std::shared_ptr<DataDirectoryManager> dataDirectoryManager;
