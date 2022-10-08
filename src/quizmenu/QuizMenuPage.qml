@@ -52,28 +52,28 @@ Item {
             topMargin: GUIConfig.quizMenu.informationLayoutTopMargin
         }
 
-        ImageLabel {
+        RowImageLabel {
             id: difficultyImageLabel
             labelText: GUIConfig.quizMenu.difficultyInfoText.arg(
                            GUIConfig.quizMenu.difficultyNames.get(difficultyLevel))
             imageSource: GUIConfig.quizMenu.difficultyIconSource
         }
 
-        ImageLabel {
+        RowImageLabel {
             id: closedQuestionsImageLabel
             labelText: GUIConfig.quizMenu.closedQuestionsInfoText
             imageSource: GUIConfig.quizMenu.closedQuestionsIconSource
             visible: areClosedQuestions
         }
 
-        ImageLabel {
+        RowImageLabel {
             id: openQuestionsImageLabel
             labelText: GUIConfig.quizMenu.openQuestionsInfoText
             imageSource: GUIConfig.quizMenu.openQuestionsIconSource
             visible: areOpenQuestions
         }
 
-        ImageLabel {
+        RowImageLabel {
             id: quizDurationImageLabel
             labelText: GUIConfig.quizMenu.quizDurationText.arg(quizDuration / 60)
             imageSource: GUIConfig.quizMenu.quizDurationIconSource

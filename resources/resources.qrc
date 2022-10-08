@@ -10,5 +10,6 @@
         <file>entryviewicon/compilericon.png</file>
         <file>entryviewicon/testingicon.png</file>
         <file>entryviewicon/quizicon.png</file>
+        <file>hourglass.png</file>
     </qresource>
 </RCC>

@@ -10,12 +10,14 @@
         <file>src/quizmenu/QuizMenuPage.qml</file>
         <file>src/external/CustomPageIndicator.qml</file>
         <file>src/external/ConfirmButton.qml</file>
-        <file>src/external/ImageLabel.qml</file>
+        <file>src/external/RowImageLabel.qml</file>
         <file>resources/quizmenuicon/openquestions.png</file>
         <file>resources/quizmenuicon/closedquestions.png</file>
         <file>src/external/CloseButton.qml</file>
         <file>src/studymenu/StudyMenu.qml</file>
         <file>src/studymenu/StudyMenuPage.qml</file>
         <file>src/quizview/QuizView.qml</file>
+        <file>src/quizview/QuizTimer.qml</file>
+        <file>src/external/ColumnImageLabel.qml</file>
     </qresource>
 </RCC>

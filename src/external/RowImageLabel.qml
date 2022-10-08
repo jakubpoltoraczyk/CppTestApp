@@ -3,7 +3,7 @@ import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
 
 RowLayout {
-    id: imageLabel
+    id: rowImageLabel
     spacing: GUIConfig.imageLabel.spacing
 
     /** Source of icon image to display */

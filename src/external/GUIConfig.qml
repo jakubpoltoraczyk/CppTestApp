@@ -26,6 +26,9 @@ Item {
     /** Contains configuration related to quiz menu component */
     readonly property alias quizMenu: quizMenu
 
+    /** Contains configuration related to quiz view component */
+    readonly property alias quizView: quizView
+
     /** Contains configuration related to study menu component */
     readonly property alias studyMenu: studyMenu
 
@@ -256,6 +259,19 @@ Item {
             [QuizMenuPageModel.DifficultyLevel.MEDIUM, "Medium"],
             [QuizMenuPageModel.DifficultyLevel.HARD, "Hard"]
         ]))
+    }
+
+    QtObject {
+        id: quizView
+
+        /** Top margin value between quiz timer and quiz view top border */
+        readonly property int quizTimerTopMargin: 16
+
+        /** Left margin value between quiz timer and quiz view left border */
+        readonly property int quizTimerLeftMargin: 12
+
+        /** Source of hour glass image */
+        readonly property string hourGlassImageSource: "qrc:/resources/hourglass.png"
     }
 
     QtObject {

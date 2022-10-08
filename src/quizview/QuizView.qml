@@ -9,20 +9,8 @@ Rectangle {
     anchors.fill: parent
     color: GUIConfig.colors.white
 
-    property int remainingTime: quizViewController.getQuizDuration()
-
-    Timer {
-        interval: 1000
-        running: true
-        repeat: true
-        onTriggered: {
-            remainingTime -= 1
-            timerLabel.text = remainingTime
-        }
-    }
-
-    Label {
-        id: timerLabel
-        text: remainingTime
+    QuizTimer {
+        id: quizTimer
+        initialTime: quizViewController.getQuizDuration()
     }
 }
