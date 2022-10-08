@@ -1,5 +1,7 @@
 #include "utils.h"
 
+#include <QJsonDocument>
+
 namespace {
 
 const QString OPEN_FILE_NOT_POSSIBLE = QStringLiteral("Couldn't open file with path: %1");
@@ -14,4 +16,10 @@ QByteArray Utils::readFileContent(const QString& filePath) {
   auto fileContent = file.readAll();
   file.close();
   return fileContent;
+}
+
+QJsonObject Utils::determineJsonObject(const QString& filePath) {
+  auto fileContent = readFileContent(filePath);
+  auto jsonDocument = QJsonDocument::fromJson(fileContent);
+  return jsonDocument.object();
 }

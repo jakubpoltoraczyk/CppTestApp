@@ -2,9 +2,6 @@
 
 #include "../external/utils/utils.h"
 
-#include <QJsonDocument>
-#include <QJsonObject>
-
 namespace {
 
 namespace Json {
@@ -17,14 +14,12 @@ StudyMenuPageModels deserializePageModels(const QStringList& studyTopicConfigura
   pageModels.reserve(studyTopicConfigurationFilePaths.size());
 
   for (const auto& filePath : studyTopicConfigurationFilePaths) {
-    auto fileContent = Utils::readFileContent(filePath);
-    auto jsonDocument = QJsonDocument::fromJson(fileContent);
-    auto jsonObject = jsonDocument.object();
+    auto jsonObject = Utils::determineJsonObject(filePath);
+    StudyMenuPageModel pageModel;
 
-    auto title = jsonObject[Json::TITLE].toString();
-    auto topic = static_cast<StudyMenuPageModel::Topic>(jsonObject[Json::TOPIC].toInt());
+    pageModel.title = jsonObject[Json::TITLE].toString();
+    pageModel.topic = static_cast<StudyMenuPageModel::Topic>(jsonObject[Json::TOPIC].toInt());
 
-    StudyMenuPageModel pageModel{.title = title, .topic = topic};
     pageModels.push_back(std::move(pageModel));
   }
 

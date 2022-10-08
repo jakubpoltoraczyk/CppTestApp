@@ -2,10 +2,6 @@
 
 #include "../external/utils/utils.h"
 
-#include <QDebug>
-#include <QJsonDocument>
-#include <QJsonObject>
-
 namespace {
 
 namespace Json {
@@ -22,22 +18,16 @@ QuizMenuPageModels deserializePageModels(const QStringList& quizConfigurationFil
 
   for (const auto& filePath : quizConfigurationFilePaths) {
     try {
-      auto fileContent = Utils::readFileContent(filePath);
-      auto jsonDocument = QJsonDocument::fromJson(fileContent);
-      auto jsonObject = jsonDocument.object();
+      auto jsonObject = Utils::determineJsonObject(filePath);
+      QuizMenuPageModel pageModel;
 
-      auto quizName = jsonObject[Json::QUIZ_NAME].toString();
-      auto difficultyLevel =
+      pageModel.quizName = jsonObject[Json::QUIZ_NAME].toString();
+      pageModel.difficultyLevel =
           static_cast<QuizMenuPageModel::DifficultyLevel>(jsonObject[Json::DIFFICULTY_LEVEL].toInt());
-      auto areOpenQuestions = jsonObject[Json::OPEN_QUESTIONS].toBool();
-      auto areClosedQuestions = jsonObject[Json::CLOSED_QUESTIONS].toBool();
-      auto quizDuration = jsonObject[Json::QUIZ_DURATION].toInt();
+      pageModel.areOpenQuestions = jsonObject[Json::OPEN_QUESTIONS].toBool();
+      pageModel.areClosedQuestions = jsonObject[Json::CLOSED_QUESTIONS].toBool();
+      pageModel.quizDuration = jsonObject[Json::QUIZ_DURATION].toInt();
 
-      QuizMenuPageModel pageModel{.quizName = quizName,
-                                  .difficultyLevel = difficultyLevel,
-                                  .areOpenQuestions = areOpenQuestions,
-                                  .areClosedQuestions = areClosedQuestions,
-                                  .quizDuration = quizDuration};
       pageModels.push_back(std::move(pageModel));
     } catch (const std::logic_error& error) {
       qDebug() << error.what();

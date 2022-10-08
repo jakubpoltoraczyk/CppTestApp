@@ -1,6 +1,7 @@
 #pragma once
 
 #include <QFile>
+#include <QJsonObject>
 #include <QVariant>
 
 /** Contains general application utils */
@@ -13,6 +14,13 @@ namespace Utils {
  * @return Content of selected file
  */
 QByteArray readFileContent(const QString& filePath);
+
+/**
+ * @brief Determine JSON object from file with selected path
+ * @param filePath Path to file which will be used to determine JSON object
+ * @return JSON object created from specified file
+ */
+QJsonObject determineJsonObject(const QString& filePath);
 
 /**
  * @brief Convert enum to its string representation

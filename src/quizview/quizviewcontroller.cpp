@@ -2,12 +2,6 @@
 
 #include "../external/utils/utils.h"
 
-#include <QDebug>
-#include <QJsonArray>
-#include <QJsonDocument>
-#include <QJsonObject>
-#include <QVariant>
-
 namespace {
 
 const QString QUESTIONS_UPDATED = QStringLiteral("Questions for the quiz '%1' have been updated");
@@ -22,35 +16,27 @@ constexpr char CORRECT_ANSWER[] = "correctAnswer";
 } // namespace Json
 
 QuizQuestionModels deserializeQuizQuestionModels(const QStringList& questionFilePaths) {
-  QuizQuestionModels viewModels;
-  viewModels.reserve(questionFilePaths.size());
+  QuizQuestionModels questionModels;
+  questionModels.reserve(questionFilePaths.size());
 
   for (const auto& filePath : questionFilePaths) {
-    auto fileContent = Utils::readFileContent(filePath);
-    auto jsonDocument = QJsonDocument::fromJson(fileContent);
-    auto jsonObject = jsonDocument.object();
+    auto jsonObject = Utils::determineJsonObject(filePath);
+    QuizQuestionModel questionModel;
 
-    auto type = static_cast<QuizQuestionModel::QuestionType>(jsonObject[Json::TYPE].toInt());
-    auto image = jsonObject[Json::IMAGE].toString();
-    auto question = jsonObject[Json::QUESTION].toString();
-    auto answers = jsonObject[Json::ANSWERS].toVariant().toStringList();
-    auto correctAnswer = jsonObject[Json::CORRECT_ANSWER].toInt();
+    questionModel.type = static_cast<QuizQuestionModel::QuestionType>(jsonObject[Json::TYPE].toInt());
+    questionModel.image = jsonObject[Json::IMAGE].toString();
+    questionModel.question = jsonObject[Json::QUESTION].toString();
+    questionModel.answers = jsonObject[Json::ANSWERS].toVariant().toStringList();
+    questionModel.correctAnswer = jsonObject[Json::CORRECT_ANSWER].toInt();
 
-    QuizQuestionModel quizViewModel{.type = type,
-                                    .image = image,
-                                    .question = question,
-                                    .answers = answers,
-                                    .correctAnswer = correctAnswer};
-    viewModels.push_back(std::move(quizViewModel));
+    questionModels.push_back(std::move(questionModel));
   }
 
-  return viewModels;
+  return questionModels;
 }
 
 int deserializeQuizDuration(const QString& configFilePath) {
-  auto fileContent = Utils::readFileContent(configFilePath);
-  auto jsonDocument = QJsonDocument::fromJson(fileContent);
-  auto jsonObject = jsonDocument.object();
+  auto jsonObject = Utils::determineJsonObject(configFilePath);
   return jsonObject[Json::QUIZ_DURATION].toInt();
 }
 
