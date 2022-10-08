@@ -13,6 +13,7 @@ namespace {
 const QString QUESTIONS_UPDATED = QStringLiteral("Questions for the quiz '%1' have been updated");
 
 namespace Json {
+constexpr char QUIZ_DURATION[] = "quizDuration";
 constexpr char TYPE[] = "type";
 constexpr char IMAGE[] = "image";
 constexpr char QUESTION[] = "question";
@@ -46,14 +47,28 @@ QuizQuestionModels deserializeQuizQuestionModels(const QStringList& questionFile
   return viewModels;
 }
 
+int deserializeQuizDuration(const QString& configFilePath) {
+  auto fileContent = Utils::readFileContent(configFilePath);
+  auto jsonDocument = QJsonDocument::fromJson(fileContent);
+  auto jsonObject = jsonDocument.object();
+  return jsonObject[Json::QUIZ_DURATION].toInt();
+}
+
 } // namespace
+
+int QuizViewController::getQuizDuration() {
+  auto quizConfigurationFilePaths = dataDirectoryManager->getQuizConfigurationFilePaths();
+  auto currentQuizConfig = quizConfigurationFilePaths.filter(quizName);
+  return deserializeQuizDuration(currentQuizConfig.first());
+}
 
 QuizViewController::QuizViewController(std::shared_ptr<DataDirectoryManager> newDataDirectoryManager,
                                        QObject* parent)
     : QObject(parent), dataDirectoryManager(newDataDirectoryManager) {}
 
-void QuizViewController::updateQuestions(const QString& quiz) {
-  auto questionFilePaths = dataDirectoryManager->getQuizQuestionFilePaths(quiz);
+void QuizViewController::updateQuestions(const QString& newQuizName) {
+  quizName = newQuizName;
+  auto questionFilePaths = dataDirectoryManager->getQuizQuestionFilePaths(quizName);
   questionModels = deserializeQuizQuestionModels(questionFilePaths);
-  qDebug() << QUESTIONS_UPDATED.arg(quiz);
+  qDebug() << QUESTIONS_UPDATED.arg(quizName);
 }

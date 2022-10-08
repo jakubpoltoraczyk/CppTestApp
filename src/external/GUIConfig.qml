@@ -47,6 +47,9 @@ Item {
         /** Transparent color used in application */
         readonly property color transparent: "transparent"
 
+        /** White color used in application */
+        readonly property color white: "#ffffff"
+
         /** Light blue color used in application */
         readonly property color lightBlue: "#7f9be3"
 

@@ -32,6 +32,7 @@ BasicController::BasicController(QObject* parent)
 std::vector<std::pair<QString, QObject*>> BasicController::getObjectsToRegister() {
   return {{QStringLiteral("basicController"), this},
           {QStringLiteral("quizMenuController"), &quizMenuController},
+          {QStringLiteral("quizViewController"), &quizViewController},
           {QStringLiteral("studyMenuController"), &studyMenuController}};
 }
 
