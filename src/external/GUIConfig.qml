@@ -44,6 +44,9 @@ Item {
     /** Contains configuration related to close button component */
     readonly property alias closeButton: closeButton
 
+    /** Contains configuration related to custom dialog component */
+    readonly property alias customDialog: customDialog
+
     QtObject {
         id: colors
 
@@ -53,8 +56,14 @@ Item {
         /** White color used in application */
         readonly property color white: "#ffffff"
 
+        /** Light grey color used in application */
+        readonly property color lightGrey: "#eeeeee"
+
         /** Grey color used in application */
         readonly property color grey: "#cccccc"
+
+        /** Dark grey color used in application */
+        readonly property color darkGrey: "#aaaaaa"
 
         /** Light blue color used in application */
         readonly property color lightBlue: "#7f9be3"
@@ -285,7 +294,7 @@ Item {
         id: quizView
 
         /** Top margin value between quiz timer and quiz view top border */
-        readonly property int quizTimerTopMargin: 20
+        readonly property int quizTimerTopMargin: 22
 
         /** Left margin value between quiz timer and quiz view left border */
         readonly property int quizTimerLeftMargin: 16
@@ -375,5 +384,30 @@ Item {
             "qrc:/resources/closebutton/closebutton1.png",
             "qrc:/resources/closebutton/closebutton2.png"
         ]
+    }
+
+    QtObject {
+        id: customDialog
+
+        /** Width of the custom dialog component */
+        readonly property int width: 480
+
+        /** Height of the custom dialog component */
+        readonly property int height: 240
+
+        /** Value of the top margin between content image label and top of the dialog */
+        readonly property int contentImageLabelTopMargin: 20
+
+        /** Width of the border used in custom dialog component */
+        readonly property int borderWidth: 3
+
+        /** Color of the border used in custom dialog component */
+        readonly property color borderColor: colors.grey
+
+        /** Color of the background in custom dialog component */
+        readonly property color backgroundColor: colors.lightGrey
+
+        /** Source of the information image */
+        readonly property string informationImageSource: "qrc:/resources/information.png"
     }
 }

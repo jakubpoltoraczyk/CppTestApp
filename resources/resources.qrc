@@ -12,5 +12,6 @@
         <file>hourglass.png</file>
         <file>closebutton/closebutton2.png</file>
         <file>closebutton/closebutton1.png</file>
+        <file>information.png</file>
     </qresource>
 </RCC>

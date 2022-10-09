@@ -15,6 +15,7 @@ ColumnLayout {
     Image {
         id: image
         source: imageSource
+        Layout.alignment: Qt.AlignHCenter
     }
 
     Label {
