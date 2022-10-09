@@ -8,6 +8,7 @@ set(CMAKE_CXX_FLAGS "-Wall -Wextra -Wpedantic -Wshadow -Werror")
 add_executable(${PROJECT_NAME}
     main.cpp
     src/basiccontroller.cpp
+    src/external/customdialog/customdialogcontroller.cpp
     src/external/datadirectorymanager/datadirectorymanager.cpp
     src/external/utils/utils.cpp
     src/quizmenu/quizmenucontroller.cpp
@@ -15,6 +16,7 @@ add_executable(${PROJECT_NAME}
     src/studymenu/studymenucontroller.cpp
 
     src/basiccontroller.h
+    src/external/customdialog/customdialogcontroller.h
     src/external/datadirectorymanager/datadirectorymanager.h
     src/external/utils/utils.h
     src/quizmenu/quizmenucontroller.h

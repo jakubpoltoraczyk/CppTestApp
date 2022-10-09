@@ -4,6 +4,7 @@ import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
 
 import "src/external"
+import "src/external/customdialog"
 import "src/entryview"
 import "src/quizmenu"
 
@@ -17,6 +18,11 @@ ApplicationWindow {
         id: mainPage
         anchors.fill: parent
         visible: basicController.entryViewVisibility
+    }
+
+    CustomDialog {
+        id: customDialog
+        visible: customDialogController.isVisible
     }
 
     Loader {

@@ -21,6 +21,7 @@ const std::unordered_map<BasicController::EntryPage, BasicController::View> ENTR
 
 BasicController::BasicController(QObject* parent)
     : QObject(parent), dataDirectoryManager(std::make_shared<DataDirectoryManager>()),
+      customDialogController(std::make_shared<CustomDialogController>(dataDirectoryManager)),
       currentView(View::ENTRY_VIEW), quizMenuController(dataDirectoryManager),
       quizViewController(dataDirectoryManager), studyMenuController(dataDirectoryManager) {
   connect(&quizMenuController, &QuizMenuController::quizMenuClosed, this, &BasicController::onQuizMenuClosed);
@@ -32,6 +33,7 @@ BasicController::BasicController(QObject* parent)
 
 std::vector<std::pair<QString, QObject*>> BasicController::getObjectsToRegister() {
   return {{QStringLiteral("basicController"), this},
+          {QStringLiteral("customDialogController"), customDialogController.get()},
           {QStringLiteral("quizMenuController"), &quizMenuController},
           {QStringLiteral("quizViewController"), &quizViewController},
           {QStringLiteral("studyMenuController"), &studyMenuController}};
@@ -44,8 +46,17 @@ void BasicController::onEntryPageSelected(EntryPage entryPage) {
 }
 
 void BasicController::onEntryViewClosed() {
-  qDebug() << APPLICATION_CLOSED;
-  QCoreApplication::quit();
+  customDialogController->showDialog();
+  auto connection = new QMetaObject::Connection;
+  *connection = connect(customDialogController.get(), &CustomDialogController::dialogClosed, this,
+                        [connection](auto exitStatus) {
+                          disconnect(*connection);
+                          delete connection;
+                          if (exitStatus == CustomDialogController::ExitStatus::ACCEPTED) {
+                            qDebug() << APPLICATION_CLOSED;
+                            QCoreApplication::quit();
+                          }
+                        });
 }
 
 void BasicController::onQuizMenuClosed() { changeView(View::ENTRY_VIEW); }

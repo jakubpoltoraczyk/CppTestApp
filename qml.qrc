@@ -19,5 +19,6 @@
         <file>src/quizview/QuizView.qml</file>
         <file>src/quizview/QuizTimer.qml</file>
         <file>src/external/ColumnImageLabel.qml</file>
+        <file>src/external/customdialog/CustomDialog.qml</file>
     </qresource>
 </RCC>

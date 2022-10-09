@@ -1,5 +1,6 @@
 #pragma once
 
+#include "external/customdialog/customdialogcontroller.h"
 #include "external/datadirectorymanager/datadirectorymanager.h"
 #include "quizmenu/quizmenucontroller.h"
 #include "quizview/quizviewcontroller.h"
@@ -93,8 +94,8 @@ private:
   bool studyMenuVisibility = false; ///< Contains visibility status of study menu component
 
   std::shared_ptr<DataDirectoryManager> dataDirectoryManager;
+  std::shared_ptr<CustomDialogController> customDialogController;
   View currentView;
-
   QuizMenuController quizMenuController;
   QuizViewController quizViewController;
   StudyMenuController studyMenuController;
