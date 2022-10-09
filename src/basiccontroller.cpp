@@ -47,16 +47,13 @@ void BasicController::onEntryPageSelected(EntryPage entryPage) {
 
 void BasicController::onEntryViewClosed() {
   customDialogController->showDialog();
-  auto connection = new QMetaObject::Connection;
-  *connection = connect(customDialogController.get(), &CustomDialogController::dialogClosed, this,
-                        [connection](auto exitStatus) {
-                          disconnect(*connection);
-                          delete connection;
-                          if (exitStatus == CustomDialogController::ExitStatus::ACCEPTED) {
-                            qDebug() << APPLICATION_CLOSED;
-                            QCoreApplication::quit();
-                          }
-                        });
+  Utils::connectOnDialogClosed(customDialogController, [](CustomDialogController::ExitStatus exitStatus) {
+    if (exitStatus == CustomDialogController::ExitStatus::REJECTED) {
+      return;
+    }
+    qDebug() << APPLICATION_CLOSED;
+    QCoreApplication::quit();
+  });
 }
 
 void BasicController::onQuizMenuClosed() { changeView(View::ENTRY_VIEW); }

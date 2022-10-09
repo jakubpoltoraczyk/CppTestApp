@@ -23,3 +23,15 @@ QJsonObject Utils::determineJsonObject(const QString& filePath) {
   auto jsonDocument = QJsonDocument::fromJson(fileContent);
   return jsonDocument.object();
 }
+
+void Utils::connectOnDialogClosed(
+    std::shared_ptr<CustomDialogController> customDialogController,
+    std::function<void(CustomDialogController::ExitStatus)> slotOnDialogClosed) {
+  auto connection = new QMetaObject::Connection;
+  *connection = QObject::connect(customDialogController.get(), &CustomDialogController::dialogClosed,
+                                 [connection, slotOnDialogClosed](auto exitStatus) {
+                                   QObject::disconnect(*connection);
+                                   delete connection;
+                                   slotOnDialogClosed(exitStatus);
+                                 });
+}

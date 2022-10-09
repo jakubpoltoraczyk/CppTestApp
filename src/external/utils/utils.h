@@ -1,5 +1,7 @@
 #pragma once
 
+#include "../customdialog/customdialogcontroller.h"
+
 #include <QFile>
 #include <QJsonObject>
 #include <QVariant>
@@ -29,5 +31,14 @@ QJsonObject determineJsonObject(const QString& filePath);
  * @return String representation of enum
  */
 template <typename QEnum> QString qenumToString(QEnum qenum) { return QVariant::fromValue(qenum).toString(); }
+
+/**
+ * @brief Used to make single shot connection for @see CustomDialogController::dialogClosed signal
+ * @details It's just a very basic version of Qt::SingleShotConnection available from Qt 6.0
+ * @param customDialogController Contains controller for custom dialog component
+ * @param slotOnDialogClosed It will be called as a slot for @see CustomDialogController:dialogClosed signal
+ */
+void connectOnDialogClosed(std::shared_ptr<CustomDialogController> customDialogController,
+                           std::function<void(CustomDialogController::ExitStatus)> slotOnDialogClosed);
 
 } // namespace Utils
