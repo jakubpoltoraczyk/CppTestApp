@@ -37,6 +37,7 @@ Dialog {
 
     footer: DialogButtonBox {
         id: dialogFooter
+        alignment: Qt.AlignHCenter
         standardButtons: customDialogController.dialogModel.buttonCode
         background: Rectangle {
             color: GUIConfig.customDialog.backgroundColor

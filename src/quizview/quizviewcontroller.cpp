@@ -49,8 +49,10 @@ int QuizViewController::getQuizDuration() {
 }
 
 QuizViewController::QuizViewController(std::shared_ptr<DataDirectoryManager> newDataDirectoryManager,
+                                       std::shared_ptr<CustomDialogController> newCustomDialogController,
                                        QObject* parent)
-    : QObject(parent), dataDirectoryManager(newDataDirectoryManager) {}
+    : QObject(parent), dataDirectoryManager(newDataDirectoryManager),
+      customDialogController(newCustomDialogController) {}
 
 void QuizViewController::updateQuestions(const QString& newQuizName) {
   quizName = newQuizName;
@@ -61,14 +63,20 @@ void QuizViewController::updateQuestions(const QString& newQuizName) {
 
 void QuizViewController::onStopTestButtonReleased() {
   qDebug() << __PRETTY_FUNCTION__;
-  emit quizViewClosed();
+  customDialogController->showDialog(DialogCode::QUIZ_STOP);
+  Utils::connectOnDialogClosed(customDialogController, [this](CustomDialogController::ExitStatus exitStatus) {
+    if (exitStatus == CustomDialogController::ExitStatus::REJECTED) {
+      return;
+    }
+    emit quizViewClosed();
+  });
 }
 
 void QuizViewController::onAnswerSelected(int answerIndex) {
   if (auto model = questionModels.at(currentQuestion); answerIndex == model.correctAnswer) {
-    qDebug() << "Answer is correct!";
+    customDialogController->showDialog(DialogCode::QUIZ_ANSWER_CORRECT);
   } else {
-    qDebug() << "Answer is wrong!";
+    customDialogController->showDialog(DialogCode::QUIZ_ANSWER_WRONG);
   }
 
   ++currentQuestion;
@@ -77,9 +85,9 @@ void QuizViewController::onAnswerSelected(int answerIndex) {
 
 void QuizViewController::onAnswerEntered(const QString& answerContent) {
   if (auto model = questionModels.at(currentQuestion); model.answers.contains(answerContent)) {
-    qDebug() << "Answer is correct!";
+    customDialogController->showDialog(DialogCode::QUIZ_ANSWER_CORRECT);
   } else {
-    qDebug() << "Answer is wrong!";
+    customDialogController->showDialog(DialogCode::QUIZ_ANSWER_WRONG);
   }
 
   ++currentQuestion;

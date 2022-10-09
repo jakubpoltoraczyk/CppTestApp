@@ -2,6 +2,14 @@
 
 #include <QObject>
 
+/** Contains available dialog codes used in the whole application */
+namespace DialogCode {
+constexpr int APPLICATION_CLOSE = 1;
+constexpr int QUIZ_ANSWER_CORRECT = 2;
+constexpr int QUIZ_ANSWER_WRONG = 3;
+constexpr int QUIZ_STOP = 4;
+} // namespace DialogCode
+
 /** Contains dataset of custom dialog */
 class CustomDialogModel {
   Q_GADGET

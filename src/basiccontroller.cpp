@@ -23,7 +23,8 @@ BasicController::BasicController(QObject* parent)
     : QObject(parent), dataDirectoryManager(std::make_shared<DataDirectoryManager>()),
       customDialogController(std::make_shared<CustomDialogController>(dataDirectoryManager)),
       currentView(View::ENTRY_VIEW), quizMenuController(dataDirectoryManager),
-      quizViewController(dataDirectoryManager), studyMenuController(dataDirectoryManager) {
+      quizViewController(dataDirectoryManager, customDialogController),
+      studyMenuController(dataDirectoryManager) {
   connect(&quizMenuController, &QuizMenuController::quizMenuClosed, this, &BasicController::onQuizMenuClosed);
   connect(&quizMenuController, &QuizMenuController::quizSelected, this, &BasicController::onQuizSelected);
   connect(&quizViewController, &QuizViewController::quizViewClosed, this, &BasicController::onQuizViewClosed);

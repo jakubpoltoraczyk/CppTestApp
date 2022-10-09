@@ -1,5 +1,6 @@
 #pragma once
 
+#include "../external/customdialog/customdialogcontroller.h"
 #include "../external/datadirectorymanager/datadirectorymanager.h"
 #include "quizviewmodel.h"
 
@@ -21,9 +22,11 @@ public:
   /**
    * @brief Create a default instance of QuizViewController class
    * @param newDataDirectoryManager Used to manage application data directory
+   * @param newCustomDialogController Used to manage application dialogs
    * @param parent Pointer to parent widget
    */
   QuizViewController(std::shared_ptr<DataDirectoryManager> newDataDirectoryManager,
+                     std::shared_ptr<CustomDialogController> newCustomDialogController,
                      QObject* parent = nullptr);
 
   /**
@@ -61,6 +64,7 @@ private:
   int currentQuestion = 0; ///< Contains current question index
 
   std::shared_ptr<DataDirectoryManager> dataDirectoryManager;
+  std::shared_ptr<CustomDialogController> customDialogController;
   QuizQuestionModels questionModels;
   QString quizName;
 };
