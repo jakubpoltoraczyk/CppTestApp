@@ -1,12 +1,10 @@
 {
-    "type": 0,
+    "type": 1,
     "image": "",
     "question": "Which smart pointer is depreacted in C++17?",
     "answers": [
-        "unique_ptr",
-        "shared_ptr",
-        "weak_ptr",
-        "auto_ptr",
+        "std::auto_ptr",
+        "auto_ptr"
     ],
-    "correctAnswer": 0
+    "correctAnswer": -1
 }

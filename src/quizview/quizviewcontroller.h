@@ -10,6 +10,7 @@
 class QuizViewController : public QObject {
   Q_OBJECT
   Q_PROPERTY(int currentQuestion MEMBER currentQuestion NOTIFY currentQuestionChanged)
+  Q_PROPERTY(QuizQuestionModels questionModels MEMBER questionModels CONSTANT)
 public:
   /**
    * @brief Provide value of current quiz duration
@@ -41,6 +42,20 @@ signals:
 public slots:
   /** Called when stop test button has been released */
   void onStopTestButtonReleased();
+
+  /**
+   *  @brief Called when user just selected the answer
+   *  @details Available only for the closed question type
+   *  @param answerIndex Index of the selected answer
+   */
+  void onAnswerSelected(int answerIndex);
+
+  /**
+   * @brief Called when user just entered the answer
+   * @details Available only for the open question type
+   * @param answerContent Content of the selected answer
+   */
+  void onAnswerEntered(const QString& answerContent);
 
 private:
   int currentQuestion = 0; ///< Contains current question index

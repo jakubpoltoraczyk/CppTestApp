@@ -53,6 +53,9 @@ Item {
         /** White color used in application */
         readonly property color white: "#ffffff"
 
+        /** Grey color used in application */
+        readonly property color grey: "#cccccc"
+
         /** Light blue color used in application */
         readonly property color lightBlue: "#7f9be3"
 
@@ -100,6 +103,15 @@ Item {
 
         /** Dark purple color used in application */
         readonly property color darkPurple: "#6d187d"
+
+        /** Light cream color used in application */
+        readonly property color lightCream: "#f5f4ed"
+
+        /** Cream color used in application */
+        readonly property color cream: "#d6d5bf"
+
+        /** Dark cream color used in application */
+        readonly property color darkCream: "#b8b69a"
     }
 
     QtObject {
@@ -133,10 +145,18 @@ Item {
             GradientStop { position: 1.0; color: colors.lightYellow }
         }
 
+        /** Contains purple gradient component */
         readonly property var purpleGradient: Gradient {
             GradientStop { position: 0.0; color: colors.darkPurple }
             GradientStop { position: 0.33; color: colors.purple }
             GradientStop { position: 1.0; color: colors.lightPurple }
+        }
+
+        /** Contains cream gradient component */
+        readonly property var creamGradient: Gradient {
+            GradientStop { position: 0.0; color: colors.darkCream }
+            GradientStop { position: 0.33; color: colors.cream }
+            GradientStop { position: 1.0; color: colors.lightCream }
         }
     }
 
@@ -270,14 +290,35 @@ Item {
         /** Left margin value between quiz timer and quiz view left border */
         readonly property int quizTimerLeftMargin: 16
 
-        /** Source of hour glass image */
-        readonly property string hourGlassImageSource: "qrc:/resources/hourglass.png"
+        /** Top margin value between question label and quiz view top border */
+        readonly property int questionLabelTopMargin: 160
+
+        /** Top margin value between answers layout and question label */
+        readonly property int answersLayoutTopMargin: 50
+
+        /** Top margin value between answer text input and question label */
+        readonly property int answerTextFieldTopMargin: 100
+
+        /** Spacing between items in answers layout component */
+        readonly property int answersLayoutSpacing: 10
 
         /** Interval of quiz timer component */
         readonly property int quizTimerInterval: 1000
 
+        /** Width of the answer text input component */
+        readonly property int answerTextFieldWidth: 360
+
+        /** Height of the answer text input component */
+        readonly property int answerTextFieldHeight: 40
+
         /** Text displayed on the accept answer button */
         readonly property string acceptAnswerButtonText: "Accept answer"
+
+        /** Placeholder text of the answer text field component */
+        readonly property string answerTextFieldPlaceholder: "Enter your answer"
+
+        /** Source of hour glass image */
+        readonly property string hourGlassImageSource: "qrc:/resources/hourglass.png"
     }
 
     QtObject {

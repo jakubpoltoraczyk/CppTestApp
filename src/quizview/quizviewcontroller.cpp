@@ -63,3 +63,25 @@ void QuizViewController::onStopTestButtonReleased() {
   qDebug() << __PRETTY_FUNCTION__;
   emit quizViewClosed();
 }
+
+void QuizViewController::onAnswerSelected(int answerIndex) {
+  if (auto model = questionModels.at(currentQuestion); answerIndex == model.correctAnswer) {
+    qDebug() << "Answer is correct!";
+  } else {
+    qDebug() << "Answer is wrong!";
+  }
+
+  ++currentQuestion;
+  emit currentQuestionChanged();
+}
+
+void QuizViewController::onAnswerEntered(const QString& answerContent) {
+  if (auto model = questionModels.at(currentQuestion); model.answers.contains(answerContent)) {
+    qDebug() << "Answer is correct!";
+  } else {
+    qDebug() << "Answer is wrong!";
+  }
+
+  ++currentQuestion;
+  emit currentQuestionChanged();
+}

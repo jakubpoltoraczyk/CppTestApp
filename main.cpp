@@ -14,6 +14,7 @@ namespace MetaObjectUtils {
 constexpr char BASIC_CONTROLLER[] = "BasicController";
 constexpr char QUIZ_MENU_PAGE_MODEL[] = "QuizMenuPageModel";
 constexpr char STUDY_MENU_PAGE_MODEL[] = "StudyMenuPageModel";
+constexpr char QUIZ_QUESTION_MODEL[] = "QuizQuestionModel";
 const QString UNCREATABLE_OBJECT =
     QStringLiteral("Couldn't create object %1, because it can be used only for accessing C++ enums");
 
@@ -25,6 +26,8 @@ void registerMetaObjects() {
                                    QUIZ_MENU_PAGE_MODEL, UNCREATABLE_OBJECT.arg(QUIZ_MENU_PAGE_MODEL));
   qmlRegisterUncreatableMetaObject(StudyMenuPageModel::staticMetaObject, STUDY_MENU_PAGE_MODEL, 1, 0,
                                    STUDY_MENU_PAGE_MODEL, UNCREATABLE_OBJECT.arg(STUDY_MENU_PAGE_MODEL));
+  qmlRegisterUncreatableMetaObject(QuizQuestionModel::staticMetaObject, QUIZ_QUESTION_MODEL, 1, 0,
+                                   QUIZ_QUESTION_MODEL, UNCREATABLE_OBJECT.arg(QUIZ_QUESTION_MODEL));
 }
 } // namespace MetaObjectUtils
 
