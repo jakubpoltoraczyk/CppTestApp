@@ -25,7 +25,7 @@ Rectangle {
 
     Timer {
         id: timer
-        interval: 1000
+        interval: GUIConfig.quizView.quizTimerInterval
         running: true
         repeat: true
 

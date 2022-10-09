@@ -265,13 +265,19 @@ Item {
         id: quizView
 
         /** Top margin value between quiz timer and quiz view top border */
-        readonly property int quizTimerTopMargin: 16
+        readonly property int quizTimerTopMargin: 20
 
         /** Left margin value between quiz timer and quiz view left border */
-        readonly property int quizTimerLeftMargin: 12
+        readonly property int quizTimerLeftMargin: 16
 
         /** Source of hour glass image */
         readonly property string hourGlassImageSource: "qrc:/resources/hourglass.png"
+
+        /** Interval of quiz timer component */
+        readonly property int quizTimerInterval: 1000
+
+        /** Text displayed on the accept answer button */
+        readonly property string acceptAnswerButtonText: "Accept answer"
     }
 
     QtObject {
@@ -317,13 +323,16 @@ Item {
     QtObject {
         id: closeButton
 
-        /** Icon source of close button */
-        readonly property string iconSource: "qrc:/resources/closebutton.png"
-
         /** Top margin value between close button and parent component */
         readonly property int topMargin: 20
 
         /** Right margin value between close button and parent component */
         readonly property int rightMargin: 20
+
+        /** List of available icon sources to use in the close button component */
+        readonly property var iconSources: [
+            "qrc:/resources/closebutton/closebutton1.png",
+            "qrc:/resources/closebutton/closebutton2.png"
+        ]
     }
 }

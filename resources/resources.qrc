@@ -6,10 +6,11 @@
         <file>quizmenuicon/easyowl.png</file>
         <file>quizmenuicon/clock.png</file>
         <file>quizmenuicon/difficulty.png</file>
-        <file>closebutton.png</file>
         <file>entryviewicon/compilericon.png</file>
         <file>entryviewicon/testingicon.png</file>
         <file>entryviewicon/quizicon.png</file>
         <file>hourglass.png</file>
+        <file>closebutton/closebutton2.png</file>
+        <file>closebutton/closebutton1.png</file>
     </qresource>
 </RCC>

@@ -58,3 +58,8 @@ void QuizViewController::updateQuestions(const QString& newQuizName) {
   questionModels = deserializeQuizQuestionModels(questionFilePaths);
   qDebug() << QUESTIONS_UPDATED.arg(quizName);
 }
+
+void QuizViewController::onStopTestButtonReleased() {
+  qDebug() << __PRETTY_FUNCTION__;
+  emit quizViewClosed();
+}

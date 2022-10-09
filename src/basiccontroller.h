@@ -65,6 +65,9 @@ public slots:
   /** Called when user decided to close quiz menu */
   void onQuizMenuClosed();
 
+  /** Called when user decided to close quiz view */
+  void onQuizViewClosed();
+
   /**
    * @brief Called when the new quiz has been just selected
    * @param quizName Name of the new selected quiz
@@ -84,10 +87,10 @@ private:
   /** Close each view expect main entry view */
   void closeEachView();
 
-  bool entryViewVisibility = true;
-  bool quizMenuVisibility = false;
-  bool quizViewVisibility = false;
-  bool studyMenuVisibility = false;
+  bool entryViewVisibility = true;  ///< Contains visibility status of entry view component
+  bool quizMenuVisibility = false;  ///< Contains visibility status of quiz menu component
+  bool quizViewVisibility = false;  ///< Contains visibility status of quiz view component
+  bool studyMenuVisibility = false; ///< Contains visibility status of study menu component
 
   std::shared_ptr<DataDirectoryManager> dataDirectoryManager;
   View currentView;

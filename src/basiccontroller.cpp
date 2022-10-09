@@ -25,6 +25,7 @@ BasicController::BasicController(QObject* parent)
       quizViewController(dataDirectoryManager), studyMenuController(dataDirectoryManager) {
   connect(&quizMenuController, &QuizMenuController::quizMenuClosed, this, &BasicController::onQuizMenuClosed);
   connect(&quizMenuController, &QuizMenuController::quizSelected, this, &BasicController::onQuizSelected);
+  connect(&quizViewController, &QuizViewController::quizViewClosed, this, &BasicController::onQuizViewClosed);
   connect(&studyMenuController, &StudyMenuController::studyMenuClosed, this,
           &BasicController::onStudyMenuClosed);
 }
@@ -48,6 +49,8 @@ void BasicController::onEntryViewClosed() {
 }
 
 void BasicController::onQuizMenuClosed() { changeView(View::ENTRY_VIEW); }
+
+void BasicController::onQuizViewClosed() { changeView(View::QUIZ_MENU); }
 
 void BasicController::onQuizSelected(const QString& quizName) {
   quizViewController.updateQuestions(quizName);
@@ -94,4 +97,7 @@ void BasicController::closeEachView() {
 
   studyMenuVisibility = false;
   emit studyMenuVisibilityChanged();
+
+  quizViewVisibility = false;
+  emit quizViewVisibilityChanged();
 }

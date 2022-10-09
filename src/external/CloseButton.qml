@@ -15,8 +15,11 @@ Button {
         color: GUIConfig.colors.transparent
     }
 
+    /** Contains index of icon source used to display close button image */
+    property int iconSourceIndex: 0
+
     Image {
         id: icon
-        source: GUIConfig.closeButton.iconSource
+        source: GUIConfig.closeButton.iconSources[iconSourceIndex]
     }
 }

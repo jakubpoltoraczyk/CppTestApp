@@ -9,6 +9,7 @@
 
 class QuizViewController : public QObject {
   Q_OBJECT
+  Q_PROPERTY(int currentQuestion MEMBER currentQuestion NOTIFY currentQuestionChanged)
 public:
   /**
    * @brief Provide value of current quiz duration
@@ -30,7 +31,20 @@ public:
    */
   void updateQuestions(const QString& newQuizName);
 
+signals:
+  /** Emitted when current question index has been changed */
+  void currentQuestionChanged();
+
+  /** Emitted when user decided to stop current test and close quiz view */
+  void quizViewClosed();
+
+public slots:
+  /** Called when stop test button has been released */
+  void onStopTestButtonReleased();
+
 private:
+  int currentQuestion = 0; ///< Contains current question index
+
   std::shared_ptr<DataDirectoryManager> dataDirectoryManager;
   QuizQuestionModels questionModels;
   QString quizName;
