@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../datadirectorymanager/datadirectorymanager.h"
+#include "customdialogmodel.h"
 
 #include <QObject>
 
@@ -10,6 +11,7 @@
 class CustomDialogController : public QObject {
   Q_OBJECT
   Q_PROPERTY(bool isVisible MEMBER isVisible NOTIFY visibilityChanged)
+  Q_PROPERTY(CustomDialogModel dialogModel MEMBER dialogModel NOTIFY dialogModelChanged)
 public:
   /** Contains available custom dialog exit statuses */
   enum class ExitStatus { ACCEPTED, REJECTED };
@@ -22,12 +24,18 @@ public:
   CustomDialogController(std::shared_ptr<DataDirectoryManager> newDataDirectoryManager,
                          QObject* parent = nullptr);
 
-  /** Show custom dialog component */
-  void showDialog();
+  /**
+   * @brief Show custom dialog component
+   * @param code Code of the dialog to display
+   */
+  void showDialog(int code);
 
 signals:
   /** Called when dialog visiblity should be changed */
   void visibilityChanged();
+
+  /** Called when dialog model should be changed */
+  void dialogModelChanged();
 
   /**
    * @brief Emitted when custom dialog has been closed
@@ -49,7 +57,8 @@ private:
    */
   void changeVisibility(bool newVisibility);
 
-  bool isVisible = false; ///< Contains information about dialog visiblity
+  bool isVisible = false;        ///< Contains information about dialog visiblity
+  CustomDialogModel dialogModel; ///< Contains information about dialog model
 
   std::shared_ptr<DataDirectoryManager> dataDirectoryManager;
 };

@@ -27,6 +27,13 @@ public:
    */
   QStringList getStudyTopicConfigurationFilePaths() const;
 
+  /**
+   * @brief Provide path to dialog with selected code
+   * @param code Code of the dialog which path will be returned
+   * @return Path to selected dialog
+   */
+  QString getDialogFilePath(int code) const;
+
 private:
   QString dataDirectoryPath;
 };

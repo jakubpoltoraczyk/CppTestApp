@@ -8,9 +8,8 @@ Dialog {
     id: customDialog
     width: GUIConfig.customDialog.width
     height: GUIConfig.customDialog.height
-    modal: true
     closePolicy: Popup.NoAutoClose
-    standardButtons: StandardButton.Ok | StandardButton.Cancel
+    modal: true
     anchors.centerIn: parent
 
     contentItem: Rectangle {
@@ -26,7 +25,7 @@ Dialog {
 
         ColumnImageLabel {
             id: contentImageLabel
-            labelText: "Are you really want to close the application?"
+            labelText: customDialogController.dialogModel.content
             imageSource: GUIConfig.customDialog.informationImageSource
             anchors {
                 horizontalCenter: parent.horizontalCenter
@@ -38,6 +37,7 @@ Dialog {
 
     footer: DialogButtonBox {
         id: dialogFooter
+        standardButtons: customDialogController.dialogModel.buttonCode
         background: Rectangle {
             color: GUIConfig.customDialog.backgroundColor
             border {

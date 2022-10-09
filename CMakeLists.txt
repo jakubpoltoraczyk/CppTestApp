@@ -17,6 +17,7 @@ add_executable(${PROJECT_NAME}
 
     src/basiccontroller.h
     src/external/customdialog/customdialogcontroller.h
+    src/external/customdialog/customdialogmodel.h
     src/external/datadirectorymanager/datadirectorymanager.h
     src/external/utils/utils.h
     src/quizmenu/quizmenucontroller.h

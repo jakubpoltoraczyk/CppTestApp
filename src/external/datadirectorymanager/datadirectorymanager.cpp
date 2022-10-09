@@ -10,6 +10,7 @@ const QString QUIZ_DIRECTORY = QStringLiteral("%1/quiz/");
 const QString QUIZ_CONFIGURATION_FILE = QStringLiteral("%1/quiz/%2/config.json");
 const QString STUDY_DIRECTORY = QStringLiteral("%1/study/");
 const QString STUDY_TOPIC_CONFIGURATION_FILE = QStringLiteral("%1/study/%2/config.json");
+const QString DIALOG_FILE = QStringLiteral("%1/dialog/dialog%2.json");
 } // namespace Paths
 
 namespace Filters {
@@ -63,4 +64,8 @@ QStringList DataDirectoryManager::getStudyTopicConfigurationFilePaths() const {
   }
 
   return studyTopicConfigurationFilePaths;
+}
+
+QString DataDirectoryManager::getDialogFilePath(int code) const {
+  return Paths::DIALOG_FILE.arg(dataDirectoryPath).arg(code);
 }

@@ -3,6 +3,11 @@
 #include <QObject>
 #include <QVector>
 
+/** Contains available dialog codes used in the whole application */
+namespace DialogCode {
+constexpr int APPLICATION_CLOSE = 1;
+}
+
 /** Contains dataset of quiz menu page */
 class QuizMenuPageModel {
   Q_GADGET

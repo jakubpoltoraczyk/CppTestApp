@@ -46,7 +46,7 @@ void BasicController::onEntryPageSelected(EntryPage entryPage) {
 }
 
 void BasicController::onEntryViewClosed() {
-  customDialogController->showDialog();
+  customDialogController->showDialog(DialogCode::APPLICATION_CLOSE);
   Utils::connectOnDialogClosed(customDialogController, [](CustomDialogController::ExitStatus exitStatus) {
     if (exitStatus == CustomDialogController::ExitStatus::REJECTED) {
       return;
