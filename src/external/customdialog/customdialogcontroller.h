@@ -25,10 +25,18 @@ public:
                          QObject* parent = nullptr);
 
   /**
-   * @brief Show custom dialog component
+   * @brief Show custom dialog component using selected dialog code
    * @param code Code of the dialog to display
    */
   void showDialog(int code);
+
+  /**
+   * @brief Show custom dialog component using selected data
+   * @param message Message to display on the dialog
+   * @param isOk Contains information if 'Ok' button is available
+   * @param isAbort Contains information if 'Abort' button is available
+   */
+  void showDialog(const QString &message, bool isOk, bool isAbort);
 
 signals:
   /** Called when dialog visiblity should be changed */

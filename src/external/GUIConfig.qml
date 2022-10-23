@@ -308,6 +308,9 @@ Item {
         /** Top margin value between answer text input and question label */
         readonly property int answerTextFieldTopMargin: 100
 
+        /** Bottom margin value between question progress bar and quiz view bottom border */
+        readonly property int questionProgresBarBottomMargin: 40
+
         /** Spacing between items in answers layout component */
         readonly property int answersLayoutSpacing: 10
 

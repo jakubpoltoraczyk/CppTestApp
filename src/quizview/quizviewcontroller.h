@@ -42,6 +42,9 @@ signals:
   /** Emitted when user decided to stop current test and close quiz view */
   void quizViewClosed();
 
+  /** Emitted when quiz has been finished and question progress bar should be completed */
+  void completeQuestionProgresBar();
+
 public slots:
   /** Called when stop test button has been released */
   void onStopTestButtonReleased();
@@ -60,11 +63,18 @@ public slots:
    */
   void onAnswerEntered(const QString& answerContent);
 
+  /** Called when timer has just timed out */
+  void onTimeout();
+
 private:
+  /** Display the result information dialog */
+  void showResultDialog();
+
   int currentQuestion = 0; ///< Contains current question index
 
   std::shared_ptr<DataDirectoryManager> dataDirectoryManager;
   std::shared_ptr<CustomDialogController> customDialogController;
   QuizQuestionModels questionModels;
   QString quizName;
+  int correctAnswers = 0;
 };

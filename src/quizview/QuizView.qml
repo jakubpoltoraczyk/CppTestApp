@@ -31,6 +31,16 @@ Rectangle {
         stopTestButton.released.connect(quizViewController.onStopTestButtonReleased)
         answerSelected.connect(quizViewController.onAnswerSelected)
         answerEntered.connect(quizViewController.onAnswerEntered)
+        quizTimer.timeout.connect(quizViewController.onTimeout)
+    }
+
+    Connections {
+        target: quizViewController
+
+        /** Called when question progress bar should be completed */
+        function onCompleteQuestionProgresBar() {
+            questionProgressBar.value = 1
+        }
     }
 
     QuizTimer {
@@ -66,6 +76,16 @@ Rectangle {
             } else {
                 answerEntered(answerTextField.text)
             }
+        }
+    }
+
+    ProgressBar {
+        id: questionProgressBar
+        value: quizViewController.currentQuestion / quizViewController.questionModels.length
+        anchors {
+            horizontalCenter: parent.horizontalCenter
+            bottom: parent.bottom
+            bottomMargin: GUIConfig.quizView.questionProgresBarBottomMargin
         }
     }
 

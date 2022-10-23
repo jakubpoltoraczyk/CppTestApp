@@ -12,17 +12,26 @@ constexpr char IS_ABORT[] = "isAbort";
 constexpr char IS_OK[] = "isOk";
 } // namespace Json
 
+int determineButtonCode(bool isOk, bool isAbort) {
+  int buttonCode = 0;
+
+  if (isOk) {
+    buttonCode |= QMessageBox::Ok;
+  }
+  if (isAbort) {
+    buttonCode |= QMessageBox::Abort;
+  }
+
+  return buttonCode;
+}
+
 CustomDialogModel deserializeDialogModel(const QString& filePath) {
   CustomDialogModel model;
 
   auto jsonObject = Utils::determineJsonObject(filePath);
   model.content = jsonObject[Json::CONTENT].toString();
-  if (jsonObject[Json::IS_OK].toBool()) {
-    model.buttonCode |= QMessageBox::Ok;
-  }
-  if (jsonObject[Json::IS_ABORT].toBool()) {
-    model.buttonCode |= QMessageBox::Abort;
-  }
+  model.buttonCode =
+      determineButtonCode(jsonObject[Json::IS_OK].toBool(), jsonObject[Json::IS_ABORT].toBool());
 
   return model;
 }
@@ -35,6 +44,12 @@ CustomDialogController::CustomDialogController(std::shared_ptr<DataDirectoryMana
 
 void CustomDialogController::showDialog(int code) {
   dialogModel = deserializeDialogModel(dataDirectoryManager->getDialogFilePath(code));
+  emit dialogModelChanged();
+  changeVisibility(true);
+}
+
+void CustomDialogController::showDialog(const QString& message, bool isOk, bool isAbort) {
+  dialogModel = {.content = message, .buttonCode = determineButtonCode(isOk, isAbort)};
   emit dialogModelChanged();
   changeVisibility(true);
 }

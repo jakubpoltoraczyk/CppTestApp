@@ -13,6 +13,9 @@ Rectangle {
         leftMargin: GUIConfig.quizView.quizTimerLeftMargin
     }
 
+    /** Emitted when the timer times out */
+    signal timeout()
+
     /** Contains quiz timer initial time */
     property int initialTime: 0
 
@@ -31,6 +34,14 @@ Rectangle {
 
         /** Called when timer interval has just timed out */
         onTriggered: {
+            if (internal.remainingTime === 0) {
+                return
+            }
+
+            if (internal.remainingTime === 1) {
+                timeout()
+            }
+
             internal.remainingTime -= 1
         }
     }

@@ -5,6 +5,7 @@
 namespace {
 
 const QString QUESTIONS_UPDATED = QStringLiteral("Questions for the quiz '%1' have been updated");
+const QString QUIZ_RESULT_MESSAGE = QStringLiteral("You've scored %1 out of %2 points");
 
 namespace Json {
 constexpr char QUIZ_DURATION[] = "quizDuration";
@@ -74,22 +75,45 @@ void QuizViewController::onStopTestButtonReleased() {
 
 void QuizViewController::onAnswerSelected(int answerIndex) {
   if (auto model = questionModels.at(currentQuestion); answerIndex == model.correctAnswer) {
+    ++correctAnswers;
     customDialogController->showDialog(DialogCode::QUIZ_ANSWER_CORRECT);
   } else {
     customDialogController->showDialog(DialogCode::QUIZ_ANSWER_WRONG);
   }
 
-  ++currentQuestion;
+  if (++currentQuestion == questionModels.size()) {
+    showResultDialog();
+    return;
+  }
+
   emit currentQuestionChanged();
 }
 
 void QuizViewController::onAnswerEntered(const QString& answerContent) {
   if (auto model = questionModels.at(currentQuestion); model.answers.contains(answerContent)) {
+    ++correctAnswers;
     customDialogController->showDialog(DialogCode::QUIZ_ANSWER_CORRECT);
   } else {
     customDialogController->showDialog(DialogCode::QUIZ_ANSWER_WRONG);
   }
 
-  ++currentQuestion;
+  if (++currentQuestion == questionModels.size()) {
+    showResultDialog();
+    return;
+  }
+
   emit currentQuestionChanged();
+}
+
+void QuizViewController::onTimeout() {
+  qDebug() << __PRETTY_FUNCTION__;
+  showResultDialog();
+}
+
+void QuizViewController::showResultDialog() {
+  emit completeQuestionProgresBar();
+  customDialogController->showDialog(QUIZ_RESULT_MESSAGE.arg(correctAnswers).arg(questionModels.size()), true,
+                                     false);
+  Utils::connectOnDialogClosed(customDialogController,
+                               [this](CustomDialogController::ExitStatus) { emit quizViewClosed(); });
 }
