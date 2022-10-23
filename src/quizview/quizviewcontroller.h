@@ -67,8 +67,11 @@ public slots:
   void onTimeout();
 
 private:
-  /** Display the result information dialog */
-  void showResultDialog();
+  /** Finish the current quiz */
+  void finishQuiz();
+
+  /** Reset the current quiz data */
+  void resetQuizData();
 
   int currentQuestion = 0; ///< Contains current question index
 

@@ -300,10 +300,10 @@ Item {
         readonly property int quizTimerLeftMargin: 16
 
         /** Top margin value between question label and quiz view top border */
-        readonly property int questionLabelTopMargin: 160
+        readonly property int questionLabelTopMargin: 130
 
         /** Top margin value between answers layout and question label */
-        readonly property int answersLayoutTopMargin: 50
+        readonly property int answersLayoutTopMargin: 70
 
         /** Top margin value between answer text input and question label */
         readonly property int answerTextFieldTopMargin: 100

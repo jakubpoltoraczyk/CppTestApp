@@ -1,0 +1,12 @@
+{
+    "type": 0,
+    "question":
+"            int a = 10;
+Which expression will not compile?",
+    "answers": [
+        "int &b = 10;",
+        "int &b = a;",
+        "const int &b = 10;"
+    ],
+    "correctAnswer": 0
+}

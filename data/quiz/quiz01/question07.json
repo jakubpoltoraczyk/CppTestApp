@@ -1,0 +1,11 @@
+{
+    "type": 0,
+    "question": "From which standard version the 'std::auto_ptr' is deprecated?",
+    "answers": [
+        "C++03",
+        "C++11",
+        "C++14",
+        "C++17"
+    ],
+    "correctAnswer": 3
+}

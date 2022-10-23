@@ -1,0 +1,10 @@
+{
+    "type": 0,
+    "question": "Convenient RAII-style wrapper mechanism for owning a mutex is:",
+    "answers": [
+        "std::mutex",
+        "std::lock_guard",
+        "std::future"
+    ],
+    "correctAnswer": 1
+}

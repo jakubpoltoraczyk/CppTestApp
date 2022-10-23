@@ -10,7 +10,6 @@ const QString QUIZ_RESULT_MESSAGE = QStringLiteral("You've scored %1 out of %2 p
 namespace Json {
 constexpr char QUIZ_DURATION[] = "quizDuration";
 constexpr char TYPE[] = "type";
-constexpr char IMAGE[] = "image";
 constexpr char QUESTION[] = "question";
 constexpr char ANSWERS[] = "answers";
 constexpr char CORRECT_ANSWER[] = "correctAnswer";
@@ -25,7 +24,6 @@ QuizQuestionModels deserializeQuizQuestionModels(const QStringList& questionFile
     QuizQuestionModel questionModel;
 
     questionModel.type = static_cast<QuizQuestionModel::QuestionType>(jsonObject[Json::TYPE].toInt());
-    questionModel.image = jsonObject[Json::IMAGE].toString();
     questionModel.question = jsonObject[Json::QUESTION].toString();
     questionModel.answers = jsonObject[Json::ANSWERS].toVariant().toStringList();
     questionModel.correctAnswer = jsonObject[Json::CORRECT_ANSWER].toInt();
@@ -69,11 +67,14 @@ void QuizViewController::onStopTestButtonReleased() {
     if (exitStatus == CustomDialogController::ExitStatus::REJECTED) {
       return;
     }
+    resetQuizData();
     emit quizViewClosed();
   });
 }
 
 void QuizViewController::onAnswerSelected(int answerIndex) {
+  qDebug() << "User answer:" << answerIndex;
+  qDebug() << "Correct answer:" << questionModels.at(currentQuestion).correctAnswer;
   if (auto model = questionModels.at(currentQuestion); answerIndex == model.correctAnswer) {
     ++correctAnswers;
     customDialogController->showDialog(DialogCode::QUIZ_ANSWER_CORRECT);
@@ -82,7 +83,7 @@ void QuizViewController::onAnswerSelected(int answerIndex) {
   }
 
   if (++currentQuestion == questionModels.size()) {
-    showResultDialog();
+    finishQuiz();
     return;
   }
 
@@ -98,7 +99,7 @@ void QuizViewController::onAnswerEntered(const QString& answerContent) {
   }
 
   if (++currentQuestion == questionModels.size()) {
-    showResultDialog();
+    finishQuiz();
     return;
   }
 
@@ -107,13 +108,21 @@ void QuizViewController::onAnswerEntered(const QString& answerContent) {
 
 void QuizViewController::onTimeout() {
   qDebug() << __PRETTY_FUNCTION__;
-  showResultDialog();
+  finishQuiz();
 }
 
-void QuizViewController::showResultDialog() {
+void QuizViewController::finishQuiz() {
   emit completeQuestionProgresBar();
   customDialogController->showDialog(QUIZ_RESULT_MESSAGE.arg(correctAnswers).arg(questionModels.size()), true,
                                      false);
-  Utils::connectOnDialogClosed(customDialogController,
-                               [this](CustomDialogController::ExitStatus) { emit quizViewClosed(); });
+  Utils::connectOnDialogClosed(customDialogController, [this](CustomDialogController::ExitStatus) {
+    resetQuizData();
+    emit quizViewClosed();
+  });
+}
+
+void QuizViewController::resetQuizData() {
+  correctAnswers = 0;
+  currentQuestion = 0;
+  emit currentQuestionChanged();
 }

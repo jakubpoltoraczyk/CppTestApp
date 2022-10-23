@@ -1,7 +1,6 @@
 {
     "type": 0,
-    "image": "",
-    "question": "Which smart pointer contains reference counter?",
+    "question": "Which smart pointer contains a reference counter?",
     "answers": [
         "std::unique_ptr",
         "std::auto_ptr",

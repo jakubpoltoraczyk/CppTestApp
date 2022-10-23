@@ -1,6 +1,5 @@
 {
     "type": 0,
-    "image": "",
     "question": "What are available smart pointers?",
     "answers": [
         "unique_ptr, shared_ptr, weak_ptr",

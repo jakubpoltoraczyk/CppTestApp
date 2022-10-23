@@ -70,11 +70,13 @@ Rectangle {
 
         /** Called when answer button has been just released */
         buttonArea.onReleased: {
-            answersRepeater.itemAt(0).checked = true
             if (internal.currentType === QuizQuestionModel.QuestionType.CLOSED) {
                 answerSelected(answersLayout.selectedAnswerIndex)
+                answersRepeater.itemAt(0).checked = true
+                answersLayout.selectedAnswerIndex = 0
             } else {
                 answerEntered(answerTextField.text)
+                answerTextField.text = ""
             }
         }
     }

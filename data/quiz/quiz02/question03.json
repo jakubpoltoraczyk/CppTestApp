@@ -1,0 +1,13 @@
+{
+    "type": 0,
+    "question":
+"    const int a = 10; auto &b = a;
+The full type of the 'b' variable is:",
+    "answers": [
+        "int",
+        "const int",
+        "int &",
+        "const int &"
+    ],
+    "correctAnswer": 3
+}

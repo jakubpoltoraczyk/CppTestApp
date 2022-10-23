@@ -1,7 +1,7 @@
 {
     "quizName": "quiz02",
-    "difficultyLevel": 1,
+    "difficultyLevel": 2,
     "closedQuestions": true,
     "openQuestions": false,
-    "quizDuration": 120
+    "quizDuration": 180
 }

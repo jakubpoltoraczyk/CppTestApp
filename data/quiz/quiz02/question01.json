@@ -1,0 +1,10 @@
+{
+    "type": 0,
+    "question": "Sequence container 'std::forward_list':",
+    "answers": [
+        "is doubly-linked list",
+        "is singly-linked list",
+        "can be doubly-linked or singly-linked list"
+    ],
+    "correctAnswer": 1
+}
