@@ -24,12 +24,15 @@ BasicController::BasicController(QObject* parent)
       customDialogController(std::make_shared<CustomDialogController>(dataDirectoryManager)),
       currentView(View::ENTRY_VIEW), quizMenuController(dataDirectoryManager),
       quizViewController(dataDirectoryManager, customDialogController),
-      studyMenuController(dataDirectoryManager) {
+      studyMenuController(dataDirectoryManager),
+      testingViewController(dataDirectoryManager, customDialogController) {
   connect(&quizMenuController, &QuizMenuController::quizMenuClosed, this, &BasicController::onQuizMenuClosed);
   connect(&quizMenuController, &QuizMenuController::quizSelected, this, &BasicController::onQuizSelected);
   connect(&quizViewController, &QuizViewController::quizViewClosed, this, &BasicController::onQuizViewClosed);
   connect(&studyMenuController, &StudyMenuController::studyMenuClosed, this,
           &BasicController::onStudyMenuClosed);
+  connect(&testingViewController, &TestingViewController::testingViewClosed, this,
+          &BasicController::onTestingViewClosed);
 }
 
 std::vector<std::pair<QString, QObject*>> BasicController::getObjectsToRegister() {
@@ -37,7 +40,8 @@ std::vector<std::pair<QString, QObject*>> BasicController::getObjectsToRegister(
           {QStringLiteral("customDialogController"), customDialogController.get()},
           {QStringLiteral("quizMenuController"), &quizMenuController},
           {QStringLiteral("quizViewController"), &quizViewController},
-          {QStringLiteral("studyMenuController"), &studyMenuController}};
+          {QStringLiteral("studyMenuController"), &studyMenuController},
+          {QStringLiteral("testingViewController"), &testingViewController}};
 }
 
 void BasicController::onEntryPageSelected(EntryPage entryPage) {
@@ -68,6 +72,8 @@ void BasicController::onQuizSelected(const QString& quizName) {
 
 void BasicController::onStudyMenuClosed() { changeView(View::ENTRY_VIEW); }
 
+void BasicController::onTestingViewClosed() { changeView(View::TESTING_VIEW); }
+
 void BasicController::changeView(View newView) {
   closeEachView();
 
@@ -92,6 +98,12 @@ void BasicController::changeView(View newView) {
     break;
 
   case View::TESTING_VIEW:
+    applicationEnlargedStatus = true;
+    testingViewVisibility = true;
+    emit applicationEnlargedStatusChanged();
+    emit testingViewVisibilityChanged();
+    break;
+
   case View::COMPILER:
     return;
   }
@@ -109,4 +121,9 @@ void BasicController::closeEachView() {
 
   quizViewVisibility = false;
   emit quizViewVisibilityChanged();
+
+  applicationEnlargedStatus = false;
+  testingViewVisibility = false;
+  emit applicationEnlargedStatusChanged();
+  emit testingViewVisibilityChanged();
 }

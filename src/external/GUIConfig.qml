@@ -172,11 +172,17 @@ Item {
     QtObject {
         id: applicationWindow
 
-        /** Width of application window */
-        readonly property int width: 800
+        /** Default width of application window */
+        readonly property int defaultWidth: 800
 
-        /** Height of application window */
-        readonly property int height: 600
+        /** Default height of application window */
+        readonly property int defaultHeight: 600
+
+        /** Enlarged width of application window */
+        readonly property int enlargedWidth: 1000
+
+        /** Enlarged height of application window */
+        readonly property int enlargedHeight: 800
     }
 
     QtObject {

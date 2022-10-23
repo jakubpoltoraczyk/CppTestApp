@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/testing">
+        <file>test01/test01obsoleteversion.png</file>
+        <file>test01/test01modernversion.png</file>
+    </qresource>
+</RCC>

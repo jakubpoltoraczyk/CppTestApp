@@ -5,6 +5,7 @@
 #include "quizmenu/quizmenucontroller.h"
 #include "quizview/quizviewcontroller.h"
 #include "studymenu/studymenucontroller.h"
+#include "testingview/testingviewcontroller.h"
 
 #include <QObject>
 
@@ -15,10 +16,12 @@
 class BasicController : public QObject {
   Q_OBJECT
   Q_CLASSINFO("RegisterEnumClassesUnscoped", "false")
+  Q_PROPERTY(bool applicationEnlargedStatus MEMBER applicationEnlargedStatus NOTIFY applicationEnlargedStatusChanged)
   Q_PROPERTY(bool entryViewVisibility MEMBER entryViewVisibility NOTIFY entryViewVisibilityChanged)
   Q_PROPERTY(bool quizMenuVisibility MEMBER quizMenuVisibility NOTIFY quizMenuVisibilityChanged)
   Q_PROPERTY(bool quizViewVisibility MEMBER quizViewVisibility NOTIFY quizViewVisibilityChanged)
   Q_PROPERTY(bool studyMenuVisibility MEMBER studyMenuVisibility NOTIFY studyMenuVisibilityChanged)
+  Q_PROPERTY(bool testingViewVisibility MEMBER testingViewVisibility NOTIFY testingViewVisibilityChanged)
 public:
   /** Contains available entry page types */
   enum class EntryPage { UNDEFINED = -1, STUDY, TESTING, QUIZ, COMPILER };
@@ -41,6 +44,9 @@ public:
   std::vector<std::pair<QString, QObject*>> getObjectsToRegister();
 
 signals:
+  /** Emitted when application enlarged status has been changed */
+  void applicationEnlargedStatusChanged();
+
   /** Emitted when entry view visibility has been changed */
   void entryViewVisibilityChanged();
 
@@ -52,6 +58,9 @@ signals:
 
   /** Emitted when study menu visibility has been changed */
   void studyMenuVisibilityChanged();
+
+  /** Emitted when testing view visibility has been changed */
+  void testingViewVisibilityChanged();
 
 public slots:
   /**
@@ -78,6 +87,9 @@ public slots:
   /** Called when user decided to close study menu */
   void onStudyMenuClosed();
 
+  /** Called when user decided to close testing view */
+  void onTestingViewClosed();
+
 private:
   /**
    * @brief Change current view using new selected view type
@@ -88,10 +100,12 @@ private:
   /** Close each view expect main entry view */
   void closeEachView();
 
-  bool entryViewVisibility = true;  ///< Contains visibility status of entry view component
-  bool quizMenuVisibility = false;  ///< Contains visibility status of quiz menu component
-  bool quizViewVisibility = false;  ///< Contains visibility status of quiz view component
-  bool studyMenuVisibility = false; ///< Contains visibility status of study menu component
+  bool applicationEnlargedStatus = false; ///< Contains enlarged status of whole application
+  bool entryViewVisibility = true;        ///< Contains visibility status of entry view component
+  bool quizMenuVisibility = false;        ///< Contains visibility status of quiz menu component
+  bool quizViewVisibility = false;        ///< Contains visibility status of quiz view component
+  bool studyMenuVisibility = false;       ///< Contains visibility status of study menu component
+  bool testingViewVisibility = false;     ///< Contains visibility status of testing view component
 
   std::shared_ptr<DataDirectoryManager> dataDirectoryManager;
   std::shared_ptr<CustomDialogController> customDialogController;
@@ -99,4 +113,5 @@ private:
   QuizMenuController quizMenuController;
   QuizViewController quizViewController;
   StudyMenuController studyMenuController;
+  TestingViewController testingViewController;
 };

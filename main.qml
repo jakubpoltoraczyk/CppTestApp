@@ -10,8 +10,10 @@ import "src/quizmenu"
 
 ApplicationWindow {
     id: applicationWindow
-    width: GUIConfig.applicationWindow.width
-    height: GUIConfig.applicationWindow.height
+    width: basicController.applicationEnlargedStatus ? GUIConfig.applicationWindow.enlargedWidth :
+                                                       GUIConfig.applicationWindow.defaultWidth
+    height: basicController.applicationEnlargedStatus ? GUIConfig.applicationWindow.enlargedHeight :
+                                                        GUIConfig.applicationWindow.defaultHeight
     visible: true
 
     EntryView {
@@ -41,5 +43,11 @@ ApplicationWindow {
         id: studyMenu
         anchors.fill: parent
         source: basicController.studyMenuVisibility ? "src/studymenu/StudyMenu.qml" : ""
+    }
+
+    Loader {
+        id: testingView
+        anchors.fill: parent
+        source: basicController.testingViewVisibility ? "src/testingview/TestingView.qml" : ""
     }
 }

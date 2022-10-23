@@ -20,5 +20,8 @@
         <file>src/quizview/QuizTimer.qml</file>
         <file>src/external/ColumnImageLabel.qml</file>
         <file>src/external/customdialog/CustomDialog.qml</file>
+        <file>src/testingview/TestingView.qml</file>
+        <file>src/testingview/TestingViewPage.qml</file>
+        <file>src/testingview/resources/resources.qrc</file>
     </qresource>
 </RCC>
