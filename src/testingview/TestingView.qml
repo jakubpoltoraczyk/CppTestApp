@@ -20,7 +20,7 @@ Rectangle {
 
         Repeater {
             id: testingViewPages
-            model: quizMenuController.pageModels.length
+            model: 10
 
             TestingViewPage {
             }

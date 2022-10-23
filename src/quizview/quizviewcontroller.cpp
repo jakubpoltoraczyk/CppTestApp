@@ -73,8 +73,6 @@ void QuizViewController::onStopTestButtonReleased() {
 }
 
 void QuizViewController::onAnswerSelected(int answerIndex) {
-  qDebug() << "User answer:" << answerIndex;
-  qDebug() << "Correct answer:" << questionModels.at(currentQuestion).correctAnswer;
   if (auto model = questionModels.at(currentQuestion); answerIndex == model.correctAnswer) {
     ++correctAnswers;
     customDialogController->showDialog(DialogCode::QUIZ_ANSWER_CORRECT);
