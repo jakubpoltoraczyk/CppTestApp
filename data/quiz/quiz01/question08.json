@@ -1,11 +1,12 @@
 {
     "type": 0,
-    "question": "Proper signature of move constructor for the 'Object' class is:",
+    "question":
+"           std::unique_ptr<int> ptr1, ptr2;
+Which of the below-mentioned expression will compile?",
     "answers": [
-        "Object(const Object &&)",
-        "Object(const Object &)",
-        "Object(Object &&)",
-        "Object(Object &)"
+        "ptr1 = ptr2;",
+        "std::move(ptr1, ptr2);",
+        "ptr1 = std::move(ptr2);"
     ],
     "correctAnswer": 2
 }

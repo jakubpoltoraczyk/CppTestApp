@@ -1,10 +1,13 @@
 {
     "type": 0,
-    "question": "Convenient RAII-style wrapper mechanism for owning a mutex is:",
+    "question":
+"                    int a = 10;
+Based on the above expression, the correct sentence is:",
     "answers": [
-        "std::mutex",
-        "std::lock_guard",
-        "std::future"
+        "'a' is the l-value",
+        "'a' is the r-value",
+        "'a' can be the l-value and the r-value",
+        "'a' is not the l-value neither the r-value"
     ],
-    "correctAnswer": 1
+    "correctAnswer": 0
 }

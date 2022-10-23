@@ -1,0 +1,12 @@
+{
+    "type": 0,
+    "question":
+"          int a = 10; [&a]{++a;}();
+What will be the result of the above expression?",
+    "answers": [
+        "a = 10",
+        "a = 11",
+        "Compilation error"
+    ],
+    "correctAnswer": 1
+}

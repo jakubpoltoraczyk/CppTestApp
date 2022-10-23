@@ -1,0 +1,11 @@
+{
+    "type": 0,
+    "question": "Proper signature of 'Object' move assignment operator is:",
+    "answers": [
+        "Object &operator=(Object &)",
+        "Object &operator=(const Object &)",
+        "Object &operator=(Object &&)",
+        "Object &operator=(const Object &&)"
+    ],
+    "correctAnswer": 2
+}

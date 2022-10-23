@@ -1,11 +1,12 @@
 {
     "type": 0,
-    "question": "Which standard version introduces the std::make_unique function?",
+    "question":
+"       const int a = 10;
+Which expression will compile?",
     "answers": [
-        "C++03",
-        "C++11",
-        "C++14",
-        "C++17"
+        "int &b = a;",
+        "const int &&b = a;",
+        "const int b = a;"
     ],
     "correctAnswer": 2
 }
