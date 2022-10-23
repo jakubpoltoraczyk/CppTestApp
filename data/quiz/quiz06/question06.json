@@ -1,0 +1,10 @@
+{
+    "type": 0,
+    "question": "Which RAII-style mutex wrapper allow to avoid deadlock?",
+    "answers": [
+        "std::lock_guard",
+        "std::unique_lock",
+        "std::scoped_lock"
+    ],
+    "correctAnswer": 2
+}

@@ -1,0 +1,13 @@
+{
+    "type": 0,
+    "question":
+"  int a = 1, b = 2; [&a, b]()mutable{ ++a; ++b; }();
+What will be the result of the above expression call?",
+    "answers": [
+        "a = 1, b = 2",
+        "a = 2, b = 2",
+        "a = 2, b = 3",
+        "Compilation error"
+    ],
+    "correctAnswer": 1
+}

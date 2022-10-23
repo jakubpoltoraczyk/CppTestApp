@@ -1,0 +1,13 @@
+{
+    "type": 0,
+    "question":
+"   const int a = 10; decltype(a) b = a;
+What is the full type of the 'b' variable?",
+    "answers": [
+        "int",
+        "int &",
+        "const int",
+        "const int &"
+    ],
+    "correctAnswer": 2
+}

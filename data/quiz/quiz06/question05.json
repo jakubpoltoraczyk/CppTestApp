@@ -1,0 +1,10 @@
+{
+    "type": 1,
+    "question":
+"      std::vector vec{1, 2, 3}; vec.reserve(10);
+What will be the capacity value of the above vector?",
+    "answers": [
+        "10"
+    ],
+    "correctAnswer": -1
+}

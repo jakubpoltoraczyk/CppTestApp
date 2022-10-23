@@ -1,0 +1,13 @@
+{
+    "type": 0,
+    "question":
+"              std::unique_ptr<int> ptr1, ptr2;
+Which expression will trigger move semantics between pointers?",
+    "answers": [
+        "std::move(ptr1, ptr2);",
+        "ptr1.move(ptr2);",
+        "ptr1 = static_cast<const std::unique_ptr<int> &&>(ptr2);",
+        "ptr1 = static_cast<std::unique_ptr<int> &&>(ptr2);"
+    ],
+    "correctAnswer": 3
+}
