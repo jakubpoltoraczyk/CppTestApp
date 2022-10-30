@@ -375,6 +375,15 @@ Item {
 
         /** Value of the top margin between the title label and the view top border */
         readonly property int titleLabelTopMargin: 50
+
+        /** Width of the picker combo box component */
+        readonly property int pickerComboBoxWidth: 100
+
+        /** Height of the picker combo box component */
+        readonly property int pickerComboBoxHeight: 40
+
+        /** Border width of the picker combo box component */
+        readonly property int pickerComboBoxBorderWidth: 2
     }
 
     QtObject {

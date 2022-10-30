@@ -94,6 +94,12 @@ Item {
                     anchors {
                         horizontalCenter: image.horizontalCenter
                     }
+                    background: Rectangle {
+                        implicitWidth: GUIConfig.testingView.pickerComboBoxWidth
+                        implicitHeight: GUIConfig.testingView.pickerComboBoxHeight
+                        border.width: GUIConfig.testingView.pickerComboBoxBorderWidth
+                        border.color: GUIConfig.colors.grey
+                    }
 
                     /** Contains information if the component is related to the first code version */
                     property bool isFirstVersion: index === 0
