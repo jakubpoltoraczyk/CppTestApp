@@ -23,10 +23,14 @@ Rectangle {
             model: testingViewController.pageModels.length
 
             TestingViewPage {
+                Component.onCompleted: {
+                    console.log(testingViewController.pageModels[index])
+                }
+
                 testID: testingViewController.pageModels[index].testID
                 title: testingViewController.pageModels[index].title
-                obsoleteImageSource: testingViewController.pageModels[index].obsoleteImageSource
-                modernImageSource: testingViewController.pageModels[index].modernImageSource
+                firstImageSource: testingViewController.pageModels[index].firstImageSource
+                secondImageSource: testingViewController.pageModels[index].secondImageSource
                 pickerValues: testingViewController.pageModels[index].pickerValues
             }
         }

@@ -13,7 +13,7 @@
         <file>closebutton/closebutton2.png</file>
         <file>closebutton/closebutton1.png</file>
         <file>information.png</file>
-        <file>testingview/test01/obsoleteversion.png</file>
-        <file>testingview/test01/modernversion.png</file>
+        <file>testingview/test01/secondversion.png</file>
+        <file>testingview/test01/firstversion.png</file>
     </qresource>
 </RCC>

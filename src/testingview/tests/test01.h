@@ -5,7 +5,7 @@
 
 namespace Test01 {
 
-void obsoleteVersion(int size) {
+void firstVersion(int size) {
   std::vector<int*> ptrs(size);
 
   // Memory allocation
@@ -19,7 +19,7 @@ void obsoleteVersion(int size) {
   }
 }
 
-void modernVersion(int size) {
+void secondVersion(int size) {
   std::vector<std::unique_ptr<int>> ptrs(size);
 
   // Memory allocation

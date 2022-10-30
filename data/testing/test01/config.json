@@ -1,7 +1,7 @@
 {
     "id": "test01",
     "title": "Smart pointers testing",
-    "obsoleteImageSource": "qrc:/resources/testingview/test01/obsoleteversion.png",
-    "modernImageSource": "qrc:/resources/testingview/test01/modernversion.png",
+    "firstImageSource": "qrc:/resources/testingview/test01/firstversion.png",
+    "secondImageSource": "qrc:/resources/testingview/test01/secondversion.png",
     "pickerValues": ["10000", "25000", "50000", "100000"]
 }

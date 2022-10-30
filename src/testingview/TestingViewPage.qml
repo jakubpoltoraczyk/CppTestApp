@@ -13,17 +13,17 @@ Item {
     /** Contains the testing view title */
     property string title: ""
 
-    /** Source of the image for the obsolete code version */
-    property string obsoleteImageSource: ""
+    /** Source of the image for the first code version */
+    property string firstImageSource: ""
 
-    /** Source of the image for the modern code version */
-    property string modernImageSource: ""
+    /** Source of the image for the second code version */
+    property string secondImageSource: ""
 
     /** Contains the picker component values to display */
     property var pickerValues: []
 
     /** Emitted when user just decided to start the selected test */
-    signal testStarted(string testID, int obsoletePickerValue, int modernPickerValue)
+    signal testStarted(string testID, int firstPickerValue, int secondPickerValue)
 
     /** Called when component has been just created */
     Component.onCompleted: {
@@ -33,11 +33,11 @@ Item {
     QtObject {
         id: internal
 
-        /** Contains the current value of the picker component for the obsolete code version */
-        property int obsoletePickerValue: pickerValues[0]
+        /** Contains the current value of the picker component for the first code version */
+        property int firstPickerValue: pickerValues[0]
 
-        /** Contains the current value of the picker component for the modern code version */
-        property int modernPickerValue: pickerValues[0]
+        /** Contains the current value of the picker component for the second code version */
+        property int secondPickerValue: pickerValues[0]
     }
 
     Rectangle {
@@ -76,7 +76,7 @@ Item {
 
                 Image {
                     id: image
-                    source: index === 0 ? obsoleteImageSource : modernImageSource
+                    source: index === 0 ? firstImageSource : secondImageSource
                 }
 
                 Label {
@@ -95,15 +95,15 @@ Item {
                         horizontalCenter: image.horizontalCenter
                     }
 
-                    /** Contains information if the component is related to the obsolete code version */
-                    property bool isObsoleteVersion: index === 0
+                    /** Contains information if the component is related to the first code version */
+                    property bool isFirstVersion: index === 0
 
                     /** Called when component has just been activated by user */
                     onActivated: {
-                        if (isObsoleteVersion) {
-                           internal.obsoletePickerValue = pickerValues[index]
+                        if (isFirstVersion) {
+                           internal.firstPickerValue = pickerValues[index]
                         } else {
-                            internal.modernPickerValue = pickerValues[index]
+                            internal.secondPickerValue = pickerValues[index]
                         }
                     }
                 }
@@ -117,7 +117,7 @@ Item {
 
         /** Called when start test button has been just released */
         buttonArea.onReleased: {
-            testStarted(testID, internal.obsoletePickerValue, internal.modernPickerValue)
+            testStarted(testID, internal.firstPickerValue, internal.secondPickerValue)
         }
     }
 }

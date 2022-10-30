@@ -35,10 +35,10 @@ public slots:
   /**
    * @brief Called when user just decided to start the currently selected test
    * @param testID ID of the selected test
-   * @param obsoletePickerValue Value of the picker component for the obsolete test version
-   * @param modernPickerValue Value of the picker component for the modern test version
+   * @param firstPickerValue Value of the picker component for the first test version
+   * @param secondPickerValue Value of the picker component for the second test version
    */
-  void onTestStarted(const QString& testID, int obsoletePickerValue, int modernPickerValue);
+  void onTestStarted(const QString& testID, int firstPickerValue, int secondPickerValue);
 
 private:
   /** Initialize the @see testFunctions class member */

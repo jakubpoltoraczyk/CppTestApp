@@ -23,8 +23,8 @@ constexpr char TEST_01[] = "test01";
 namespace Json {
 constexpr char ID[] = "id";
 constexpr char TITLE[] = "title";
-constexpr char OBSOLETE_IMAGE_SOURCE[] = "obsoleteImageSource";
-constexpr char MODERN_IMAGE_SOURCE[] = "modernImageSource";
+constexpr char FIRST_IMAGE_SOURCE[] = "firstImageSource";
+constexpr char SECOND_IMAGE_SOURCE[] = "secondImageSource";
 constexpr char PICKER_VALUES[] = "pickerValues";
 } // namespace Json
 
@@ -38,8 +38,8 @@ TestingViewPageModels deserializePageModels(const QStringList& testingConfigFile
 
     pageModel.testID = jsonObject[Json::ID].toString();
     pageModel.title = jsonObject[Json::TITLE].toString();
-    pageModel.obsoleteImageSource = jsonObject[Json::OBSOLETE_IMAGE_SOURCE].toString();
-    pageModel.modernImageSource = jsonObject[Json::MODERN_IMAGE_SOURCE].toString();
+    pageModel.firstImageSource = jsonObject[Json::FIRST_IMAGE_SOURCE].toString();
+    pageModel.secondImageSource = jsonObject[Json::SECOND_IMAGE_SOURCE].toString();
     pageModel.pickerValues = jsonObject[Json::PICKER_VALUES].toVariant().toStringList();
 
     pageModels.push_back(std::move(pageModel));
@@ -64,33 +64,32 @@ void TestingViewController::onCloseButtonReleased() {
   emit testingViewClosed();
 }
 
-void TestingViewController::onTestStarted(const QString& testID, int obsoletePickerValue,
-                                          int modernPickerValue) {
+void TestingViewController::onTestStarted(const QString& testID, int firstPickerValue,
+                                          int secondPickerValue) {
   if (testFunctions.find(testID.toStdString()) == testFunctions.end()) {
     qDebug() << TEST_FUNCTIONS_UNRECOGNIZED.arg(testID);
     return;
   }
 
   qDebug() << TEST_FUNCTIONS_STARTED.arg(testID);
-  const auto& [obsoleteFunction, modernFunction] = testFunctions.at(testID.toStdString());
+  const auto& [firstFunction, secondFunction] = testFunctions.at(testID.toStdString());
 
-  auto obsoleteDuration = getAveragedTestFunctionDurationMilliseconds(obsoleteFunction, obsoletePickerValue,
-                                                                      REPEAT_TO_MAKE_AVERAGE);
-  auto obsoleteDurationText =
-      QString::number(obsoleteDuration, DOUBLE_NUMBER_FORMAT, DOUBLE_NUMBER_PRECISION);
-  auto modernDuration =
-      getAveragedTestFunctionDurationMilliseconds(modernFunction, modernPickerValue, REPEAT_TO_MAKE_AVERAGE);
-  auto modernDurationText = QString::number(modernDuration, DOUBLE_NUMBER_FORMAT, DOUBLE_NUMBER_PRECISION);
+  auto firstDuration =
+      getAveragedTestFunctionDurationMilliseconds(firstFunction, firstPickerValue, REPEAT_TO_MAKE_AVERAGE);
+  auto firstDurationText = QString::number(firstDuration, DOUBLE_NUMBER_FORMAT, DOUBLE_NUMBER_PRECISION);
+  auto secondDuration =
+      getAveragedTestFunctionDurationMilliseconds(secondFunction, secondPickerValue, REPEAT_TO_MAKE_AVERAGE);
+  auto secondDurationText = QString::number(secondDuration, DOUBLE_NUMBER_FORMAT, DOUBLE_NUMBER_PRECISION);
 
-  qDebug() << "Obsolete function duration:" << obsoleteDurationText;
-  qDebug() << "Modern function duration:" << modernDurationText;
+  qDebug() << "First function duration:" << firstDurationText;
+  qDebug() << "Second function duration:" << secondDurationText;
 }
 
 void TestingViewController::initializeTestFunctions() {
   for (const auto& pageModel : pageModels) {
     const auto& testID = pageModel.testID;
     if (testID == TestID::TEST_01) {
-      testFunctions[testID.toStdString()] = std::make_pair(Test01::obsoleteVersion, Test01::modernVersion);
+      testFunctions[testID.toStdString()] = std::make_pair(Test01::firstVersion, Test01::secondVersion);
     } else {
       qDebug() << UNHANDLED_TEST.arg(testID);
     }
