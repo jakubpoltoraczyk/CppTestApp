@@ -2,6 +2,7 @@
 
 #include "../external/customdialog/customdialogcontroller.h"
 #include "../external/datadirectorymanager/datadirectorymanager.h"
+#include "testingviewpagemodel.h"
 
 #include <QObject>
 
@@ -9,6 +10,7 @@
 
 class TestingViewController : public QObject {
   Q_OBJECT
+  Q_PROPERTY(TestingViewPageModels pageModels MEMBER pageModels CONSTANT)
 public:
   /**
    * @brief Create a default instance of TestingViewController class
@@ -28,10 +30,12 @@ public slots:
   /** Called when close button has been released */
   void onCloseButtonReleased();
 
-  /** Called when start test button has been just released */
-  void onStartTestButtonReleased();
+  /** Called when user just decided to start the selected test */
+  void onTestStarted(int obsoletePickerValue, int modernPickerValue);
 
 private:
   std::shared_ptr<DataDirectoryManager> dataDirectoryManager;
   std::shared_ptr<CustomDialogController> customDialogController;
+
+  TestingViewPageModels pageModels;
 };

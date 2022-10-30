@@ -10,7 +10,7 @@ Rectangle {
 
     /** Called when component creation has been finished */
     Component.onCompleted: {
-        closeButton.released.connect(quizMenuController.onCloseButtonReleased)
+        closeButton.released.connect(testingViewController.onCloseButtonReleased)
     }
 
     SwipeView {
@@ -20,9 +20,13 @@ Rectangle {
 
         Repeater {
             id: testingViewPages
-            model: 10
+            model: testingViewController.pageModels.length
 
             TestingViewPage {
+                title: testingViewController.pageModels[index].title
+                obsoleteImageSource: testingViewController.pageModels[index].obsoleteImageSource
+                modernImageSource: testingViewController.pageModels[index].modernImageSource
+                pickerValues: testingViewController.pageModels[index].pickerValues
             }
         }
     }

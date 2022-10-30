@@ -7,8 +7,33 @@ import "../external"
 Item {
     id: testingViewPage
 
+    /** Contains the testing view title */
+    property string title: ""
+
+    /** Source of the image for the obsolete code version */
+    property string obsoleteImageSource: ""
+
+    /** Source of the image for the modern code version */
+    property string modernImageSource: ""
+
+    /** Contains the picker component values to display */
+    property var pickerValues: []
+
+    signal testStarted(int obsoletePickerValue, int modernPickerValue)
+
+    /** Called when component has been just created */
     Component.onCompleted: {
-        startTestButton.buttonArea.released.connect(testingViewController.onStartTestButtonReleased)
+        testStarted.connect(testingViewController.onTestStarted)
+    }
+
+    QtObject {
+        id: internal
+
+        /** Contains the current value of the picker component for the obsolete code version */
+        property int obsoletePickerValue: pickerValues[0]
+
+        /** Contains the current value of the picker component for the modern code version */
+        property int modernPickerValue: pickerValues[0]
     }
 
     Rectangle {
@@ -17,25 +42,78 @@ Item {
         gradient: GUIConfig.gradients.creamGradient
     }
 
-    Row {
-        spacing: 50
+    Label {
+        id: titleLabel
+        text: title
+        font: GUIConfig.fonts.decoratedFont
         anchors {
             horizontalCenter: parent.horizontalCenter
             top: parent.top
-            topMargin: 150
+            topMargin: GUIConfig.testingView.titleLabelTopMargin
+        }
+    }
+
+    Row {
+        id: componentRow
+        spacing: GUIConfig.testingView.imagesSpacing
+        anchors {
+            horizontalCenter: parent.horizontalCenter
+            top: parent.top
+            topMargin: GUIConfig.testingView.imagesTopMargin
         }
 
         Repeater {
             id: imageRepeater
-            model: 2
-            Image {
-                source: "qrc:/testing/test01/test01modernversion.png"
+            model: GUIConfig.testingView.imagesToDisplay
+
+            Column {
+                id: imageRepeaterColumn
+                spacing: GUIConfig.testingView.columnSpacing
+
+                Image {
+                    id: image
+                    source: index === 0 ? obsoleteImageSource : modernImageSource
+                }
+
+                Label {
+                    id: pickerLabel
+                    text: GUIConfig.testingView.pickerLabelText
+                    font: GUIConfig.fonts.smallFont
+                    anchors {
+                        horizontalCenter: image.horizontalCenter
+                    }
+                }
+
+                ComboBox {
+                    id: pickerComboBox
+                    model: pickerValues
+                    anchors {
+                        horizontalCenter: image.horizontalCenter
+                    }
+
+                    /** Contains information if the component is related to the obsolete code version */
+                    property bool isObsoleteVersion: index === 0
+
+                    /** Called when component has just been activated by user */
+                    onActivated: {
+                        if (isObsoleteVersion) {
+                           internal.obsoletePickerValue = pickerValues[index]
+                        } else {
+                            internal.modernPickerValue = pickerValues[index]
+                        }
+                    }
+                }
             }
         }
     }
 
     ConfirmButton {
         id: startTestButton
-        text: "Start test"
+        text: GUIConfig.testingView.startButtonText
+
+        /** Called when start test button has been just released */
+        buttonArea.onReleased: {
+            testStarted(internal.obsoletePickerValue, internal.modernPickerValue)
+        }
     }
 }

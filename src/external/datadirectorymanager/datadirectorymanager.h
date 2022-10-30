@@ -34,6 +34,12 @@ public:
    */
   QString getDialogFilePath(int code) const;
 
+  /**
+   * @brief Provide a list of testing configuration files
+   * @return List of testing configuration files
+   */
+  QStringList getTestingConfigurationFiles() const;
+
 private:
   QString dataDirectoryPath;
 };

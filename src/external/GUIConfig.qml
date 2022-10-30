@@ -32,6 +32,9 @@ Item {
     /** Contains configuration related to study menu component */
     readonly property alias studyMenu: studyMenu
 
+    /** Contains configuration related to testing view component */
+    readonly property alias testingView: testingView
+
     /** Contains configuration related to custom page indicator component */
     readonly property alias customPageIndicator: customPageIndicator
 
@@ -347,6 +350,31 @@ Item {
 
         /** Value of title label top margin */
         readonly property int titleLabelTopMargin: 150
+    }
+
+    QtObject {
+        id: testingView
+
+        /** Test of the start button component */
+        readonly property string startButtonText: "Start test"
+
+        /** Number of images to display in one test */
+        readonly property int imagesToDisplay: 2
+
+        /** Value of the top margin between images and top border of the view */
+        readonly property int imagesTopMargin: 150
+
+        /** Value of the spacing between images */
+        readonly property int imagesSpacing: 50
+
+        /** Value of the column spacing between: image, label and combo box */
+        readonly property int columnSpacing: 40
+
+        /** Text displayed on the picker label component */
+        readonly property string pickerLabelText: "Pick the value of the 'size' parameter:";
+
+        /** Value of the top margin between the title label and the view top border */
+        readonly property int titleLabelTopMargin: 50
     }
 
     QtObject {

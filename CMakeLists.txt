@@ -28,11 +28,10 @@ add_executable(${PROJECT_NAME}
     src/studymenu/studymenucontroller.h
     src/studymenu/studymenupagemodel.h
     src/testingview/testingviewcontroller.h
-    src/testingview/resources/test01/test01.h
+    src/testingview/testingviewpagemodel.h
 
     qml.qrc
     resources/resources.qrc
-    src/testingview/resources/resources.qrc
 )
 
 target_include_directories(${PROJECT_NAME} PRIVATE

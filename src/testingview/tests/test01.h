@@ -5,29 +5,29 @@
 
 namespace Test01 {
 
-void test01ObsoleteVersion(int size) {
+void obsoleteVersion(int size) {
   std::vector<int*> ptrs(size);
 
-       // Memory allocation
+  // Memory allocation
   for (auto& ptr : ptrs) {
     ptr = new int;
   }
 
-       // Memory deallocation
+  // Memory deallocation
   for (auto& ptr : ptrs) {
     delete ptr;
   }
 }
 
-void test01ModernVersion(int size) {
+void modernVersion(int size) {
   std::vector<std::unique_ptr<int>> ptrs(size);
 
-       // Memory allocation
+  // Memory allocation
   for (auto& ptr : ptrs) {
     ptr = std::make_unique<int>();
   }
 
-       // No need to manually deallocate memory
+  // No need to manually deallocate memory
 }
 
-}
+} // namespace Test01

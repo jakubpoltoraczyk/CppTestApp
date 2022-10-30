@@ -72,7 +72,7 @@ void BasicController::onQuizSelected(const QString& quizName) {
 
 void BasicController::onStudyMenuClosed() { changeView(View::ENTRY_VIEW); }
 
-void BasicController::onTestingViewClosed() { changeView(View::TESTING_VIEW); }
+void BasicController::onTestingViewClosed() { changeView(View::ENTRY_VIEW); }
 
 void BasicController::changeView(View newView) {
   closeEachView();
