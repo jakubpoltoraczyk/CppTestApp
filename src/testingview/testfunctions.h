@@ -5,14 +5,10 @@
 
 namespace TestUtils {
 
-/** Class which represents basic object used for testing purposes */
-class TestObject {
-public:
-  TestObject() : vec1(1000), vec2(1000) {}
-
-private:
-  std::vector<int> vec1;
-  std::vector<std::string> vec2;
+/** Struct which represents basic object used for testing purposes */
+struct TestObject {
+  std::vector<int> vec1 = std::vector<int>(1000);
+  std::vector<std::string> vec2 = std::vector<std::string>(1000);
 };
 
 /** Test functions for the test with the ID 'test01' */
@@ -64,6 +60,7 @@ void secondVersion(int size) {
 }
 } // namespace Test02
 
+/** Test functions for the test with the ID 'test03' */
 namespace Test03 {
 void firstVersion(int size) {
   std::vector<TestObject> objects;
@@ -85,5 +82,30 @@ void secondVersion(int size) {
   }
 }
 } // namespace Test03
+
+/** Test functions for the test with the ID 'test04' */
+namespace Test04 {
+void firstVersion(int size) {
+  std::vector<TestObject> objects(size);
+
+  std::vector<int> vec;
+  vec.reserve(objects.size());
+
+  std::transform(objects.begin(), objects.end(), std::back_inserter(vec),
+                 [](const auto& object) { return object.vec1.size() + object.vec2.size(); });
+}
+
+void secondVersion(int size) {
+  std::vector<TestObject> objects(size);
+
+  std::vector<int> vec;
+  vec.reserve(objects.size());
+
+  for (std::size_t i = 0; i < objects.size(); ++i) {
+    const auto& object = objects[i];
+    vec.emplace_back(object.vec1.size() + object.vec2.size());
+  }
+}
+} // namespace Test04
 
 } // namespace TestUtils

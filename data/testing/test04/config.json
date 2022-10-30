@@ -1,0 +1,7 @@
+{
+    "id": "test04",
+    "title": "STL algorithms testing",
+    "firstImageSource": "qrc:/resources/testingview/test04/firstversion.png",
+    "secondImageSource": "qrc:/resources/testingview/test04/secondversion.png",
+    "pickerValues": ["500", "1000", "2000", "5000", "10000"]
+}

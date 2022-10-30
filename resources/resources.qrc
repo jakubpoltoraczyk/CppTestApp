@@ -19,5 +19,7 @@
         <file>testingview/test02/firstversion.png</file>
         <file>testingview/test03/secondversion.png</file>
         <file>testingview/test03/firstversion.png</file>
+        <file>testingview/test04/secondversion.png</file>
+        <file>testingview/test04/firstversion.png</file>
     </qresource>
 </RCC>
