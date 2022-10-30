@@ -1,7 +1,7 @@
 #include "testingviewcontroller.h"
 
 #include "../external/utils/utils.h"
-#include "tests/test01.h"
+#include "testfunctions.h"
 
 #include <QDebug>
 
@@ -18,7 +18,9 @@ const QString TEST_FUNCTIONS_STARTED =
 
 namespace TestID {
 constexpr char TEST_01[] = "test01";
-}
+constexpr char TEST_02[] = "test02";
+constexpr char TEST_03[] = "test03";
+} // namespace TestID
 
 namespace Json {
 constexpr char ID[] = "id";
@@ -86,10 +88,15 @@ void TestingViewController::onTestStarted(const QString& testID, int firstPicker
 }
 
 void TestingViewController::initializeTestFunctions() {
+  using namespace TestUtils;
   for (const auto& pageModel : pageModels) {
     const auto& testID = pageModel.testID;
     if (testID == TestID::TEST_01) {
       testFunctions[testID.toStdString()] = std::make_pair(Test01::firstVersion, Test01::secondVersion);
+    } else if (testID == TestID::TEST_02) {
+      testFunctions[testID.toStdString()] = std::make_pair(Test02::firstVersion, Test02::secondVersion);
+    } else if (testID == TestID::TEST_03) {
+      testFunctions[testID.toStdString()] = std::make_pair(Test03::firstVersion, Test03::secondVersion);
     } else {
       qDebug() << UNHANDLED_TEST.arg(testID);
     }

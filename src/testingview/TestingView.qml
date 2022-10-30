@@ -23,10 +23,6 @@ Rectangle {
             model: testingViewController.pageModels.length
 
             TestingViewPage {
-                Component.onCompleted: {
-                    console.log(testingViewController.pageModels[index])
-                }
-
                 testID: testingViewController.pageModels[index].testID
                 title: testingViewController.pageModels[index].title
                 firstImageSource: testingViewController.pageModels[index].firstImageSource

@@ -1,0 +1,7 @@
+{
+    "id": "test03",
+    "title": "Move semantics testing",
+    "firstImageSource": "qrc:/resources/testingview/test03/firstversion.png",
+    "secondImageSource": "qrc:/resources/testingview/test03/secondversion.png",
+    "pickerValues": ["250", "750", "1500", "2500", "5000"]
+}
