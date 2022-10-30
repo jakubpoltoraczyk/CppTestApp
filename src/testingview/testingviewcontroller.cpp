@@ -7,8 +7,9 @@
 
 namespace {
 
-constexpr char DOUBLE_NUMBER_FORMAT = 'g';
+constexpr int REPEAT_TO_MAKE_AVERAGE = 10;
 constexpr int DOUBLE_NUMBER_PRECISION = 3;
+constexpr char DOUBLE_NUMBER_FORMAT = 'g';
 const QString UNHANDLED_TEST = QStringLiteral("Unhandled test with the ID '%1'");
 const QString TEST_FUNCTIONS_UNRECOGNIZED =
     QStringLiteral("Test functions for the test with the ID '%1' are not available");
@@ -73,14 +74,27 @@ void TestingViewController::onTestStarted(const QString& testID, int obsoletePic
   qDebug() << TEST_FUNCTIONS_STARTED.arg(testID);
   const auto& [obsoleteFunction, modernFunction] = testFunctions.at(testID.toStdString());
 
-  QString obsoleteDuration =
-      QString::number(getTestFunctionDurationMilliseconds(obsoleteFunction, obsoletePickerValue),
-                      DOUBLE_NUMBER_FORMAT, DOUBLE_NUMBER_PRECISION);
-  QString modernDuration =
-      QString::number(getTestFunctionDurationMilliseconds(modernFunction, modernPickerValue),
-                      DOUBLE_NUMBER_FORMAT, DOUBLE_NUMBER_PRECISION);
-  qDebug() << "Obsolete function duration:" << obsoleteDuration;
-  qDebug() << "Modern function duration:" << modernDuration;
+  auto obsoleteDuration = getAveragedTestFunctionDurationMilliseconds(obsoleteFunction, obsoletePickerValue,
+                                                                      REPEAT_TO_MAKE_AVERAGE);
+  auto obsoleteDurationText =
+      QString::number(obsoleteDuration, DOUBLE_NUMBER_FORMAT, DOUBLE_NUMBER_PRECISION);
+  auto modernDuration =
+      getAveragedTestFunctionDurationMilliseconds(modernFunction, modernPickerValue, REPEAT_TO_MAKE_AVERAGE);
+  auto modernDurationText = QString::number(modernDuration, DOUBLE_NUMBER_FORMAT, DOUBLE_NUMBER_PRECISION);
+
+  qDebug() << "Obsolete function duration:" << obsoleteDurationText;
+  qDebug() << "Modern function duration:" << modernDurationText;
+}
+
+void TestingViewController::initializeTestFunctions() {
+  for (const auto& pageModel : pageModels) {
+    const auto& testID = pageModel.testID;
+    if (testID == TestID::TEST_01) {
+      testFunctions[testID.toStdString()] = std::make_pair(Test01::obsoleteVersion, Test01::modernVersion);
+    } else {
+      qDebug() << UNHANDLED_TEST.arg(testID);
+    }
+  }
 }
 
 double
@@ -93,13 +107,11 @@ TestingViewController::getTestFunctionDurationMilliseconds(const std::function<v
   return duration.count();
 }
 
-void TestingViewController::initializeTestFunctions() {
-  for (const auto& pageModel : pageModels) {
-    const auto& testID = pageModel.testID;
-    if (testID == TestID::TEST_01) {
-      testFunctions[testID.toStdString()] = std::make_pair(Test01::obsoleteVersion, Test01::modernVersion);
-    } else {
-      qDebug() << UNHANDLED_TEST.arg(testID);
-    }
+double TestingViewController::getAveragedTestFunctionDurationMilliseconds(
+    const std::function<void(int)>& testFunction, int sizeParameter, int averagePrecision) {
+  double duration{};
+  for (int i = 0; i < averagePrecision; ++i) {
+    duration += getTestFunctionDurationMilliseconds(testFunction, sizeParameter);
   }
+  return duration / averagePrecision;
 }

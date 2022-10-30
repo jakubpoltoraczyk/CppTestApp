@@ -52,6 +52,16 @@ private:
    */
   double getTestFunctionDurationMilliseconds(const std::function<void(int)>& testFunction, int sizeParameter);
 
+  /**
+   * @brief Provide averaged duration of the test function in milliseconds
+   * @param testFunction Test function to call
+   * @param sizeParameter Size parameter which will be passed to the test function as an argument
+   * @param averagePrecision Value of the average precision
+   * @return Averaged duration of the test function call in milliseconds
+   */
+  double getAveragedTestFunctionDurationMilliseconds(const std::function<void(int)>& testFunction,
+                                                     int sizeParameter, int averagePrecision);
+
   std::shared_ptr<DataDirectoryManager> dataDirectoryManager;
   std::shared_ptr<CustomDialogController> customDialogController;
 
