@@ -6,7 +6,9 @@
 
 #include <QObject>
 
+#include <chrono>
 #include <memory>
+#include <unordered_map>
 
 class TestingViewController : public QObject {
   Q_OBJECT
@@ -30,12 +32,31 @@ public slots:
   /** Called when close button has been released */
   void onCloseButtonReleased();
 
-  /** Called when user just decided to start the selected test */
-  void onTestStarted(int obsoletePickerValue, int modernPickerValue);
+  /**
+   * @brief Called when user just decided to start the currently selected test
+   * @param testID ID of the selected test
+   * @param obsoletePickerValue Value of the picker component for the obsolete test version
+   * @param modernPickerValue Value of the picker component for the modern test version
+   */
+  void onTestStarted(const QString& testID, int obsoletePickerValue, int modernPickerValue);
 
 private:
+  /** Initialize the @see testFunctions class member */
+  void initializeTestFunctions();
+
+  /**
+   * @brief Provide duration of the test function in milliseconds
+   * @param testFunction Test function to call
+   * @param sizeParameter Size parameter which will be passed to the test function as an argument
+   * @return Duration of the test function call in milliseconds
+   */
+  double getTestFunctionDurationMilliseconds(const std::function<void(int)>& testFunction, int sizeParameter);
+
   std::shared_ptr<DataDirectoryManager> dataDirectoryManager;
   std::shared_ptr<CustomDialogController> customDialogController;
+
+  std::unordered_map<std::string, std::pair<std::function<void(int)>, std::function<void(int)>>>
+      testFunctions;
 
   TestingViewPageModels pageModels;
 };

@@ -23,6 +23,7 @@ Rectangle {
             model: testingViewController.pageModels.length
 
             TestingViewPage {
+                testID: testingViewController.pageModels[index].testID
                 title: testingViewController.pageModels[index].title
                 obsoleteImageSource: testingViewController.pageModels[index].obsoleteImageSource
                 modernImageSource: testingViewController.pageModels[index].modernImageSource

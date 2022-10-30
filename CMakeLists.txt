@@ -29,6 +29,7 @@ add_executable(${PROJECT_NAME}
     src/studymenu/studymenupagemodel.h
     src/testingview/testingviewcontroller.h
     src/testingview/testingviewpagemodel.h
+    src/testingview/tests/test01.h
 
     qml.qrc
     resources/resources.qrc

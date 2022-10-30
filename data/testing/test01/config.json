@@ -1,6 +1,7 @@
 {
+    "id": "test01",
     "title": "Smart pointers testing",
     "obsoleteImageSource": "qrc:/resources/testingview/test01/obsoleteversion.png",
     "modernImageSource": "qrc:/resources/testingview/test01/modernversion.png",
-    "pickerValues": ["500", "750", "1000", "1500", "2000", "3000"]
+    "pickerValues": ["10000", "25000", "50000", "100000"]
 }

@@ -7,6 +7,9 @@ import "../external"
 Item {
     id: testingViewPage
 
+    /** Contains the test ID value */
+    property string testID: ""
+
     /** Contains the testing view title */
     property string title: ""
 
@@ -19,7 +22,8 @@ Item {
     /** Contains the picker component values to display */
     property var pickerValues: []
 
-    signal testStarted(int obsoletePickerValue, int modernPickerValue)
+    /** Emitted when user just decided to start the selected test */
+    signal testStarted(string testID, int obsoletePickerValue, int modernPickerValue)
 
     /** Called when component has been just created */
     Component.onCompleted: {
@@ -113,7 +117,7 @@ Item {
 
         /** Called when start test button has been just released */
         buttonArea.onReleased: {
-            testStarted(internal.obsoletePickerValue, internal.modernPickerValue)
+            testStarted(testID, internal.obsoletePickerValue, internal.modernPickerValue)
         }
     }
 }
