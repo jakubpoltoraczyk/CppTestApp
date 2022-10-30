@@ -16,6 +16,13 @@ const QString TEST_FUNCTIONS_UNRECOGNIZED =
 const QString TEST_FUNCTIONS_STARTED =
     QStringLiteral("Test functions for the test with the ID '%1' will be started");
 
+namespace CustomDialogMessage {
+const QString TEST_FUNCTION_DURATION =
+    QStringLiteral("Duration of the first function: %1 msec\nDuration of the second function: %2 msec");
+const QString TEST_FUNCTION_MEMORY_USAGE =
+    QStringLiteral("Memory used by the first function: %1\nMemory used by the second function: %2");
+} // namespace CustomDialogMessage
+
 namespace TestID {
 constexpr char TEST_01[] = "test01";
 constexpr char TEST_02[] = "test02";
@@ -84,8 +91,12 @@ void TestingViewController::onTestStarted(const QString& testID, int firstPicker
       getAveragedTestFunctionDurationMilliseconds(secondFunction, secondPickerValue, REPEAT_TO_MAKE_AVERAGE);
   auto secondDurationText = QString::number(secondDuration, DOUBLE_NUMBER_FORMAT, DOUBLE_NUMBER_PRECISION);
 
-  qDebug() << "First function duration:" << firstDurationText;
-  qDebug() << "Second function duration:" << secondDurationText;
+  customDialogController->showDialog(
+      CustomDialogMessage::TEST_FUNCTION_DURATION.arg(firstDurationText, secondDurationText), true, false);
+  Utils::connectOnDialogClosed(customDialogController, [this](CustomDialogController::ExitStatus) {
+    customDialogController->showDialog(CustomDialogMessage::TEST_FUNCTION_MEMORY_USAGE.arg("@todo", "@todo"),
+                                       true, false);
+  });
 }
 
 void TestingViewController::initializeTestFunctions() {
