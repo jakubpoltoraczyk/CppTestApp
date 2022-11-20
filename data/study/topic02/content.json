@@ -1,5 +1,17 @@
 {
-    "title": "Smart pointers",
-    "images": ["", "", ""],
-    "lessons": ["Dupa1", "Dupa2", "Dupa3"]
+    "title": "Move semantics",
+    "images": ["qrc:/resources/studyview/movesemantics/codeimage01.png",
+               "qrc:/resources/studyview/movesemantics/codeimage02.png",
+               "qrc:/resources/studyview/movesemantics/codeimage03.png"],
+    "lessons": [
+"Try to avoid creating an unnecessary copy of objects, which you
+already don't need. Use the 'std::move' converter instead to allow
+move semantics to work.",
+"Be aware of the fact, that 'std::move' is just a tool which allows to
+convert the l-value into the r-value. Move constructor and move assignment
+operator are directly responsible for the real move process.",
+"It's not recommended to use the 'std::move' on the constant object.
+It will be converted to the constant r-value and because of that the copy
+constructor or copy assignment operator will have to be called instead
+their move versions."]
 }

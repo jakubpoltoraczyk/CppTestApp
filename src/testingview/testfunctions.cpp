@@ -1,5 +1,6 @@
 #include "testfunctions.h"
 
+#include <map>
 #include <memory>
 #include <numeric>
 
@@ -182,3 +183,22 @@ TestAnalysis Test05::secondVersion(int size) {
   delete[] objects;
   return analysis;
 }
+
+using Object = std::vector<int>;
+using Array = std::vector<Object>;
+Array jsonObjects;
+
+void processObject(const Object&) {}
+
+Array getRawObjects() { return Array(); }
+
+
+
+
+void foo() {
+  Object obj1;
+  const Object obj2;
+  obj1 = std::move(obj2);
+}
+
+

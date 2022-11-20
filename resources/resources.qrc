@@ -23,5 +23,11 @@
         <file>testingview/test04/firstversion.png</file>
         <file>testingview/test05/secondversion.png</file>
         <file>testingview/test05/firstversion.png</file>
+        <file>studyview/smartpointers/codeimage01.png</file>
+        <file>studyview/smartpointers/codeimage02.png</file>
+        <file>studyview/smartpointers/codeimage03.png</file>
+        <file>studyview/movesemantics/codeimage01.png</file>
+        <file>studyview/movesemantics/codeimage02.png</file>
+        <file>studyview/movesemantics/codeimage03.png</file>
     </qresource>
 </RCC>

@@ -1,5 +1,17 @@
 {
     "title": "Smart pointers",
-    "images": ["", "", ""],
-    "lessons": ["Dupa1", "Dupa2", "Dupa3"]
+    "images": ["qrc:/resources/studyview/smartpointers/codeimage01.png",
+               "qrc:/resources/studyview/smartpointers/codeimage02.png",
+               "qrc:/resources/studyview/smartpointers/codeimage03.png"],
+    "lessons": [
+"There's no need to directly deallocate the memory managed by
+the smart pointer. It takes the responsibility for calling the delete
+operation directly in the destructor (RAII style).",
+"It's recommended to use the 'make' functions to create the smart pointer.
+They allow to not duplicate the type, which is consistent with the DRY rule.
+Also until C++17 'std::make_shared' function is safer regarding memory leaks.",
+"Try no to extract the raw pointer from selected smart pointer.
+It can be possible to accidentialy delete the resource managed by
+the smart pointer, which causes the undefined behavior."
+]
 }

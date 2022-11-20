@@ -49,7 +49,7 @@ Item {
         text: lesson
         anchors {
             horizontalCenter: pageBackground.horizontalCenter
-            top: codeImage.top
+            top: codeImage.bottom
             topMargin: 50
         }
     }

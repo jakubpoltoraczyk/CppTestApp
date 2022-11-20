@@ -50,10 +50,10 @@ void StudyViewController::updateLesson(StudyMenuPageModel::Topic topic) {
     currentModel = pageModels[0];
     break;
   case StudyMenuPageModel::Topic::MOVE_SEMANTICS:
-    currentModel = pageModels[0];
+    currentModel = pageModels[1];
     break;
   case StudyMenuPageModel::Topic::STL_CONTAINERS:
-    currentModel = pageModels[0];
+    currentModel = pageModels[2];
     break;
   default:
     qDebug() << QStringLiteral("Study topic %1 has not been recognized")

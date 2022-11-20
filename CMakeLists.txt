@@ -3,7 +3,7 @@ project(TestApp)
 find_package(Qt5 5.15.2 COMPONENTS Quick Widgets Core REQUIRED)
 
 set(CMAKE_CXX_STANDARD 20)
-set(CMAKE_CXX_FLAGS "-Wall -Wextra -Wpedantic -Wshadow -Werror")
+#set(CMAKE_CXX_FLAGS "-Wall -Wextra -Wpedantic -Wshadow -Werror")
 
 add_executable(${PROJECT_NAME}
     main.cpp
