@@ -19,7 +19,7 @@ namespace CustomDialogMessage {
 const QString TEST_FUNCTION_DURATION =
     QStringLiteral("Duration of the first function: %1 msec\nDuration of the second function: %2 msec");
 const QString TEST_FUNCTION_MEMORY_USAGE =
-    QStringLiteral("Memory used by the first function: %1[B]\nMemory used by the second function: %2[B]");
+    QStringLiteral("Memory used by the first function: %1[kB]\nMemory used by the second function: %2[kB]");
 } // namespace CustomDialogMessage
 
 namespace TestID {
@@ -150,7 +150,7 @@ void TestingViewController::displayAdditionalInformation(
   }
 
   customDialogController->showDialog(
-      CustomDialogMessage::TEST_FUNCTION_MEMORY_USAGE.arg(QString::number(firstMemoryUsage.value()),
-                                                          QString::number(secondMemoryUsage.value())),
+      CustomDialogMessage::TEST_FUNCTION_MEMORY_USAGE.arg(QString::number(firstMemoryUsage.value() / 1000),
+                                                          QString::number(secondMemoryUsage.value() / 1000)),
       true, false);
 }

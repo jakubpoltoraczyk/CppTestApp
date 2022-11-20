@@ -1,19 +1,22 @@
 #include "testfunctions.h"
 
+#include <vector>
+#include <memory>
+
 namespace {
 using namespace TestUtils;
 }
 
 TestAnalysis Test01::firstVersion(int size) {
   TestAnalysis analysis;
-  std::vector<TestObject*> ptrs(size);
+  std::vector<TestObject1*> ptrs(size);
 
   // Memory allocation
   for (auto& ptr : ptrs) {
-    ptr = new TestObject;
+    ptr = new TestObject1;
   }
 
-  analysis.maxMemoryUsage = size * (sizeof(TestObject*) + sizeof(TestObject)) + sizeof(ptrs);
+  analysis.maxMemoryUsage = size * (sizeof(TestObject1*) + sizeof(TestObject1));
 
   // Memory deallocation
   for (auto& ptr : ptrs) {
@@ -25,14 +28,14 @@ TestAnalysis Test01::firstVersion(int size) {
 
 TestAnalysis Test01::secondVersion(int size) {
   TestAnalysis analysis;
-  std::vector<std::unique_ptr<TestObject>> ptrs(size);
+  std::vector<std::unique_ptr<TestObject1>> ptrs(size);
 
   // Memory allocation
   for (auto& ptr : ptrs) {
-    ptr = std::make_unique<TestObject>();
+    ptr = std::make_unique<TestObject1>();
   }
 
-  analysis.maxMemoryUsage = size * (sizeof(std::unique_ptr<TestObject>) + sizeof(TestObject)) + sizeof(ptrs);
+  analysis.maxMemoryUsage = size * (sizeof(std::unique_ptr<TestObject1>) + sizeof(TestObject1));
 
   // No need to manually deallocate memory
 
@@ -41,38 +44,38 @@ TestAnalysis Test01::secondVersion(int size) {
 
 TestAnalysis Test02::firstVersion(int size) {
   TestAnalysis analysis;
-  std::vector<std::unique_ptr<TestObject>> ptrs(size);
+  std::vector<std::unique_ptr<TestObject1>> ptrs(size);
 
   // Memory allocation
   for (auto& ptr : ptrs) {
-    ptr = std::make_unique<TestObject>();
+    ptr = std::make_unique<TestObject1>();
   }
 
-  analysis.maxMemoryUsage = size * (sizeof(std::unique_ptr<TestObject>) + sizeof(TestObject)) + sizeof(ptrs);
+  analysis.maxMemoryUsage = size * (sizeof(std::unique_ptr<TestObject1>) + sizeof(TestObject1));
 
   return analysis;
 }
 
 TestAnalysis Test02::secondVersion(int size) {
   TestAnalysis analysis;
-  std::vector<std::shared_ptr<TestObject>> ptrs(size);
+  std::vector<std::shared_ptr<TestObject1>> ptrs(size);
 
   // Memory allocation
   for (auto& ptr : ptrs) {
-    ptr = std::make_shared<TestObject>();
+    ptr = std::make_shared<TestObject1>();
   }
 
-  analysis.maxMemoryUsage = size * (sizeof(std::shared_ptr<TestObject>) + sizeof(TestObject)) + sizeof(ptrs);
+  analysis.maxMemoryUsage = size * (sizeof(std::shared_ptr<TestObject1>) + sizeof(TestObject1));
 
   return analysis;
 }
 
 TestAnalysis Test03::firstVersion(int size) {
-  std::vector<TestObject> objects;
+  std::vector<TestObject1> objects;
   objects.reserve(size);
 
   for (int i = 0; i < size; ++i) {
-    TestObject object;
+    TestObject1 object;
     objects.emplace_back(object);
   }
 
@@ -80,11 +83,11 @@ TestAnalysis Test03::firstVersion(int size) {
 }
 
 TestAnalysis Test03::secondVersion(int size) {
-  std::vector<TestObject> objects;
+  std::vector<TestObject1> objects;
   objects.reserve(size);
 
   for (int i = 0; i < size; ++i) {
-    TestObject object;
+    TestObject1 object;
     objects.emplace_back(std::move(object));
   }
 
@@ -92,7 +95,7 @@ TestAnalysis Test03::secondVersion(int size) {
 }
 
 TestAnalysis Test04::firstVersion(int size) {
-  std::vector<TestObject> objects(size);
+  std::vector<TestObject1> objects(size);
 
   std::vector<int> vec;
   vec.reserve(objects.size());
@@ -104,7 +107,7 @@ TestAnalysis Test04::firstVersion(int size) {
 }
 
 TestAnalysis Test04::secondVersion(int size) {
-  std::vector<TestObject> objects(size);
+  std::vector<TestObject1> objects(size);
 
   std::vector<int> vec;
   vec.reserve(objects.size());

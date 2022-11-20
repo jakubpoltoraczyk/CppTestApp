@@ -1,7 +1,8 @@
 #pragma once
 
-#include <memory>
-#include <vector>
+#include <array>
+#include <optional>
+#include <string>
 
 namespace TestUtils {
 
@@ -11,9 +12,9 @@ struct TestAnalysis {
 };
 
 /** Struct which represents basic object used for testing purposes */
-struct TestObject {
-  std::vector<int> vec1 = std::vector<int>(1000);
-  std::vector<std::string> vec2 = std::vector<std::string>(1000);
+struct TestObject1 {
+  std::array<int, 1000> vec1;
+  std::array<std::string, 1000> vec2;
 };
 
 /** Test functions for the test with the ID 'test01' */
