@@ -31,6 +31,7 @@ constexpr char TEST_01[] = "test01";
 constexpr char TEST_02[] = "test02";
 constexpr char TEST_03[] = "test03";
 constexpr char TEST_04[] = "test04";
+constexpr char TEST_05[] = "test05";
 } // namespace TestID
 
 namespace Json {
@@ -117,6 +118,8 @@ void TestingViewController::initializeTestFunctions() {
       testFunctions[testID.toStdString()] = std::make_pair(Test03::firstVersion, Test03::secondVersion);
     } else if (testID == TestID::TEST_04) {
       testFunctions[testID.toStdString()] = std::make_pair(Test04::firstVersion, Test04::secondVersion);
+    } else if (testID == TestID::TEST_05) {
+      testFunctions[testID.toStdString()] = std::make_pair(Test05::firstVersion, Test05::secondVersion);
     } else {
       qDebug() << UNHANDLED_TEST.arg(testID);
     }

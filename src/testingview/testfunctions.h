@@ -58,4 +58,10 @@ TestAnalysis firstVersion(int size);
 TestAnalysis secondVersion(int size);
 } // namespace Test04
 
+/** Test functions for the test with the ID 'test05' */
+namespace Test05 {
+TestAnalysis firstVersion(int size);
+TestAnalysis secondVersion(int size);
+} // namespace Test05
+
 } // namespace TestUtils

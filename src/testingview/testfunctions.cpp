@@ -161,3 +161,24 @@ TestAnalysis Test04::secondVersion(int size) {
 
   return {};
 }
+
+TestAnalysis Test05::firstVersion(int size) {
+  TestAnalysis analysis;
+  std::vector<TestObject1> objects(size);
+
+  std::fill(objects.begin(), objects.end(), TestObject1());
+  analysis.maxMemoryUsage = size * sizeof(TestObject1);
+
+  return analysis;
+}
+
+TestAnalysis Test05::secondVersion(int size) {
+  TestAnalysis analysis;
+  auto objects = new TestObject1[size];
+
+  std::fill(objects, std::next(objects, size), TestObject1());
+  analysis.maxMemoryUsage = size * sizeof(TestObject1);
+
+  delete[] objects;
+  return analysis;
+}

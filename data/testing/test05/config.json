@@ -1,0 +1,7 @@
+{
+    "id": "test05",
+    "title": "STL containers testing",
+    "firstImageSource": "qrc:/resources/testingview/test05/firstversion.png",
+    "secondImageSource": "qrc:/resources/testingview/test05/secondversion.png",
+    "pickerValues": ["500", "1000", "2500", "5000"]
+}
