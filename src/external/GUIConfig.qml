@@ -219,6 +219,9 @@ Item {
         /** Text of start button component */
         readonly property string startButtonText: "Start"
 
+        /** Top margin between the page title and page background */
+        readonly property int pageTitleTopMargin: 150
+
         /** List of available pages in entry view */
         readonly property var pages: [
             BasicController.EntryPage.STUDY,
@@ -234,6 +237,16 @@ Item {
             [BasicController.EntryPage.TESTING, "qrc:/resources/entryviewicon/testingicon.png"],
             [BasicController.EntryPage.QUIZ, "qrc:/resources/entryviewicon/quizicon.png"],
             [BasicController.EntryPage.COMPILER, "qrc:/resources/entryviewicon/compilericon.png"]
+        ]))
+
+
+        /** Map consists of page type and related page title */
+        readonly property var pageTitles: (new Map([
+            [BasicController.EntryPage.UNDEFINED, ""],
+            [BasicController.EntryPage.STUDY, "Study view"],
+            [BasicController.EntryPage.TESTING, "Testing view"],
+            [BasicController.EntryPage.QUIZ, "Quiz view"],
+            [BasicController.EntryPage.COMPILER, "Compiler view"]
         ]))
     }
 

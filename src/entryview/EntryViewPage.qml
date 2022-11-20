@@ -23,6 +23,17 @@ Item {
         gradient: GUIConfig.gradients.blueGradient
     }
 
+    Label {
+        id: textLabel
+        font: GUIConfig.fonts.decoratedFont
+        text: GUIConfig.entryView.pageTitles.get(pageType)
+        anchors {
+            horizontalCenter: pageBackground.horizontalCenter
+            top: pageBackground.top
+            topMargin: GUIConfig.entryView.pageTitleTopMargin
+        }
+    }
+
     Image {
         id: image
         source: GUIConfig.entryView.iconSources.get(pageType)
