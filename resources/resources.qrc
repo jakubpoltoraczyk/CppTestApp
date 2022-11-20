@@ -29,5 +29,7 @@
         <file>studyview/movesemantics/codeimage01.png</file>
         <file>studyview/movesemantics/codeimage02.png</file>
         <file>studyview/movesemantics/codeimage03.png</file>
+        <file>studyview/stlcontainers/codeimage01.png</file>
+        <file>studyview/stlcontainers/codeimage02.png</file>
     </qresource>
 </RCC>

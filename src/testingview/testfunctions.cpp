@@ -3,6 +3,7 @@
 #include <map>
 #include <memory>
 #include <numeric>
+#include <iostream>
 
 namespace {
 
@@ -195,10 +196,10 @@ Array getRawObjects() { return Array(); }
 
 
 
-void foo() {
-  Object obj1;
-  const Object obj2;
-  obj1 = std::move(obj2);
+void foo(int size) {
+  std::vector<Object> vec(size);
+  Object *arr = new Object[size];
+  delete[] arr;
 }
 
 

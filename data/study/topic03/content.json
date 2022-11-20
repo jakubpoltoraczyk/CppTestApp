@@ -1,5 +1,14 @@
 {
-    "title": "Smart pointers",
-    "images": ["", "", ""],
-    "lessons": ["Dupa1", "Dupa2", "Dupa3"]
+    "title": "STL containers",
+    "images": ["qrc:/resources/studyview/stlcontainers/codeimage01.png",
+               "qrc:/resources/studyview/stlcontainers/codeimage02.png"],
+    "lessons": [
+"It's recommended to use 'std::array' instead of the basic C style array.
+The 'std::array' container is available from the C++11 standard and provides
+a convenient way to manage fixed size array in a harmony with modern C++
+programming style.",
+"Instead of creating a dynamically allocated C style array it's
+better to use the 'std::vector' container. It takes the responsibility
+for memory deallocation and provides many functionalities to work with
+modern C++ features."]
 }
