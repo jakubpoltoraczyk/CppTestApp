@@ -1,10 +1,40 @@
 #include "testfunctions.h"
 
-#include <vector>
 #include <memory>
+#include <numeric>
 
 namespace {
+
 using namespace TestUtils;
+
+int accumulateCopyOperationCalls(int accumulator, const TestObject2& object) {
+  return accumulator + object.copyCounter;
+}
+
+int accumulateMoveOperationCalls(int accumulator, const TestObject2& object) {
+  return accumulator + object.moveCounter;
+}
+
+} // namespace
+
+TestObject2::TestObject2(const TestObject2& other) : vec1(other.vec1), vec2(other.vec2) { ++copyCounter; }
+
+TestObject2::TestObject2(TestObject2&& other) : vec1(std::move(other.vec1)), vec2(std::move(other.vec2)) {
+  ++moveCounter;
+}
+
+TestObject2& TestObject2::operator=(const TestObject2& other) {
+  vec1 = other.vec1;
+  vec2 = other.vec2;
+  ++copyCounter;
+  return *this;
+}
+
+TestObject2& TestObject2::operator=(TestObject2&& other) {
+  vec1 = std::move(other.vec1);
+  vec2 = std::move(other.vec2);
+  ++moveCounter;
+  return *this;
 }
 
 TestAnalysis Test01::firstVersion(int size) {
@@ -71,27 +101,39 @@ TestAnalysis Test02::secondVersion(int size) {
 }
 
 TestAnalysis Test03::firstVersion(int size) {
-  std::vector<TestObject1> objects;
+  TestAnalysis analysis;
+  std::vector<TestObject2> objects;
   objects.reserve(size);
 
   for (int i = 0; i < size; ++i) {
-    TestObject1 object;
+    TestObject2 object;
     objects.emplace_back(object);
   }
 
-  return {};
+  analysis.copyOperationCalls =
+      std::accumulate(objects.begin(), objects.end(), 0, accumulateCopyOperationCalls);
+  analysis.moveOperationCalls =
+      std::accumulate(objects.begin(), objects.end(), 0, accumulateMoveOperationCalls);
+
+  return analysis;
 }
 
 TestAnalysis Test03::secondVersion(int size) {
-  std::vector<TestObject1> objects;
+  TestAnalysis analysis;
+  std::vector<TestObject2> objects;
   objects.reserve(size);
 
   for (int i = 0; i < size; ++i) {
-    TestObject1 object;
+    TestObject2 object;
     objects.emplace_back(std::move(object));
   }
 
-  return {};
+  analysis.copyOperationCalls =
+      std::accumulate(objects.begin(), objects.end(), 0, accumulateCopyOperationCalls);
+  analysis.moveOperationCalls =
+      std::accumulate(objects.begin(), objects.end(), 0, accumulateMoveOperationCalls);
+
+  return analysis;
 }
 
 TestAnalysis Test04::firstVersion(int size) {

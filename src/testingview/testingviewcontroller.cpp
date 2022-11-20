@@ -20,6 +20,10 @@ const QString TEST_FUNCTION_DURATION =
     QStringLiteral("Duration of the first function: %1 msec\nDuration of the second function: %2 msec");
 const QString TEST_FUNCTION_MEMORY_USAGE =
     QStringLiteral("Memory used by the first function: %1[kB]\nMemory used by the second function: %2[kB]");
+const QString TEST_FUNCTION_COPY_CALLS = QStringLiteral(
+    "Copy operations called by first function: %1\nCopy operations called by second function: %2");
+const QString TEST_FUNCTION_MOVE_CALLS = QStringLiteral(
+    "Move operations called by first function: %1\nMove operations called by second function: %2");
 } // namespace CustomDialogMessage
 
 namespace TestID {
@@ -142,15 +146,31 @@ void TestingViewController::displayAdditionalInformation(
     const std::function<TestUtils::TestAnalysis(int)>& firstFunction,
     const std::function<TestUtils::TestAnalysis(int)>& secondFunction, int firstPickerValue,
     int secondPickerValue) {
-  auto firstMemoryUsage = firstFunction(firstPickerValue).maxMemoryUsage;
-  auto secondMemoryUsage = secondFunction(secondPickerValue).maxMemoryUsage;
 
-  if (!firstMemoryUsage.has_value() || !secondMemoryUsage.has_value()) {
+  auto firstAnalysis = firstFunction(firstPickerValue);
+  auto secondAnalysis = secondFunction(secondPickerValue);
+
+  if (firstAnalysis.maxMemoryUsage.has_value() && secondAnalysis.maxMemoryUsage.has_value()) {
+    customDialogController->showDialog(CustomDialogMessage::TEST_FUNCTION_MEMORY_USAGE.arg(
+                                           QString::number(firstAnalysis.maxMemoryUsage.value() / 1000),
+                                           QString::number(secondAnalysis.maxMemoryUsage.value() / 1000)),
+                                       true, false);
     return;
   }
 
-  customDialogController->showDialog(
-      CustomDialogMessage::TEST_FUNCTION_MEMORY_USAGE.arg(QString::number(firstMemoryUsage.value() / 1000),
-                                                          QString::number(secondMemoryUsage.value() / 1000)),
-      true, false);
+  if (firstAnalysis.copyOperationCalls.has_value() && secondAnalysis.copyOperationCalls.has_value()) {
+    customDialogController->showDialog(CustomDialogMessage::TEST_FUNCTION_COPY_CALLS.arg(
+                                           QString::number(firstAnalysis.copyOperationCalls.value()),
+                                           QString::number(secondAnalysis.copyOperationCalls.value())),
+                                       true, false);
+    if (firstAnalysis.moveOperationCalls.has_value() && secondAnalysis.moveOperationCalls.has_value())
+      Utils::connectOnDialogClosed(customDialogController, [this, firstAnalysis, secondAnalysis](
+                                                               CustomDialogController::ExitStatus) {
+        customDialogController->showDialog(CustomDialogMessage::TEST_FUNCTION_MOVE_CALLS.arg(
+                                               QString::number(firstAnalysis.moveOperationCalls.value()),
+                                               QString::number(secondAnalysis.moveOperationCalls.value())),
+                                           true, false);
+      });
+    return;
+  }
 }
