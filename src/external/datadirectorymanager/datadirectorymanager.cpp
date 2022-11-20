@@ -10,6 +10,7 @@ const QString QUIZ_DIRECTORY = QStringLiteral("%1/quiz/");
 const QString QUIZ_CONFIGURATION_FILE = QStringLiteral("%1/quiz/%2/config.json");
 const QString STUDY_DIRECTORY = QStringLiteral("%1/study/");
 const QString STUDY_TOPIC_CONFIGURATION_FILE = QStringLiteral("%1/study/%2/config.json");
+const QString STUDY_TOPIC_CONTENT_FILE = QStringLiteral("%1/study/%2/content.json");
 const QString DIALOG_FILE = QStringLiteral("%1/dialog/dialog%2.json");
 const QString TESTING_DIRECTORY = QStringLiteral("%1/testing/");
 const QString TESTING_CONFIGURATION_FILE = QStringLiteral("%1/testing/%2/config.json");
@@ -81,4 +82,16 @@ QStringList DataDirectoryManager::getTestingConfigurationFiles() const {
   }
 
   return testingConfigurationFiles;
+}
+
+QStringList DataDirectoryManager::getStudyContentFilePaths() const {
+  QStringList studyTopicConfigurationFilePaths;
+  QDir studyDirectory(Paths::STUDY_DIRECTORY.arg(dataDirectoryPath));
+
+  for (const auto& studyTopic : studyDirectory.entryList(Filters::DEFAULT_DIR_FILTER)) {
+    studyTopicConfigurationFilePaths.push_back(
+        Paths::STUDY_TOPIC_CONTENT_FILE.arg(dataDirectoryPath, studyTopic));
+  }
+
+  return studyTopicConfigurationFilePaths;
 }

@@ -24,9 +24,15 @@ signals:
   /** Emitted when user decided to close study menu */
   void studyMenuClosed();
 
+  /** Emitted when user decided to select topic */
+  void topicSelected(StudyMenuPageModel::Topic topic);
+
 public slots:
   /** Called when close button has been released */
   void onCloseButtonReleased();
+
+  /** Called when user decided to start selected topic */
+  void onStartTopicButtonReleased(int topic);
 
 private:
   std::shared_ptr<DataDirectoryManager> dataDirectoryManager;

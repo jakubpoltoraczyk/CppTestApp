@@ -25,14 +25,19 @@ BasicController::BasicController(QObject* parent)
       currentView(View::ENTRY_VIEW), quizMenuController(dataDirectoryManager),
       quizViewController(dataDirectoryManager, customDialogController),
       studyMenuController(dataDirectoryManager),
-      testingViewController(dataDirectoryManager, customDialogController) {
+      testingViewController(dataDirectoryManager, customDialogController),
+      studyViewController(dataDirectoryManager, customDialogController) {
   connect(&quizMenuController, &QuizMenuController::quizMenuClosed, this, &BasicController::onQuizMenuClosed);
   connect(&quizMenuController, &QuizMenuController::quizSelected, this, &BasicController::onQuizSelected);
   connect(&quizViewController, &QuizViewController::quizViewClosed, this, &BasicController::onQuizViewClosed);
   connect(&studyMenuController, &StudyMenuController::studyMenuClosed, this,
           &BasicController::onStudyMenuClosed);
+  connect(&studyMenuController, &StudyMenuController::topicSelected, this,
+          &BasicController::onStudyTopicSelected);
   connect(&testingViewController, &TestingViewController::testingViewClosed, this,
           &BasicController::onTestingViewClosed);
+  connect(&studyViewController, &StudyViewController::studyViewClosed, this,
+          &BasicController::onStudyViewClosed);
 }
 
 std::vector<std::pair<QString, QObject*>> BasicController::getObjectsToRegister() {
@@ -41,7 +46,8 @@ std::vector<std::pair<QString, QObject*>> BasicController::getObjectsToRegister(
           {QStringLiteral("quizMenuController"), &quizMenuController},
           {QStringLiteral("quizViewController"), &quizViewController},
           {QStringLiteral("studyMenuController"), &studyMenuController},
-          {QStringLiteral("testingViewController"), &testingViewController}};
+          {QStringLiteral("testingViewController"), &testingViewController},
+          {QStringLiteral("studyViewController"), &studyViewController}};
 }
 
 void BasicController::onEntryPageSelected(EntryPage entryPage) {
@@ -74,6 +80,13 @@ void BasicController::onStudyMenuClosed() { changeView(View::ENTRY_VIEW); }
 
 void BasicController::onTestingViewClosed() { changeView(View::ENTRY_VIEW); }
 
+void BasicController::onStudyViewClosed() { changeView(View::STUDY_MENU); }
+
+void BasicController::onStudyTopicSelected(StudyMenuPageModel::Topic topic) {
+  studyViewController.updateLesson(topic);
+  changeView(View::STUDY_VIEW);
+}
+
 void BasicController::changeView(View newView) {
   closeEachView();
 
@@ -104,6 +117,11 @@ void BasicController::changeView(View newView) {
     emit testingViewVisibilityChanged();
     break;
 
+  case View::STUDY_VIEW:
+    studyViewVisibility = true;
+    emit studyViewVisibilityChanged();
+    break;
+
   case View::COMPILER:
     return;
   }
@@ -126,4 +144,7 @@ void BasicController::closeEachView() {
   testingViewVisibility = false;
   emit applicationEnlargedStatusChanged();
   emit testingViewVisibilityChanged();
+
+  studyViewVisibility = false;
+  emit studyViewVisibilityChanged();
 }

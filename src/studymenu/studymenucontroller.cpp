@@ -37,3 +37,8 @@ void StudyMenuController::onCloseButtonReleased() {
   qDebug() << __PRETTY_FUNCTION__;
   emit studyMenuClosed();
 }
+
+void StudyMenuController::onStartTopicButtonReleased(int topic) {
+  qDebug() << __PRETTY_FUNCTION__;
+  emit topicSelected(static_cast<StudyMenuPageModel::Topic>(topic));
+}

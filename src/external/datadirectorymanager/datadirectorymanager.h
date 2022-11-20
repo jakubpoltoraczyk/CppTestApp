@@ -40,6 +40,12 @@ public:
    */
   QStringList getTestingConfigurationFiles() const;
 
+  /**
+   * @brief Provide a list of study content file paths
+   * @return List of study topic content file paths
+   */
+  QStringList getStudyContentFilePaths() const;
+
 private:
   QString dataDirectoryPath;
 };

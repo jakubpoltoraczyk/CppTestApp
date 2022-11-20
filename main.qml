@@ -50,4 +50,10 @@ ApplicationWindow {
         anchors.fill: parent
         source: basicController.testingViewVisibility ? "src/testingview/TestingView.qml" : ""
     }
+
+    Loader {
+        id: studyView
+        anchors.fill: parent
+        source: basicController.studyViewVisibility ? "src/studyview/StudyView.qml" : ""
+    }
 }

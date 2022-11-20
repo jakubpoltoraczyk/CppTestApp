@@ -24,6 +24,12 @@ Rectangle {
 
             StudyMenuPage {
                 title: studyMenuController.pageModels[index].title
+                topic: studyMenuController.pageModels[index].topic
+
+                /** Called when component has been just created */
+                Component.onCompleted: {
+                    startTopicButtonReleased.connect(studyMenuController.onStartTopicButtonReleased)
+                }
             }
         }
     }

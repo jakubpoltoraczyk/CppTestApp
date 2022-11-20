@@ -15,6 +15,9 @@ Item {
     /** Contains study menu page topic */
     property int topic: StudyMenuPageModel.Topic.UNDEFINED
 
+    /** Emitted when start topic button has been released */
+    signal startTopicButtonReleased(int topic)
+
     Rectangle {
         id: pageBackground
         anchors.fill: parent
@@ -35,5 +38,10 @@ Item {
     ConfirmButton {
         id: confirmButton
         text: GUIConfig.studyMenu.startButtonText
+
+        /** Called when button has been released */
+        buttonArea.onReleased: {
+            startTopicButtonReleased(topic)
+        }
     }
 }

@@ -14,6 +14,7 @@ add_executable(${PROJECT_NAME}
     src/quizmenu/quizmenucontroller.cpp
     src/quizview/quizviewcontroller.cpp
     src/studymenu/studymenucontroller.cpp
+    src/studyview/studyviewcontroller.cpp
     src/testingview/testfunctions.cpp
     src/testingview/testingviewcontroller.cpp
 
@@ -28,6 +29,8 @@ add_executable(${PROJECT_NAME}
     src/quizview/quizviewmodel.h
     src/studymenu/studymenucontroller.h
     src/studymenu/studymenupagemodel.h
+    src/studyview/studyviewcontroller.h
+    src/studyview/studyviewpagemodel.h
     src/testingview/testfunctions.h
     src/testingview/testingviewcontroller.h
     src/testingview/testingviewpagemodel.h
