@@ -14,6 +14,7 @@ add_executable(${PROJECT_NAME}
     src/quizmenu/quizmenucontroller.cpp
     src/quizview/quizviewcontroller.cpp
     src/studymenu/studymenucontroller.cpp
+    src/testingview/testfunctions.cpp
     src/testingview/testingviewcontroller.cpp
 
     src/basiccontroller.h
@@ -27,9 +28,9 @@ add_executable(${PROJECT_NAME}
     src/quizview/quizviewmodel.h
     src/studymenu/studymenucontroller.h
     src/studymenu/studymenupagemodel.h
+    src/testingview/testfunctions.h
     src/testingview/testingviewcontroller.h
     src/testingview/testingviewpagemodel.h
-    src/testingview/testfunctions.h
 
     qml.qrc
     resources/resources.qrc

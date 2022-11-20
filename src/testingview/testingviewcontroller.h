@@ -2,6 +2,7 @@
 
 #include "../external/customdialog/customdialogcontroller.h"
 #include "../external/datadirectorymanager/datadirectorymanager.h"
+#include "testfunctions.h"
 #include "testingviewpagemodel.h"
 
 #include <QObject>
@@ -50,7 +51,8 @@ private:
    * @param sizeParameter Size parameter which will be passed to the test function as an argument
    * @return Duration of the test function call in milliseconds
    */
-  double getTestFunctionDurationMilliseconds(const std::function<void(int)>& testFunction, int sizeParameter);
+  double getTestFunctionDurationMilliseconds(const std::function<TestUtils::TestAnalysis(int)>& testFunction,
+                                             int sizeParameter);
 
   /**
    * @brief Provide averaged duration of the test function in milliseconds
@@ -59,13 +61,26 @@ private:
    * @param averagePrecision Value of the average precision
    * @return Averaged duration of the test function call in milliseconds
    */
-  double getAveragedTestFunctionDurationMilliseconds(const std::function<void(int)>& testFunction,
-                                                     int sizeParameter, int averagePrecision);
+  double
+  getAveragedTestFunctionDurationMilliseconds(const std::function<TestUtils::TestAnalysis(int)>& testFunction,
+                                              int sizeParameter, int averagePrecision);
+
+  /**
+   * @brief Display additional information about the testing function using custom dialog component
+   * @param firstFunction First test function to call
+   * @param secondFunction Second test function to call
+   * @param firstPickerValue Value of the picker component for the first test version
+   * @param secondPickerValue Value of the picker component for the second test version
+   */
+  void displayAdditionalInformation(const std::function<TestUtils::TestAnalysis(int)>& firstFunction,
+                                    const std::function<TestUtils::TestAnalysis(int)>& secondFunction,
+                                    int firstPickerValue, int secondPickerValue);
 
   std::shared_ptr<DataDirectoryManager> dataDirectoryManager;
   std::shared_ptr<CustomDialogController> customDialogController;
 
-  std::unordered_map<std::string, std::pair<std::function<void(int)>, std::function<void(int)>>>
+  std::unordered_map<std::string, std::pair<std::function<TestUtils::TestAnalysis(int)>,
+                                            std::function<TestUtils::TestAnalysis(int)>>>
       testFunctions;
 
   TestingViewPageModels pageModels;

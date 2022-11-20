@@ -1,7 +1,6 @@
 #include "testingviewcontroller.h"
 
 #include "../external/utils/utils.h"
-#include "testfunctions.h"
 
 #include <QDebug>
 
@@ -20,7 +19,7 @@ namespace CustomDialogMessage {
 const QString TEST_FUNCTION_DURATION =
     QStringLiteral("Duration of the first function: %1 msec\nDuration of the second function: %2 msec");
 const QString TEST_FUNCTION_MEMORY_USAGE =
-    QStringLiteral("Memory used by the first function: %1\nMemory used by the second function: %2");
+    QStringLiteral("Memory used by the first function: %1[B]\nMemory used by the second function: %2[B]");
 } // namespace CustomDialogMessage
 
 namespace TestID {
@@ -82,7 +81,9 @@ void TestingViewController::onTestStarted(const QString& testID, int firstPicker
   }
 
   qDebug() << TEST_FUNCTIONS_STARTED.arg(testID);
-  const auto& [firstFunction, secondFunction] = testFunctions.at(testID.toStdString());
+  const auto& functions = testFunctions.at(testID.toStdString());
+  const auto& firstFunction = functions.first;
+  const auto& secondFunction = functions.second;
 
   auto firstDuration =
       getAveragedTestFunctionDurationMilliseconds(firstFunction, firstPickerValue, REPEAT_TO_MAKE_AVERAGE);
@@ -93,10 +94,11 @@ void TestingViewController::onTestStarted(const QString& testID, int firstPicker
 
   customDialogController->showDialog(
       CustomDialogMessage::TEST_FUNCTION_DURATION.arg(firstDurationText, secondDurationText), true, false);
-  Utils::connectOnDialogClosed(customDialogController, [this](CustomDialogController::ExitStatus) {
-    customDialogController->showDialog(CustomDialogMessage::TEST_FUNCTION_MEMORY_USAGE.arg("@todo", "@todo"),
-                                       true, false);
-  });
+  Utils::connectOnDialogClosed(
+      customDialogController, [this, &firstFunction, &secondFunction, firstPickerValue,
+                               secondPickerValue](CustomDialogController::ExitStatus) {
+        displayAdditionalInformation(firstFunction, secondFunction, firstPickerValue, secondPickerValue);
+      });
 }
 
 void TestingViewController::initializeTestFunctions() {
@@ -117,9 +119,8 @@ void TestingViewController::initializeTestFunctions() {
   }
 }
 
-double
-TestingViewController::getTestFunctionDurationMilliseconds(const std::function<void(int)>& testFunction,
-                                                           int sizeParameter) {
+double TestingViewController::getTestFunctionDurationMilliseconds(
+    const std::function<TestUtils::TestAnalysis(int)>& testFunction, int sizeParameter) {
   auto startTime = std::chrono::high_resolution_clock::now();
   testFunction(sizeParameter);
   auto endTime = std::chrono::high_resolution_clock::now();
@@ -128,10 +129,28 @@ TestingViewController::getTestFunctionDurationMilliseconds(const std::function<v
 }
 
 double TestingViewController::getAveragedTestFunctionDurationMilliseconds(
-    const std::function<void(int)>& testFunction, int sizeParameter, int averagePrecision) {
+    const std::function<TestUtils::TestAnalysis(int)>& testFunction, int sizeParameter,
+    int averagePrecision) {
   double duration{};
   for (int i = 0; i < averagePrecision; ++i) {
     duration += getTestFunctionDurationMilliseconds(testFunction, sizeParameter);
   }
   return duration / averagePrecision;
+}
+
+void TestingViewController::displayAdditionalInformation(
+    const std::function<TestUtils::TestAnalysis(int)>& firstFunction,
+    const std::function<TestUtils::TestAnalysis(int)>& secondFunction, int firstPickerValue,
+    int secondPickerValue) {
+  auto firstMemoryUsage = firstFunction(firstPickerValue).maxMemoryUsage;
+  auto secondMemoryUsage = secondFunction(secondPickerValue).maxMemoryUsage;
+
+  if (!firstMemoryUsage.has_value() || !secondMemoryUsage.has_value()) {
+    return;
+  }
+
+  customDialogController->showDialog(
+      CustomDialogMessage::TEST_FUNCTION_MEMORY_USAGE.arg(QString::number(firstMemoryUsage.value()),
+                                                          QString::number(secondMemoryUsage.value())),
+      true, false);
 }
